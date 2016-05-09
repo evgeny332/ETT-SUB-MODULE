@@ -1,16 +1,12 @@
 package com.rh.utility;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.jms.core.JmsTemplate;
 
-import com.rh.config.ConfigHolder;
+import com.rh.config.DBConfigHolder;
 import com.rh.persistence.DBPersister;
 import com.rh.persistence.domain.GiftVoucher;
 import com.rh.persistence.domain.UserRedeem;
@@ -21,15 +17,15 @@ public class FlipkartEGV {
 	private static Log log = LogFactory.getLog(FlipkartEGV.class);
 	private UserRedeem userRedeem;
 	private DBPersister dbPersister;
-	private ConfigHolder configHolder;
+	private DBConfigHolder configHolder;
 //	private JmsTemplate jmsTemplate;
 //	private BlockingQueue<String> fifo = null;
 
-	public FlipkartEGV(UserRedeem userRedeem, DBPersister dbPersister, ConfigHolder configHolder, JmsTemplate jmsTemplate) {
+	public FlipkartEGV(UserRedeem userRedeem, DBPersister dbPersister, DBConfigHolder configHolder2, JmsTemplate jmsTemplate) {
 		try {
 			this.dbPersister = dbPersister;
 			this.userRedeem = userRedeem;
-			this.configHolder = configHolder;
+			this.configHolder = configHolder2;
 //			this.jmsTemplate = jmsTemplate;
 //			this.fifo = fifo;
 
@@ -48,11 +44,14 @@ public class FlipkartEGV {
 		String trans = createTranasaction();
 		if (!trans.equals("FAILED")) {
 			userRedeem.setTrans_id(trans);
-			String url = configHolder.getProperties().getProperty("FLIPKART_EGV_URL") + "egv";
+			String url = configHolder.getProperties().get("FLIPKART_EGV_URL") + "egv";
 			String resp = CreateGiftVoucher(url);
 			log.info("RECHARGE URL|" + url + "|RESP|" + resp + "|TIME|" + (System.currentTimeMillis() - start));
+			
+			if(resp.equalsIgnoreCase("TIMEOUT")){
+				return resp;
+			}
 			if (resp.equals("ACTIVE")) {
-
 				return "SUCCESS";
 			}
 		}
@@ -60,7 +59,7 @@ public class FlipkartEGV {
 	}
 
 	private String createTranasaction() {
-		String url = configHolder.getProperties().getProperty("FLIPKART_EGV_URL") + "transaction";
+		String url = configHolder.getProperties().get("FLIPKART_EGV_URL") + "transaction";
 		SendGetRequest sendGetRequest = new SendGetRequest();
 		String resp = sendGetRequest.sendPost(url);
 		String trans = getTansactionId(resp);
@@ -88,6 +87,9 @@ public class FlipkartEGV {
 
 			// appendResult();
 			// return "FAILED";
+			if(resp.equalsIgnoreCase("TIMEOUT")){
+				return resp;
+			}
 			return JsonInline(resp);
 
 		} catch (JSONException e) {
@@ -150,22 +152,23 @@ public class FlipkartEGV {
 				try {
 
 					dbPersister.insertGiftVoucher(giftVoucher);
-					if (configHolder.getProperties().getProperty("FLIPKART_EGV_SMS_ENABLED").equals("true")) {
+					if (configHolder.getProperties().get("FLIPKART_EGV_SMS_ENABLED").equals("true")) {
 
-						final String msg = userRedeem.getMsisdn() + "#" + configHolder.getProperties().getProperty("FLIPKART_EGV_SMS").replace("#AMOUNT#", amount + "").replace("#CODE#", code).replace("#PIN#", pin)
+						final String msg = userRedeem.getMsisdn() + "#" + configHolder.getProperties().get("FLIPKART_EGV_SMS").replace("#AMOUNT#", amount + "").replace("#CODE#", code).replace("#PIN#", pin)
 								.replace("#EXPIRYDATE#", expiryDate).replace("#STATUS#", status);
-						// final String url = configHolder.getProperties().getProperty("FLIPKART_SMS_URL").replace("#MSISDN#", userRedeem.getMsisdn() + "").replace("#MSG#", msg);
+						// final String url = configHolder.getProperties().get("FLIPKART_SMS_URL").replace("#MSISDN#", userRedeem.getMsisdn() + "").replace("#MSG#", msg);
 
 						try {
 
-							SendUDP(msg, "54.209.220.78", "7171");
+							Utility utility = new Utility();
+							utility.SendUDP(msg, "54.209.220.78", "7171");
 
 							// jmsTemplate.send("GiftSMS", new MessageCreator() {
 							// @Override public Message createMessage(Session session) throws JMSException { return session.createTextMessage(url); } });
 							// if (fifo == null) {
 							// return "";
 							// }
-							// final String url = configHolder.getProperties().getProperty("FLIPKART_SMS_URL").replace("#MSISDN#", userRedeem.getMsisdn() + "");
+							// final String url = configHolder.getProperties().get("FLIPKART_SMS_URL").replace("#MSISDN#", userRedeem.getMsisdn() + "");
 							// fifo.add(url);
 
 						} catch (Exception e) {
@@ -198,32 +201,11 @@ public class FlipkartEGV {
 			if (fifo == null) {
 				return;
 			}
-			final String url = configHolder.getProperties().getProperty("FLIPKART_SMS_URL").replace("#MSISDN#", userRedeem.getMsisdn() + "");
+			final String url = configHolder.getProperties().get("FLIPKART_SMS_URL").replace("#MSISDN#", userRedeem.getMsisdn() + "");
 			fifo.add(url);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("Error!! in insertGiftVoucher ");
 		}
 	}*/
-
-	private void SendUDP(String strFinal, String IP, String port) {
-
-		System.out.println("[ETT][SendUDP] [SendUDP] [OnlineDA Message] FINAL String " + strFinal + ":::" + IP + "::" + port);
-		try {
-			
-			DatagramSocket clientSocket = new DatagramSocket();
-			int localport = clientSocket.getLocalPort();
-			String portn = localport + "";
-			strFinal = strFinal.replace("LPORT", portn);
-			InetAddress IPAddress = InetAddress.getByName(IP);
-			DatagramPacket sendPacket = new DatagramPacket(strFinal.getBytes(), strFinal.getBytes().length, IPAddress, Integer.parseInt(port));
-			clientSocket.send(sendPacket);
-			log.info("[ETT] [SendUDP] [OnlineDA Message] SendUDP[" + strFinal + "] [IP:" + IP + " Port:" + port + "]");
-			clientSocket.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("[ETT][SendUDP] [OnlineDA Message] Exception When send Packet!!!!!!!!!! " , e);
-		}
-	}
 }

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -17,12 +15,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
-import com.rh.config.ConfigHolder;
+import com.rh.config.DBConfigHolder;
 import com.rh.interfaces.APIInterface;
 import com.rh.interfaces.PushInterface;
-import com.rh.interfaces.RHServiceInterface;
 import com.rh.interfaces.Impl.PushServiceImpl;
-import com.rh.interfaces.Impl.RHServiceImpl;
 import com.rh.persistence.DBPersister;
 import com.rh.persistence.domain.DeviceToken;
 import com.rh.persistence.domain.PopUpSheduled;
@@ -32,6 +28,7 @@ import com.rh.persistence.domain.UserRedeem;
 import com.rh.persistence.domain.UserRedeem.RedeemType;
 import com.rh.remote.SendGetRequest;
 import com.rh.utility.FlipkartEGV;
+import com.rh.utility.Utility;
 
 /*
  * Implementation class of APIInterface and SessionHolder interfaces.
@@ -42,101 +39,174 @@ public class APIImpl implements APIInterface {
 
 	private PushInterface pushServiceImpl;
 	private DBPersister dbPersister;
-	private ConfigHolder configHolder;
+	private DBConfigHolder configHolder;
 	private JmsTemplate jmsTemplate;
-	private RHServiceInterface rhServiceImpl;
-//	BlockingQueue<String> fifo = null;
-	
-	 //new sendSMS(fifo);
+	// private RHServiceInterface rhServiceImpl;
+
 	private static Log log = LogFactory.getLog(APIImpl.class);
 
 	/*
 	 * Constructor use to initialize various managers and DBPersister variables.
 	 */
+	
 	public APIImpl(DBPersister dp, JmsTemplate jmsTemplate) throws IOException {
 		this.dbPersister = dp;
-		this.configHolder = new ConfigHolder();
+		this.configHolder = new DBConfigHolder(dp);
 		this.jmsTemplate = jmsTemplate;
 		this.pushServiceImpl = new PushServiceImpl();
-		this.rhServiceImpl = new RHServiceImpl();
-		/*if (configHolder.getProperties().getProperty("FLIPKART_EGV_ENABLED").equals("true")) {
-			if (configHolder.getProperties().getProperty("FLIPKART_EGV_SMS_ENABLED").equals("true")) {
-				fifo =new LinkedBlockingQueue<String>();
-				new sendSMS(fifo);
-			}
-		}*/
+		// this.rhServiceImpl = new RHServiceImpl();
 	}
 
 	@Override
 	public void updatePokktInfo(String id) {
 		UserRedeem userRedeem = dbPersister.getUserRedeem(id);
-
-		// if(configHolder.getProperties().getProperty("PROCESS_FEE_DEDUCT").equals("true")&&
-		// userRedeem.getFee()<=0.0f && userRedeem.getEttId()==17) {
+		
+		
 		if (userRedeem.getType() == null || userRedeem.getType().equals("")) {
 			userRedeem.setType("PREPAID");
 		}
-		if (configHolder.getProperties().getProperty("PROCESS_FEE_DEDUCT").equals("true") && userRedeem.getFee() <= 0.0f) {
-			rhServiceImpl.setConvenienceCharge(userRedeem, dbPersister);
-		}
+
 		if (userRedeem.getEttId() == null) {
 			log.warn("userRedeem not found |" + id);
 			return;
 		}
-		/*** Barred Redeem Check ***/
-		if (configHolder.getProperties().getProperty("BARRED_USER_CHECK") != null && configHolder.getProperties().getProperty("BARRED_USER_CHECK").equals("true")) {
+
+		/******************** SOS OFFER ****************************/
+
+		boolean sos = false;
+		if (configHolder.getProperties().get("SOS_OFFER").equals("true")) {
+			sos = true;
+		}
+
+		/************** USER ACTIVITY BOOSTER ***************/
+		boolean userActivityBooster = false;
+		long userActivityBoosterId = 0;
+		if (configHolder.getProperties().get("USERACTIVITYBOOSTER").equals("true") && userRedeem.getFee() == 0.0f) {
+			userActivityBoosterId = dbPersister.getIDUserActivityBooster(userRedeem.getEttId());
+			if (userActivityBoosterId != 0) {
+				userActivityBooster = true;
+			}
+		}
+
+		/************* BARRED REDEEM CHECK **************/
+		if (configHolder.getProperties().get("BARRED_USER_CHECK") != null && configHolder.getProperties().get("BARRED_USER_CHECK").equals("true")) {
 			if (configHolder.getBarredStatus(userRedeem.getEttId())) {
 				dbPersister.updateBarredRedeem(userRedeem);
+				if (userActivityBooster) {
+					dbPersister.updateUserActivityBooster(userActivityBoosterId, 1);
+				}
 				log.info("[Redeem Barred] for the ettId=" + userRedeem.getEttId() + " | id=" + userRedeem.getId());
 				return;
 			}
 		}
-		/*************************/
+
+		/**********************************/
 		String isSuccess = "";
 		log.info("UserRedeem|" + userRedeem.toString());
 		User user = dbPersister.getUser(userRedeem.getEttId());
+		DeviceToken dToken = dbPersister.getDeviceId(user.getDeviceId(), user.getEttId());
+
+		/************** DAILY LIMIT *****************/
 		int toDayAmount = dbPersister.getTodayAmount(userRedeem.getEttId());
-		if ((toDayAmount + userRedeem.getAmount()) >= Integer.parseInt(configHolder.getProperties().getProperty("DAY_LIMIT"))) {
-			log.info("Day limit [" + configHolder.getProperties().getProperty("DAY_LIMIT") + "] crossed for ettId=" + userRedeem.getEttId());
+		if ((toDayAmount + userRedeem.getAmount()) >= Integer.parseInt(configHolder.getProperties().get("DAY_LIMIT"))) {
+			log.info("Day limit [" + configHolder.getProperties().get("DAY_LIMIT") + "] crossed for ettId=" + userRedeem.getEttId());
 			dbPersister.updateFailRedeem(user, userRedeem);
-			DeviceToken dToken = dbPersister.getDeviceId(user.getDeviceId(), user.getEttId());
+			if (userActivityBooster) {
+				dbPersister.updateUserActivityBooster(userActivityBoosterId, 1);
+			}
 			if (dToken != null && !dToken.getDeviceToken().equals("")) {
-				String pushText = configHolder.getProperties().getProperty("DAY_LIMIT_CROSS_NOTF");
+				String pushText = configHolder.getProperties().get("DAY_LIMIT_CROSS_NOTF");
 				if (!pushText.equals(""))
 					pushText = pushText.replaceFirst("#MOBILE_NUMBER#", userRedeem.getMsisdn() + "");
 				sendPush(pushText, dToken);
 			}
 			return;
 		}
+
+		/************** MONTHLY LIMIT *****************/
+		// considering that UserRedeem contains data of this year only//
+		if (configHolder.getProperties().get("IS_MONTHLY_LIMIT_ENABLE").equalsIgnoreCase("true")) {
+			int monthlyLimit = dbPersister.getMonthlyAmount(userRedeem.getEttId());
+			if (monthlyLimit >= Integer.parseInt(configHolder.getProperties().get("MONTHLY_LIMIT"))) {
+				log.info("Monthly limit [" + configHolder.getProperties().get("MONTHLY_LIMIT") + "] for recharge crossed for ettId=" + userRedeem.getEttId());
+				dbPersister.updateFailRedeem(user, userRedeem);
+				if (userActivityBooster) {
+					dbPersister.updateUserActivityBooster(userActivityBoosterId, 1);
+				}
+				if (dToken != null && !dToken.getDeviceToken().equals("")) {
+					String pushText = configHolder.getProperties().get("MONTHLY_LIMIT_CROSS_NOTF");
+					if (!pushText.equals(""))
+						pushText = pushText.replaceFirst("#MOBILE_NUMBER#", userRedeem.getMsisdn() + "");
+					sendPush(pushText, dToken);
+				}
+				return;
+			}
+		}
+
+		/*********** EGV MONTHLY LIMIT **************/
+
+		if (userRedeem.getType().equalsIgnoreCase("EGV") && configHolder.getProperties().get("IS_EGV_MONTHLY_LIMIT_ENABLE").equalsIgnoreCase("true")) {
+			int egvmonthlyLimit = dbPersister.getMonthlyEGV(userRedeem.getEttId());
+			if (egvmonthlyLimit >= Integer.parseInt(configHolder.getProperties().get("EGV_MONTHLY_LIMIT"))) {
+				log.info("Monthly limit [" + configHolder.getProperties().get("EGV_MONTHLY_LIMIT") + "] of EGV crossed for ettId=" + userRedeem.getEttId());
+				dbPersister.updateFailRedeem(user, userRedeem);
+				if (userActivityBooster) {
+					dbPersister.updateUserActivityBooster(userActivityBoosterId, 1);
+				}
+				if (dToken != null && !dToken.getDeviceToken().equals("")) {
+					String pushText = configHolder.getProperties().get("EGV_MONTHLY_LIMIT_CROSS_NOTF");
+					if (!pushText.equals(""))
+						pushText = pushText.replaceFirst("#MOBILE_NUMBER#", userRedeem.getMsisdn() + "");
+					sendPush(pushText, dToken);
+				}
+				return;
+			}
+		}
+
+		// DeviceToken dToken = dbPersister.getDeviceId(user.getDeviceId(), user.getEttId());
+
+		/************ BSNL JK CHECK ************/
+		/*
+		 * if (userRedeem.getOperator().equalsIgnoreCase("BSNL") && userRedeem.getCircle().equalsIgnoreCase("JK")){ userRedeem.setStatus("FAILED"); dbPersister.updateFailRedeem(user, userRedeem);
+		 * sendPush("service down on this operator, please try tomorrow", dToken); log.info("redeem not valid BSNL JK ettId=" + user.getEttId()); return; }
+		 */
+
+		/************ MSISDN LENGTH CHECK ************/
 		if (user.getMsisdn().length() != 10) {
 			log.info("user msisdn length is not equal to 10 so fail ettId=" + userRedeem.getEttId());
 			dbPersister.updateFailRedeem(user, userRedeem);
+			if (userActivityBooster) {
+				dbPersister.updateUserActivityBooster(userActivityBoosterId, 1);
+			}
 			return;
-
 		}
-		/*******************************/
-		/*
-		 * UserSource usersource = dbPersister.getUserSource(user.getEttId()); if(usersource.getUtmMedium().equals("INVITE")){ Long inviteeEttId = usersource.getUtmSource(); User userInvitee =
-		 * dbPersister.getUser(inviteeEttId); if(user.getDeviceId().equals(userInvitee.getDeviceId())){ log.info( "Device Id same for both invitee and inviter so request dump for "); } }
-		 */
-		/*******************************/
 
-		// if(configHolder.getProperties().getProperty("LOAN_SERVICE_ENABLE").equals("true"))
-		// {
+		/************** FIRST REDEEM ***************/
+		/*boolean firstRedeemPay = false;
+		int diffInDays = (int) ((userRedeem.getCreatedTime().getTime() - user.getRegDate().getTime()) / (1000 * 60 * 60 * 24));
+		log.info("Date diff=" + diffInDays);
+		if (diffInDays < 7) {
+			if (configHolder.getProperties().get("FIRSTREDEEMPAY").equals("true")) {
+				if (configHolder.getAmountfirstRedeemBonus().containsKey((int) userRedeem.getAmount())) {
+					int count = dbPersister.getRedeemCount(userRedeem.getEttId());
+					if (count == 0) {
+						firstRedeemPay = true;
+					}
+				}
+			}
+		}*/
 
 		/* ####################################################LOAN HANDLING########################################################################### */
 
 		if (userRedeem.getRedeemType().equals(RedeemType.LOAN)) {
 
-			if (configHolder.getProperties().getProperty("LOAN_SERVICE_ENABLE").equals("true")) {
+			if (configHolder.getProperties().get("LOAN_SERVICE_ENABLE").equals("true")) {
 				isSuccess = giveBalanceApt(userRedeem);
-				if (isSuccess.equalsIgnoreCase("SUCCESS") || isSuccess.equalsIgnoreCase("PENDING")) {
-
-				} else {
+				if (!isSuccess.equalsIgnoreCase("SUCCESS") && !isSuccess.equalsIgnoreCase("TIMEOUT")) {
 					isSuccess = giveBalanceOxygen(userRedeem);
 				}
 			} else {
-				isSuccess = "FAIL";
+				isSuccess = "FAILED";
 			}
 		}
 
@@ -146,50 +216,68 @@ public class APIImpl implements APIInterface {
 
 		case "EGV": {
 			isSuccess = EGV(userRedeem);
-			if (!isSuccess.equalsIgnoreCase("SUCCESS") && configHolder.getProperties().getProperty("FLIPKART_EGV_ENABLED").equals("true")) {
-				isSuccess = "FAIL";
+			if (!isSuccess.equalsIgnoreCase("SUCCESS") && !isSuccess.equalsIgnoreCase("TIMEOUT") && configHolder.getProperties().get("FLIPKART_EGV_ENABLED").equals("true")) {
+				isSuccess = "FAILED";
 			}
 		}
 			break;
 
-		case "NEXGTV": {
+		case "TVANDMUSIC": {
 			isSuccess = NEXGTV(userRedeem);
-			if (!isSuccess.equalsIgnoreCase("SUCCESS") && configHolder.getProperties().getProperty("FLIPKART_EGV_ENABLED").equals("true")) {
-				isSuccess = "FAIL";
+			if (!isSuccess.equalsIgnoreCase("SUCCESS") && !isSuccess.equalsIgnoreCase("TIMEOUT") && configHolder.getProperties().get("IS_NEXGTV_ENABLE").equals("true")) {
+				isSuccess = "FAILED";
 			}
 		}
 			break;
 
 		case "":
 		case "PREPAID": {
-			if (configHolder.getProperties().getProperty("IS_GLOBAL_URL").equals("true")) {
+			
+			if(userRedeem.getRedeemType().equals(RedeemType.BROWSEPLAN)){
+				isSuccess = giveBalanceOxygen(userRedeem);
+				break;
+			}
+			
+			if (configHolder.getProperties().get("IS_GLOBAL_URL").equals("true")) {
 				isSuccess = giveGlobalBalance(userRedeem.getMsisdn(), (int) userRedeem.getAmount(), userRedeem);
 			}
 
 			// temp code for airtel
-			else if (configHolder.getProperties().getProperty("AIRTEL_MCARBON_ENABLE").equals("true") && userRedeem.getOperator().equalsIgnoreCase("AIRTEL")) {
-				// userRedeem.setVender("MC");
-				isSuccess = giveAirtelBalance(userRedeem.getMsisdn(), (int) userRedeem.getAmount(), userRedeem);
-			} else {
+
+			if (userRedeem.getOperator().equalsIgnoreCase("AIRTEL")) {
 				isSuccess = giveBalanceApt(userRedeem);
+				if (!isSuccess.equalsIgnoreCase("SUCCESS") && !isSuccess.equalsIgnoreCase("TIMEOUT") && configHolder.getProperties().get("AIRTEL_MCARBON_ENABLE").equals("true")) {
+					isSuccess = giveAirtelBalance(userRedeem.getMsisdn(), (int) userRedeem.getAmount(), userRedeem);
+				}
+				if (!isSuccess.equalsIgnoreCase("SUCCESS") && !isSuccess.equalsIgnoreCase("TIMEOUT")) {
+					isSuccess = giveBalanceOxygen(userRedeem);
+				}
+			} else {
+				if (!isSuccess.equalsIgnoreCase("SUCCESS") && configHolder.getProperties().get("PREPAID_PRIORITY").equals("OXYGEN")) {
+					isSuccess = giveBalanceOxygen(userRedeem);
+				} else {
+					isSuccess = giveBalanceApt(userRedeem);
+				}
+				if (!isSuccess.equalsIgnoreCase("SUCCESS") && !isSuccess.equalsIgnoreCase("TIMEOUT")) {
+					if (!configHolder.getProperties().get("PREPAID_PRIORITY").equals("OXYGEN")) {
+						isSuccess = giveBalanceOxygen(userRedeem);
+					} else {
+						isSuccess = giveBalanceApt(userRedeem);
+					}
+				}
 			}
 
-			if (configHolder.getProperties().getProperty("AIRTEL_MCARBON_FALLBACK").equals("true") && userRedeem.getOperator().equalsIgnoreCase("AIRTEL") && !isSuccess.equalsIgnoreCase("SUCCESS")
-					&& !isSuccess.equalsIgnoreCase("PENDING")) {
-
+			if (configHolder.getProperties().get("AIRTEL_MCARBON_FALLBACK").equals("true") && userRedeem.getOperator().equalsIgnoreCase("AIRTEL") && !isSuccess.equalsIgnoreCase("SUCCESS")
+					&& !isSuccess.equalsIgnoreCase("TIMEOUT")) {
 				isSuccess = giveAirtelBalance(userRedeem.getMsisdn(), (int) userRedeem.getAmount(), userRedeem);
 			}
 
-			if (isSuccess.equalsIgnoreCase("SUCCESS") || isSuccess.equalsIgnoreCase("PENDING")) {
-			} else {
-				isSuccess = giveBalanceOxygen(userRedeem);
-			}
 		}
 			break;
 
 		case "POSTPAID": {
 			isSuccess = giveBalanceOxygenPostPaid(userRedeem);
-			if ((!isSuccess.equalsIgnoreCase("SUCCESS")) && configHolder.getProperties().getProperty("APT_POSTPAID_ENABLE").equals("true")) {
+			if ((!isSuccess.equalsIgnoreCase("SUCCESS")) && !isSuccess.equalsIgnoreCase("TIMEOUT")) {
 				isSuccess = giveBalanceAptPostPaid(userRedeem);
 			}
 		}
@@ -197,7 +285,7 @@ public class APIImpl implements APIInterface {
 
 		case "DTH": {
 			isSuccess = giveBalanceOxygenDth(userRedeem);
-			if (!isSuccess.equalsIgnoreCase("SUCCESS") && configHolder.getProperties().getProperty("APT_DTH_ENABLE").equals("true")) {
+			if (!isSuccess.equalsIgnoreCase("SUCCESS") && !isSuccess.equalsIgnoreCase("TIMEOUT")) {
 				isSuccess = giveBalanceAptDth(userRedeem);
 			}
 		}
@@ -208,9 +296,14 @@ public class APIImpl implements APIInterface {
 			break;
 		}
 
-		if (isSuccess.equalsIgnoreCase("SUCCESS") || isSuccess.equalsIgnoreCase("PENDING")) {
-			String status = isSuccess.equalsIgnoreCase("SUCCESS") ? isSuccess.toUpperCase() : "SUCESS_P";
-			userRedeem.setStatus(status);
+		if (isSuccess.equalsIgnoreCase("TIMEOUT")) {
+			userRedeem.setStatus(isSuccess);
+			dbPersister.updateRedeemStatus(userRedeem);
+			return;
+		}
+
+		if (isSuccess.equalsIgnoreCase("SUCCESS")) {
+			userRedeem.setStatus(isSuccess);
 			UserAccountSummary userAccountSummary = new UserAccountSummary();
 			userAccountSummary.setEttId(user.getEttId());
 			if (userRedeem.getRedeemType().equals(RedeemType.LOAN)) {
@@ -223,15 +316,47 @@ public class APIImpl implements APIInterface {
 				userAccountSummary.setOfferName("GIFTVOUCHER");
 				userAccountSummary.setAmount(-(userRedeem.getAmount()));
 				userAccountSummary.setRemarks("FLIPKART");
+			} else if (userRedeem.getType().equals("TVandMusic")) {
+				userAccountSummary.setOfferId(0l);
+				userAccountSummary.setOfferName("TVandMusic");
+				userAccountSummary.setAmount(-(userRedeem.getAmount()));
+				userAccountSummary.setRemarks("NexGTV");
 			} else {
 				userAccountSummary.setOfferId(0l);
 				userAccountSummary.setOfferName("redemption");
 				userAccountSummary.setAmount(-(userRedeem.getAmount()));
-				userAccountSummary.setRemarks("Recharged");
+				if(userRedeem.getRedeemType().equals(RedeemType.BROWSEPLAN)){
+					userAccountSummary.setRemarks("Recharged Browseplan");
+				}else{
+					userAccountSummary.setRemarks("Recharged");
+				}
+				CheckMsisdn(user, userRedeem);
 			}
 			dbPersister.updateSuccessRedeem(user, userAccountSummary, userRedeem);
+			
+			if(user.getRedeemCount()==0){
+				rechargeBonus(user);
+			}
+			
+			if (sos) {
+				dbPersister.updateThreashHoldSpecial(userRedeem.getEttId(), 0);
+			}
+
+			if (userActivityBooster) {
+				dbPersister.updateUserActivityBooster(userActivityBoosterId, 2);
+			}
+
+			/*if (firstRedeemPay) {
+				userAccountSummary.setOfferId(7005l);
+				userAccountSummary.setOfferName("First Redeem Bonus");
+				userAccountSummary.setAmount(configHolder.getfirstRedeemBonus((int) userRedeem.getAmount()).intValue());
+				userAccountSummary.setRemarks("First Redeem Bonus");
+				dbPersister.firstRedeemOffer(userAccountSummary);
+				log.info("First Recharge Bonus [ ettId=" + userRedeem.getEttId() + " ]");
+			}*/
+
 			log.info("redeem successful ettId=" + user.getEttId());
-			DeviceToken dToken = dbPersister.getDeviceId(user.getDeviceId(), user.getEttId());
+
 			if (dToken != null && !dToken.getDeviceToken().equals("")) {
 				String txt = pushServiceImpl.getSuccessPush(isSuccess, userRedeem);
 				sendPush(txt, dToken);
@@ -250,40 +375,94 @@ public class APIImpl implements APIInterface {
 			return;
 		}
 
-		DeviceToken dToken = dbPersister.getDeviceId(user.getDeviceId(), user.getEttId());
+		if (isSuccess.equalsIgnoreCase("SUBSCRIBED")) {
+			if (dToken != null && !dToken.getDeviceToken().equals("")) {
+				sendPush(configHolder.getProperties().get("NEXGTV_SUBSCRIBED_PUSH"), dToken);
+				return;
+			}
+		}
+
 		if (dToken != null && !dToken.getDeviceToken().equals("")) {
 			String txt = pushServiceImpl.getFailurePush(isSuccess, userRedeem);
 			sendPush(txt, dToken);
 		}
+
 		userRedeem.setStatus("FAILED");
 		dbPersister.updateFailRedeem(user, userRedeem);
 		log.info("redeem failed ettId=" + user.getEttId());
+
+		if (userActivityBooster) {
+			dbPersister.updateUserActivityBooster(userActivityBoosterId, 1);
+		}
+	}
+
+    // API for RECHARGE BONUS
+	private void rechargeBonus(User user){
+		
+		if(configHolder.getProperties().get("APRIL_FOOL_OFFER").equals("true")) {
+			long start = System.currentTimeMillis();
+			String url = configHolder.getProperties().get("APRIL_FOOL_OFFER_API").replace("#ETTID#", user.getEttId()+"").replace("#OTP#", user.getOtp()+"");
+			SendGetRequest sendGetRequest = new SendGetRequest();
+			String resp = sendGetRequest.sendRequest(url);
+			log.info("APRIL FOOL OFFER API|" + url + "|RESP|" + resp + "|TIME|" + (System.currentTimeMillis() - start));
+		}
+	}
+	
+	// CHECK MSISDN
+	private void CheckMsisdn(User user, UserRedeem userRedeem) {
+
+		if (user.getMsisdn().equalsIgnoreCase(userRedeem.getMsisdn() + "")) {
+			log.info("Msisdn same : " + user.getMsisdn());
+		} else {
+			log.info("Msisdn different : " + userRedeem.getMsisdn());
+
+			boolean isAvailable = dbPersister.checkMsisdn(userRedeem.getMsisdn());
+
+			if (!isAvailable) {
+
+				log.info("Msisdn Not Available : " + userRedeem.getMsisdn());
+				if (configHolder.getProperties().get("REDEEM_SMS_ENABLE").equals("true")) {
+
+					Utility utility = new Utility();
+					String msg = userRedeem.getMsisdn() + "#congratulations you received FREE recharge of Rs. " + userRedeem.getAmount()
+							+ " from earn talktime, you can also get FREE money and recharge Mobile for FREE by downloading the Earn Talktime App, click http://ri.earntalktime.com";
+					utility.SendUDP(msg, "54.209.220.78", "7171");
+				}
+			}
+		}
 	}
 
 	// NEXGTV creation
 	private String NEXGTV(UserRedeem userRedeem) {
 
 		try {
-			if (!configHolder.getProperties().getProperty("IS_NEXGTV_ENABLE").equals("true")) {
+			if (!configHolder.getProperties().get("IS_NEXGTV_ENABLE").equals("true")) {
 				return "";
 			}
 			long tId = System.currentTimeMillis() + userRedeem.getEttId();
 			userRedeem.setVender("NEXGTV");
 			userRedeem.setTrans_id_ett(String.valueOf(tId));
-			String url = configHolder.getProperties().getProperty("NEXGTV_URL").replace("#MSISDN#", userRedeem.getMsisdn() + "").replace("#AMOUNT#", ((int) userRedeem.getAmount()) + "").replace("#TID#", tId + "")
+			String url = configHolder.getProperties().get("NEXGTV_URL").replace("#MSISDN#", userRedeem.getMsisdn() + "").replace("#AMOUNT#", ((int) userRedeem.getAmount()) + "").replace("#TID#", tId + "")
 					.replace("#VALIDITY#", configHolder.getValidityPriceMapNexgenTV((int) userRedeem.getAmount()) + "");
 			SendGetRequest sendGetRequest = new SendGetRequest();
 			long start = System.currentTimeMillis();
 			String resp = sendGetRequest.sendRequest(url);
 			log.info("RECHARGE URL|" + url + "|RESP|" + resp + "|TIME|" + (System.currentTimeMillis() - start));
-			userRedeem.setTrans_id_ett(String.valueOf(tId));
 
-			String respArray[] = resp.split("|");
-			if (respArray[0].equals("00x1")) {
-				return "SUCCESS";
-			} else {
-				return "FAILED";
+			String resp1 = "";
+			if (resp.equalsIgnoreCase("TIMEOUT")) {
+				return resp;
 			}
+
+			String respArray[] = resp.split("\\|");
+			if (respArray[0].trim().equalsIgnoreCase("00x1")) {
+				resp1 = "SUCCESS";
+			} else if (respArray[0].trim().equalsIgnoreCase("00z3")) {
+				resp1 = "SUBSCRIBED";
+			} else {
+				resp1 = "FAILED";
+			}
+			return resp1;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			log.info("[error in giveGlobleBalance][" + ex + "]");
@@ -293,16 +472,16 @@ public class APIImpl implements APIInterface {
 
 	// Flipkart EGV creation
 	private String EGV(UserRedeem userRedeem) {
-		if (!configHolder.getProperties().getProperty("FLIPKART_EGV_ENABLED").equals("true")) {
+		if (!configHolder.getProperties().get("FLIPKART_EGV_ENABLED").equals("true")) {
 			return "";
 		}
-		FlipkartEGV egv = new FlipkartEGV(userRedeem, dbPersister,configHolder,jmsTemplate);
+		FlipkartEGV egv = new FlipkartEGV(userRedeem, dbPersister, configHolder, jmsTemplate);
 		String resp = egv.createEGV();
 		return resp;
 	}
 
 	private String giveBalanceAptDth(UserRedeem userRedeem) {
-		if (!configHolder.getProperties().getProperty("IS_ATP_DTH_ENABLE").equals("true")) {
+		if (!configHolder.getProperties().get("IS_ATP_DTH_ENABLE").equals("true")) {
 			return "";
 		}
 		long tId = System.currentTimeMillis() + userRedeem.getEttId();
@@ -314,23 +493,29 @@ public class APIImpl implements APIInterface {
 		long start = System.currentTimeMillis();
 		String resp = sendGetRequest.sendRequest(url);
 		log.info("RECHARGE URL|" + url + "|RESP|" + resp + "|TIME|" + (System.currentTimeMillis() - start));
+		if (resp.equalsIgnoreCase("TIMEOUT")) {
+			return resp;
+		}
 		String respArray[] = resp.split(",");
-		if (respArray.length < 3)
-			return "INVALID_RESP_" + resp;
-
 		userRedeem.setTrans_id(respArray[0]);
-		userRedeem.setTrans_id_ett(String.valueOf(tId));
+		if (respArray.length < 3) {
+			return "INVALID_RESP_" + resp;
+		}
+		if (respArray[2].equalsIgnoreCase("PENDING")) {
+			return "TIMEOUT";
+		}
 		return respArray[2];
 	}
 
 	private String giveBalanceAptPostPaid(UserRedeem userRedeem) {
-		if (!configHolder.getProperties().getProperty("IS_ATP_POSTPAID_ENABLE").equals("true")) {
+		if (!configHolder.getProperties().get("IS_ATP_POSTPAID_ENABLE").equals("true")) {
 			return "";
 		}
 		long tId = System.currentTimeMillis() + userRedeem.getEttId();
 		if (userRedeem.getOperator().equals("Reliance"))
 			userRedeem.setOperator("Reliance GSM");
 		userRedeem.setVender("ATP");
+		userRedeem.setTrans_id_ett(String.valueOf(tId));
 		String url = "http://aptrecharge.in/api/recharge.php?uid=616e7572616731393832&pin=5328526938345&number=" + userRedeem.getMsisdn() + "&operator="
 				+ configHolder.getPostPaidOperatorId(userRedeem.getOperator().toUpperCase()) + "&circle=" + configHolder.getCircleId(userRedeem.getCircle().toUpperCase()) + "&amount=" + ((int) userRedeem.getAmount())
 				+ "&usertx=" + tId + "&format=csv&version=4";
@@ -338,13 +523,18 @@ public class APIImpl implements APIInterface {
 		long start = System.currentTimeMillis();
 		String resp = sendGetRequest.sendRequest(url);
 		log.info("RECHARGE URL|" + url + "|RESP|" + resp + "|TIME|" + (System.currentTimeMillis() - start));
+
+		if (resp.equalsIgnoreCase("TIMEOUT")) {
+			return resp;
+		}
 		String respArray[] = resp.split(",");
-
-		if (respArray.length < 3)
-			return "INVALID_RESP_" + resp;
-
 		userRedeem.setTrans_id(respArray[0]);
-		userRedeem.setTrans_id_ett(String.valueOf(tId));
+		if (respArray.length < 3) {
+			return "INVALID_RESP_" + resp;
+		}
+		if (respArray[2].equalsIgnoreCase("PENDING")) {
+			return "TIMEOUT";
+		}
 		return respArray[2];
 	}
 
@@ -354,7 +544,7 @@ public class APIImpl implements APIInterface {
 		String amount1 = "0";
 		String validResp = dbPersister.getValidResp(msisdn);
 		if (validResp == null || validResp.equals("")) {
-			String validateUrl = configHolder.getProperties().getProperty("GLOBAL_VALIDATION_URL");
+			String validateUrl = configHolder.getProperties().get("GLOBAL_VALIDATION_URL");
 			validateUrl = validateUrl.replaceFirst("<ettId>", "17");
 			validateUrl = validateUrl.replaceFirst("<msisdn>", msisdn + "");
 			sendGetRequest.sendRequest(validateUrl);
@@ -373,8 +563,8 @@ public class APIImpl implements APIInterface {
 				}
 			}
 			if (!amount1.equals("0")) {
-				String url = configHolder.getProperties().getProperty("GLOBAL_RECHARGE_URL");
-				String postData = configHolder.getProperties().getProperty("GLOBAL_RECHARGE_DATA");
+				String url = configHolder.getProperties().get("GLOBAL_RECHARGE_URL");
+				String postData = configHolder.getProperties().get("GLOBAL_RECHARGE_DATA");
 				postData = postData.replaceFirst("<msisdn>", validOkResp1[5]);
 				postData = postData.replaceFirst("<AMOUNT>", amount1);
 				userRedeem.setVender("ccard");
@@ -395,20 +585,27 @@ public class APIImpl implements APIInterface {
 
 	private String giveAirtelBalance(Long msisdn, int amount, UserRedeem userRedeem) {
 		SendGetRequest sendGetRequest = new SendGetRequest();
-		String url = configHolder.getProperties().getProperty("AIRTEL_RECHARGE_URL") + "?msisdn=" + msisdn + "&units=" + amount;
+		String url = configHolder.getProperties().get("AIRTEL_RECHARGE_URL") + "?msisdn=" + msisdn + "&units=" + amount;
 		userRedeem.setVender("MC");
 		long start = System.currentTimeMillis();
 		String resp = sendGetRequest.sendRequest(url);
 		log.info("RECHARGE URL|" + url + "|RESP|" + resp + "|TIME|" + (System.currentTimeMillis() - start));
 
 		if ((!resp.equalsIgnoreCase("SUCCESS")) && configHolder.getIsGetApi()) {
+			if (resp.equalsIgnoreCase("TIMEOUT")) {
+				return resp;
+			}
 			long tId = System.currentTimeMillis() + userRedeem.getEttId();
+			userRedeem.setVender("GETAPI");
+			userRedeem.setTrans_id_ett(tId + "");
 			String url3 = "http://www.getapi.in/api/recharge.php?utid=" + tId + "&sender=rationalheads&pin=98103&keyword=" + configHolder.getOperatorKeyGETAPI(userRedeem.getOperator().toUpperCase()) + "&mobile="
 					+ userRedeem.getMsisdn() + "&amount=" + ((int) userRedeem.getAmount());
 			start = System.currentTimeMillis();
-			userRedeem.setVender("GETAPI");
 			String resp3 = sendGetRequest.sendRequest(url3);
 			log.info("RECHARGE3 URL|" + url3 + "|RESP|" + resp3 + "|TIME|" + (System.currentTimeMillis() - start));
+			if (resp3.equalsIgnoreCase("TIMEOUT")) {
+				return resp3;
+			}
 			String respArray3[] = resp3.split(",");
 			if (respArray3.length >= 3) {
 				return respArray3[3];
@@ -441,7 +638,7 @@ public class APIImpl implements APIInterface {
 			return "INVALID_RESP_" + resp;
 
 		if (!(respArray[2].equalsIgnoreCase("SUCCESS") || respArray[2].equalsIgnoreCase("PENDING"))) {
-			if (!configHolder.getProperties().getProperty("IS_JOLO_ENABLE").equals("true")) {
+			if (!configHolder.getProperties().get("IS_JOLO_ENABLE").equals("true")) {
 				return resp;
 			}
 			// try by another vendor
@@ -485,32 +682,49 @@ public class APIImpl implements APIInterface {
 	}
 
 	private String getOxygenResponse(UserRedeem userRedeem, String resp) {
+		if (resp.equalsIgnoreCase("TIMEOUT")) {
+			return resp;
+		}
 		String resp1[] = resp.split("\\|");
 		// if(resp1[0].equals("0") || resp1[0].equals("1") ||
 		// resp1[0].equals("31")) {
 		if (resp1[0].equals("0")) {
-			userRedeem.setVender("OXYGEN");
+			try {
+				String resp2[] = resp1[1].split("-");
+				userRedeem.setTrans_id(resp2[1].trim());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return "SUCCESS";
 		} else if (Integer.parseInt(resp1[0].trim()) < 0) {
-			userRedeem.setVender("OXYGEN");
-			return "PENDING";
+			return "TIMEOUT";
 		} else {
-			return "FAIL";
+			return "FAILED";
 		}
 	}
 
 	private String giveBalanceOxygen(UserRedeem userRedeem) {
 		try {
-			if (configHolder.getProperties().getProperty("IS_OXYGEN_PREPAID_ENABLE").equals("true")) {
-				if (userRedeem.getOperator().equalsIgnoreCase("AIRTEL") && (!configHolder.getProperties().getProperty("IS_AIRTEL_ON_OXYGEN").equals("true"))) {
+			if (configHolder.getProperties().get("IS_OXYGEN_PREPAID_ENABLE").equals("true")) {
+				if (userRedeem.getOperator().equalsIgnoreCase("AIRTEL") && (!configHolder.getProperties().get("IS_AIRTEL_ON_OXYGEN").equals("true"))) {
 					log.info("Airtel Oxygen close id=" + userRedeem.getId());
 					return "";
 				}
 
-				String url = configHolder.getProperties().getProperty("OXYGEN_RECHARGE_URL");
-				String postData = configHolder.getProperties().getProperty("OXYGEN_RECHARGE_PREPAID_PARAMETER").replace("#TID#", getTidOxygen("yyyyMMDDHHmmssSSS") + userRedeem.getEttId())
-						.replace("#MSISDN#", userRedeem.getMsisdn() + "").replace("#OPERATOR#", configHolder.getOperatorKeyMapOxygenPrepaid(userRedeem.getOperator()))
-						.replace("#AMOUNT#", ((int) userRedeem.getAmount()) + "").replace("#REQUESTDATE#", getTidOxygen("yyyyMMddHHmmss"));
+				String url = configHolder.getProperties().get("OXYGEN_RECHARGE_URL");
+				userRedeem.setVender("OXYGEN");
+				String tid = getTidOxygen("yyyyMMDDHHmmssSSS") + userRedeem.getEttId();
+				userRedeem.setTrans_id_ett(tid);
+				String postData = "";
+				if (userRedeem.getCircle() == null || userRedeem.getCircle().equals("")) {
+					postData = "transid=" + tid + "&merchantrefno=Topup," + userRedeem.getMsisdn() + "," + configHolder.getOperatorKeyMapOxygenPrepaid_1(userRedeem.getOperator()) + "&amount="
+							+ ((int) userRedeem.getAmount()) + "&requestdate=" + getTidOxygen("yyyyMMddHHmmss") + "&status=0&bankrefno=8";
+				} else {
+					postData = configHolder.getProperties().get("OXYGEN_RECHARGE_PREPAID_PARAMETER").replace("#TID#", tid).replace("#MSISDN#", userRedeem.getMsisdn() + "")
+							.replace("#OPERATOR#", configHolder.getOperatorKeyMapOxygenPrepaid(userRedeem.getOperator())).replace("#AMOUNT#", ((int) userRedeem.getAmount()) + "")
+							.replace("#CIRCLE#", configHolder.getCircleKeyMapOxygen(userRedeem.getCircle().toUpperCase())).replace("#REQUESTDATE#", getTidOxygen("yyyyMMddHHmmss"));
+				}
+
 				SendGetRequest sendGetRequest = new SendGetRequest();
 				long start = System.currentTimeMillis();
 				String resp = sendGetRequest.sendRequestOxygen(url, postData);
@@ -526,15 +740,24 @@ public class APIImpl implements APIInterface {
 	}
 
 	private String giveBalanceOxygenPostPaid(UserRedeem userRedeem) {
-		if (configHolder.getProperties().getProperty("IS_OXYGEN_POSTPAID_ENABLE").equals("true")) {
-			if (userRedeem.getOperator().equalsIgnoreCase("AIRTEL") && (!configHolder.getProperties().getProperty("IS_AIRTEL_ON_OXYGEN").equals("true"))) {
+		if (configHolder.getProperties().get("IS_OXYGEN_POSTPAID_ENABLE").equals("true")) {
+			if (userRedeem.getOperator().equalsIgnoreCase("AIRTEL") && (!configHolder.getProperties().get("IS_AIRTEL_ON_OXYGEN").equals("true"))) {
 				log.info("Airtel Oxygen close id=" + userRedeem.getId());
 				return "";
 			}
-			String url = configHolder.getProperties().getProperty("OXYGEN_RECHARGE_URL");
-			String postData = configHolder.getProperties().getProperty("OXYGEN_RECHARGE_PREPAID_PARAMETER").replace("#TID#", getTidOxygen("yyyyMMDDHHmmssSSS") + userRedeem.getEttId())
-					.replace("#MSISDN#", userRedeem.getMsisdn() + "").replace("#OPERATOR#", configHolder.getOperatorKeyMapOxygenPostpaid(userRedeem.getOperator())).replace("#AMOUNT#", ((int) userRedeem.getAmount()) + "")
-					.replace("#REQUESTDATE#", getTidOxygen("yyyyMMddHHmmss"));
+			String url = configHolder.getProperties().get("OXYGEN_RECHARGE_URL");
+			userRedeem.setVender("OXYGEN");
+			String tid = getTidOxygen("yyyyMMDDHHmmssSSS") + userRedeem.getEttId();
+			userRedeem.setTrans_id_ett(tid);
+			String postData = "";
+			if (userRedeem.getCircle() == null || userRedeem.getCircle().equals("")) {
+				postData = "transid=" + tid + "&merchantrefno=Topup," + userRedeem.getMsisdn() + "," + configHolder.getOperatorKeyMapOxygenPostpaid_1(userRedeem.getOperator()) + "&amount="
+						+ ((int) userRedeem.getAmount()) + "&requestdate=" + getTidOxygen("yyyyMMddHHmmss") + "&status=0&bankrefno=8";
+			} else {
+				postData = configHolder.getProperties().get("OXYGEN_RECHARGE_PREPAID_PARAMETER").replace("#TID#", tid).replace("#MSISDN#", userRedeem.getMsisdn() + "")
+						.replace("#OPERATOR#", configHolder.getOperatorKeyMapOxygenPostpaid(userRedeem.getOperator())).replace("#AMOUNT#", ((int) userRedeem.getAmount()) + "")
+						.replace("#CIRCLE#", configHolder.getCircleKeyMapOxygen(userRedeem.getCircle().toUpperCase())).replace("#REQUESTDATE#", getTidOxygen("yyyyMMddHHmmss"));
+			}
 			SendGetRequest sendGetRequest = new SendGetRequest();
 			long start = System.currentTimeMillis();
 			String resp = sendGetRequest.sendRequestOxygen(url, postData);
@@ -546,14 +769,17 @@ public class APIImpl implements APIInterface {
 	}
 
 	private String giveBalanceOxygenDth(UserRedeem userRedeem) {
-		if (configHolder.getProperties().getProperty("IS_OXYGEN_DTH_ENABLE").equals("true")) {
-			if (userRedeem.getOperator().equalsIgnoreCase("AIRTEL") && (!configHolder.getProperties().getProperty("IS_AIRTEL_ON_OXYGEN").equals("true"))) {
+		if (configHolder.getProperties().get("IS_OXYGEN_DTH_ENABLE").equals("true")) {
+			if (userRedeem.getOperator().equalsIgnoreCase("AIRTEL") && (!configHolder.getProperties().get("IS_AIRTEL_ON_OXYGEN").equals("true"))) {
 				log.info("Airtel Oxygen close id=" + userRedeem.getId());
 				return "";
 			}
-			String url = configHolder.getProperties().getProperty("OXYGEN_RECHARGE_URL");
-			String postData = configHolder.getProperties().getProperty("OXYGEN_RECHARGE_DTH_PARAMETER").replace("#TID#", getTidOxygen("yyyyMMDDHHmmssSSS") + userRedeem.getEttId())
-					.replace("#MSISDN#", userRedeem.getMsisdn() + "").replace("#OPERATOR#", configHolder.getOperatorKeyMapOxygenDth(userRedeem.getOperator())).replace("#AMOUNT#", ((int) userRedeem.getAmount()) + "")
+			String url = configHolder.getProperties().get("OXYGEN_RECHARGE_URL");
+			userRedeem.setVender("OXYGEN");
+			String tid = getTidOxygen("yyyyMMDDHHmmssSSS") + userRedeem.getEttId();
+			userRedeem.setTrans_id_ett(tid);
+			String postData = configHolder.getProperties().get("OXYGEN_RECHARGE_DTH_PARAMETER").replace("#TID#", tid).replace("#MSISDN#", userRedeem.getMsisdn() + "")
+					.replace("#OPERATOR#", configHolder.getOperatorKeyMapOxygenDth(userRedeem.getOperator())).replace("#AMOUNT#", ((int) userRedeem.getAmount()) + "")
 					.replace("#REQUESTDATE#", getTidOxygen("yyyyMMddHHmmss"));
 			SendGetRequest sendGetRequest = new SendGetRequest();
 			long start = System.currentTimeMillis();
@@ -566,10 +792,11 @@ public class APIImpl implements APIInterface {
 
 	@SuppressWarnings("unused")
 	private String giveBalanceJolo(UserRedeem userRedeem) {
-		if (!configHolder.getProperties().getProperty("IS_JOLO_ENABLE").equals("true")) {
+		if (!configHolder.getProperties().get("IS_JOLO_ENABLE").equals("true")) {
 			return "";
 		}
 		long tId = System.currentTimeMillis() + userRedeem.getEttId();
+		userRedeem.setTrans_id_ett(String.valueOf(tId));
 		SendGetRequest sendGetRequest = new SendGetRequest();
 		userRedeem.setVender("JOLO");
 		String url2 = "http://joloapi.com/api/recharge.php?mode=1&userid=anurag&key=405552127516438&operator=" + configHolder.getOperatorKey(userRedeem.getOperator().toUpperCase()) + "&service=" + userRedeem.getMsisdn()
@@ -577,13 +804,15 @@ public class APIImpl implements APIInterface {
 		// 273680092955545
 		long start = System.currentTimeMillis();
 		String resp2 = sendGetRequest.sendRequest(url2);
+		if (resp2.equalsIgnoreCase("TIMEOUT")) {
+			return resp2;
+		}
 		String respArray2[] = resp2.split(",");
 		log.info("RECHARGE2 URL|" + url2 + "|RESP|" + resp2 + "|TIME|" + (System.currentTimeMillis() - start));
 		if (respArray2.length < 2)
 			return "INVALID_RESP_" + resp2;
 
 		userRedeem.setTrans_id(respArray2[0]);
-		userRedeem.setTrans_id_ett(String.valueOf(tId));
 		return respArray2[1];
 	}
 
@@ -591,13 +820,14 @@ public class APIImpl implements APIInterface {
 		/*
 		 * userAccount.setCurrentBalance((userAccount.getCurrentBalance()- userRedeem.getAmount())); userAccountRepository.save(userAccount);
 		 */
-		if (!configHolder.getProperties().getProperty("IS_ATP_PREPAID_ENABLE").equals("true")) {
+		if (!configHolder.getProperties().get("IS_ATP_PREPAID_ENABLE").equals("true")) {
 			return "";
 		}
 		long tId = System.currentTimeMillis() + userRedeem.getEttId();
 		if (userRedeem.getOperator().equals("Reliance"))
 			userRedeem.setOperator("Reliance GSM");
 		userRedeem.setVender("ATP");
+		userRedeem.setTrans_id_ett(String.valueOf(tId));
 		String url = "http://aptrecharge.in/api/recharge.php?uid=616e7572616731393832&pin=5328526938345&number=" + userRedeem.getMsisdn() + "&operator="
 				+ configHolder.getOperatorId(userRedeem.getOperator().toUpperCase()) + "&circle=" + configHolder.getCircleId(userRedeem.getCircle().toUpperCase()) + "&amount=" + ((int) userRedeem.getAmount())
 				+ "&usertx=" + tId + "&format=csv&version=4";
@@ -605,12 +835,16 @@ public class APIImpl implements APIInterface {
 		long start = System.currentTimeMillis();
 		String resp = sendGetRequest.sendRequest(url);
 		log.info("RECHARGE URL|" + url + "|RESP|" + resp + "|TIME|" + (System.currentTimeMillis() - start));
+		if (resp.equalsIgnoreCase("TIMEOUT")) {
+			return resp;
+		}
 		String respArray[] = resp.split(",");
+		userRedeem.setTrans_id(respArray[0]);
 		if (respArray.length < 3)
 			return "INVALID_RESP_" + resp;
-
-		userRedeem.setTrans_id(respArray[0]);
-		userRedeem.setTrans_id_ett(String.valueOf(tId));
+		if (respArray[2].equalsIgnoreCase("PENDING")) {
+			return "TIMEOUT";
+		}
 		return respArray[2];
 	}
 
@@ -633,7 +867,6 @@ public class APIImpl implements APIInterface {
 			log.error("error in redeem push " + e);
 			e.printStackTrace();
 		}
-
 	}
 
 }

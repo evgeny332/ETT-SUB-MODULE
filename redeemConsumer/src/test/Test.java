@@ -37,16 +37,37 @@ public class Test {
 		// String postData = "transid=12131&merchantrefno=Topup,8285932390,Aircel,&amount=&requestdate="+getTidOxygen("yyyyMMddHHmmss")+"&status=0&bankrefno=8";
 		// String postData = getMobilePulsaResponse("<?xml version=\"1.0\"?><mp><status>1</status><message>pulsa5000 ke 2.081299380279 Harga Rp. 6150 SUCCESS.
 		// SN:5120420021261008000.</message><tr_id>1600826</tr_id><balance>1066810</balance><ref_id>1449234121456</ref_id></mp>");
-//		createJson();
+		// createJson();
 		// System.out.println(postData);
-		sendRequestOxygen("https://osg.oximall.com/transservice.aspx", "transid=201601070216533161077673&merchantrefno=Topup,8285932390,AIRCEL&amount=100&requestdate=20160107195409&status=0&bankrefno=8");
+		// sendRequestOxygen("https://osg.oximall.com/transservice.aspx",
+		// "transid=201601070216533161077673&merchantrefno=ETOP*AIRC*DEL,8285932390&amount=20&requestdate=20160107195409&status=0&bankrefno=8");
+
+		Date date = new Date();
+		Date date2 = new Date(99, 0, 9);
+
+		System.out.println("Date1:" + date + ", Date2:"+date2);
+		// make 3 comparisons with them
+		int comparison = date.compareTo(date2);
+		int comparison2 = date2.compareTo(date);
+		int comparison3 = date.compareTo(date);
+
+		// print the results
+		System.out.println("Comparison Result:" + comparison);
+		System.out.println("Comparison2 Result:" + comparison2);
+		System.out.println("Comparison3 Result:" + comparison3);
+		float f = 0.000f;
+
+		if (f <= 0f) {
+			System.out.println("True");
+		} else {
+			System.out.println("False");
+		}
 	}
 
 	public static void sendRequestOxygen1(String url, String postData) {
-		
-		
+
 		try {
-			System.setProperty("https.protocols", "TLSv1.1");
+			System.setProperty("https.protocols", "TLSv1");
 
 			URL obj = new URL(url);
 			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -78,7 +99,7 @@ public class Test {
 
 				System.out.println(response.toString());
 
-//				return response.toString();
+				// return response.toString();
 			} else if (responseCode == 201) {
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 				String inputLine;
@@ -90,7 +111,7 @@ public class Test {
 				in.close();
 
 				System.out.println(response.toString());
-//				return response.toString();
+				// return response.toString();
 
 			} else {
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
@@ -102,19 +123,19 @@ public class Test {
 				}
 				in.close();
 				System.out.println(response.toString());
-//				return response.toString();
+				// return response.toString();
 			}
-//			oLog.info(new Date() + "|reqst=" + URL + "|postData=" + postData + "|resp=" + text.toString());
-//			System.out.println(new Date() + "|reqst=" + url + "|postData=" + postData + "|resp=" + response.toString());
-//			return text.toString();
+			// oLog.info(new Date() + "|reqst=" + URL + "|postData=" + postData + "|resp=" + text.toString());
+			// System.out.println(new Date() + "|reqst=" + url + "|postData=" + postData + "|resp=" + response.toString());
+			// return text.toString();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-//			oLog.error("[Error in  curl][" + URL + "] [postData][" + postData + "]" + e);
-//			return null;
+			// oLog.error("[Error in curl][" + URL + "] [postData][" + postData + "]" + e);
+			// return null;
 		}
 	}
-	
+
 	public static void sendRequestOxygen(String URL, String postData) {
 		try {
 			TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
@@ -149,13 +170,6 @@ public class Test {
 					System.out.println("allHostsValid SSLSession : " + session);
 					return true;
 				}
-
-				@SuppressWarnings("unused")
-				public boolean verify(String arg0, String arg1) {
-					// TODO Auto-generated method stub
-					return true;
-				}
-
 			};
 
 			HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
@@ -181,32 +195,32 @@ public class Test {
 				text = text + decodedString;
 			}
 			in.close();
-//			oLog.info(new Date() + "|reqst=" + URL + "|postData=" + postData + "|resp=" + text.toString());
+			// oLog.info(new Date() + "|reqst=" + URL + "|postData=" + postData + "|resp=" + text.toString());
 			System.out.println(new Date() + "|reqst=" + URL + "|postData=" + postData + "|resp=" + text.toString());
-//			return text.toString();
+			// return text.toString();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-//			oLog.error("[Error in  curl][" + URL + "] [postData][" + postData + "]" + e);
-//			return null;
+			// oLog.error("[Error in curl][" + URL + "] [postData][" + postData + "]" + e);
+			// return null;
 		}
 	}
 
 	public static void createJson() {
-		
+
 		try {
-			
+
 			JSONObject jsonObject = new JSONObject();
 			JSONObject jsonObject1 = new JSONObject();
 
 			jsonObject.put("transactionId", "2377212");
-			jsonObject.put("denomination", "50");			
+			jsonObject.put("denomination", "50");
 			jsonObject1.put("medium", "INLINE");
 			jsonObject1.put("format", "JSON");
 			jsonObject.put("recipient", jsonObject1);
 
 			System.out.println(jsonObject);
-			
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

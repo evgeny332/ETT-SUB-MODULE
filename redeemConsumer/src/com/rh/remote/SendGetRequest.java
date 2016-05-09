@@ -2,10 +2,15 @@ package com.rh.remote;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
@@ -28,8 +33,8 @@ public class SendGetRequest {
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.addRequestProperty("User-Agent", "curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.3.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2");
 			// urlConnection.addRequestProperty(key, value);
-			urlConnection.setReadTimeout(60000);
-			urlConnection.setConnectTimeout(60000);
+			urlConnection.setReadTimeout(90000);
+			urlConnection.setConnectTimeout(90000);
 			BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 			String line = "";
 			String temp = "";
@@ -37,17 +42,26 @@ public class SendGetRequest {
 				temp = temp + line;
 			}
 			in.close();
-			oLog.info("|request=" + URL + "resp=" + temp.toString());
-			System.out.println(new Date() + "|request=" + URL + "resp=" + temp.toString());
-			
+			oLog.info("|request=" + URL + "| resp=" + temp.toString());
+			System.out.println(new Date() + " |request=" + URL + "| resp=" + temp.toString());
+
 			return temp.toString();
-		} catch (Exception e) {
-			
+
+		} catch (SocketTimeoutException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + URL + "] " + e);
+			System.out.println(new Date() + "|request=" + URL + "|resp=TIMEOUT");
+			return "TIMEOUT";
+		} catch (SocketException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + URL + "] " + e);
+			System.out.println(new Date() + "|request=" + URL + "|resp=TIMEOUT");
+			return "TIMEOUT";
+		} catch (IOException e) {
 			e.printStackTrace();
 			oLog.error("Error in  curl" + URL + "  " + e);
 			return null;
 		}
-
 	}
 
 	public String sendRequest(String URL, String postData) {
@@ -57,8 +71,8 @@ public class SendGetRequest {
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.addRequestProperty("User-Agent", "curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.3.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2");
 			// urlConnection.addRequestProperty(key, value);
-			urlConnection.setReadTimeout(50000);
-			urlConnection.setConnectTimeout(50000);
+			urlConnection.setReadTimeout(90000);
+			urlConnection.setConnectTimeout(90000);
 			urlConnection.setDoOutput(true);
 			OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
 			wr.write(postData);
@@ -71,13 +85,23 @@ public class SendGetRequest {
 				temp = temp + line;
 			}
 			in.close();
-			
-			oLog.info("|request=" + URL + "resp=" + temp.toString());
-			System.out.println(new Date() + "|request=" + URL + "resp=" + temp.toString());
-			
+
+			oLog.info("|request=" + URL + "| resp=" + temp.toString());
+			System.out.println(new Date() + "|request=" + URL + " |resp=" + temp.toString());
+
 			return temp.toString();
-			
-		} catch (Exception e) {
+
+		} catch (SocketTimeoutException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + URL + "] [postData][" + postData + "]" + e);
+			System.out.println(new Date() + "|request=" + URL + "|resp=TIMEOUT");
+			return "TIMEOUT";
+		} catch (SocketException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + URL + "] [postData][" + postData + "]" + e);
+			System.out.println(new Date() + "|request=" + URL + "|resp=TIMEOUT");
+			return "TIMEOUT";
+		} catch (IOException e) {
 			e.printStackTrace();
 			oLog.error("[Error in  curl][" + URL + "] [postData][" + postData + "]" + e);
 			return null;
@@ -94,17 +118,17 @@ public class SendGetRequest {
 			con.setRequestMethod("POST");
 			con.setRequestProperty("Flipkart-Gifting-Client-Id", "sum8189248");
 			con.setRequestProperty("Flipkart-Gifting-Client-Token", "O6kP3UBmERooXYcWEt4H");
-//			con.setRequestProperty("Flipkart-Gifting-Client-Id", "sum5570257");
-//			con.setRequestProperty("Flipkart-Gifting-Client-Token", "xcEEnXpeabrXBQumkrxh");
+			// con.setRequestProperty("Flipkart-Gifting-Client-Id", "sum5570257");
+			// con.setRequestProperty("Flipkart-Gifting-Client-Token", "xcEEnXpeabrXBQumkrxh");
 			con.setRequestProperty("Content-Type", "application/json");
-			con.setReadTimeout(50000);
-			con.setConnectTimeout(50000);
+			con.setReadTimeout(90000);
+			con.setConnectTimeout(90000);
 
 			con.setDoOutput(true);
 
 			int responseCode = con.getResponseCode();
-//			System.out.println("\nSending 'POST' request to URL : " + url);
-//			System.out.println("Response Code : " + responseCode);
+			// System.out.println("\nSending 'POST' request to URL : " + url);
+			// System.out.println("Response Code : " + responseCode);
 
 			if (responseCode == 200) {
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -148,7 +172,17 @@ public class SendGetRequest {
 				return response.toString();
 			}
 
-		} catch (Exception e) {
+		} catch (SocketTimeoutException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + url + "] " + e);
+			System.out.println(new Date() + "|request=" + url + "|resp=TIMEOUT");
+			return "TIMEOUT";
+		} catch (SocketException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + url + "] " + e);
+			System.out.println(new Date() + "|request=" + url + "|resp=TIMEOUT");
+			return "TIMEOUT";
+		} catch (IOException e) {
 			oLog.error("[Error in  curl][" + url + "]", e);
 			e.printStackTrace();
 			return null;
@@ -166,8 +200,8 @@ public class SendGetRequest {
 			con.setRequestProperty("Flipkart-Gifting-Client-Id", "sum8189248");
 			con.setRequestProperty("Flipkart-Gifting-Client-Token", "O6kP3UBmERooXYcWEt4H");
 			con.setRequestProperty("Content-Type", "application/json");
-			con.setReadTimeout(50000);
-			con.setConnectTimeout(50000);
+			con.setReadTimeout(90000);
+			con.setConnectTimeout(90000);
 			con.setDoOutput(true);
 
 			DataOutputStream osw = new DataOutputStream(con.getOutputStream());
@@ -190,7 +224,7 @@ public class SendGetRequest {
 				oLog.info("|request=" + url + "|postData=" + postData + "|resp=" + response.toString());
 				System.out.println(new Date() + "|request=" + url + "|resp=" + response.toString());
 				return response.toString();
-				
+
 			} else if (responseCode == 201) {
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 				String inputLine;
@@ -214,13 +248,23 @@ public class SendGetRequest {
 					response.append(inputLine);
 				}
 				in.close();
-				
+
 				oLog.info("|request=" + url + "|postData=" + postData + "|resp=" + response.toString());
 				System.out.println(new Date() + "|request=" + url + "|resp=" + response.toString());
 				return response.toString();
 			}
 
-		} catch (Exception e) {
+		} catch (SocketTimeoutException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + url + "] [postData][" + postData + "]" + e);
+			System.out.println(new Date() + "|request=" + url + "|resp=TIMEOUT");
+			return "TIMEOUT";
+		} catch (SocketException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + url + "] [postData][" + postData + "]" + e);
+			System.out.println(new Date() + "|request=" + url + "|resp=TIMEOUT");
+			return "TIMEOUT";
+		} catch (IOException e) {
 			oLog.error("[Error in  curl][" + url + "] [postData][" + postData + "]" + e);
 			e.printStackTrace();
 			return null;
@@ -247,8 +291,8 @@ public class SendGetRequest {
 
 			URL url = new URL(URL);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			urlConnection.setReadTimeout(60000);
-			urlConnection.setConnectTimeout(60000);
+			urlConnection.setReadTimeout(90000);
+			urlConnection.setConnectTimeout(90000);
 			BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 			String line = "";
 			String temp = "";
@@ -267,8 +311,7 @@ public class SendGetRequest {
 
 	public String sendRequestOxygen(String URL, String postData) {
 		try {
-						
-			
+
 			TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
 				public java.security.cert.X509Certificate[] getAcceptedIssuers() {
 					return null;
@@ -283,8 +326,8 @@ public class SendGetRequest {
 
 			SSLContext sc = SSLContext.getInstance("SSL");
 			sc.init(null, trustAllCerts, new java.security.SecureRandom());
-			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());			
-			
+			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
 			HostnameVerifier allHostsValid = new HostnameVerifier() {
 				public boolean verify(String hostname, SSLSession session) {
 					System.out.println("allHostsValid hostname :" + hostname);
@@ -294,16 +337,16 @@ public class SendGetRequest {
 			};
 
 			HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-			
-			//System.setProperty("jdk.tls.client.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+
 			System.setProperty("https.protocols", "TLSv1");
+
 			URL url = new URL(URL);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setRequestMethod("POST");
 			urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			urlConnection.setRequestProperty("Authorization", "Basic UmF0aW9uYWxoZWFkczpSYXRpb25hbGhlYWRzQG1wMTIz");
-			urlConnection.setReadTimeout(50000);
-			urlConnection.setConnectTimeout(50000);
+			urlConnection.setReadTimeout(90000);
+			urlConnection.setConnectTimeout(90000);
 			urlConnection.setDoOutput(true);
 
 			DataOutputStream osw = new DataOutputStream(urlConnection.getOutputStream());
@@ -313,7 +356,7 @@ public class SendGetRequest {
 
 			int responseCode = urlConnection.getResponseCode();
 			System.out.println("Response Code : " + responseCode);
-			
+
 			if (responseCode == 200) {
 				BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 				String inputLine;
@@ -328,7 +371,7 @@ public class SendGetRequest {
 				System.out.println(new Date() + "|request=" + URL + "|postData=" + postData + "|resp=" + response.toString());
 
 				return response.toString();
-				
+
 			} else if (responseCode == 201) {
 				BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 				String inputLine;
@@ -352,14 +395,21 @@ public class SendGetRequest {
 					response.append(inputLine);
 				}
 				in.close();
-				
+
 				oLog.info("|request=" + URL + "|postData=" + postData + "|resp=" + response.toString());
 				System.out.println(new Date() + "|request=" + URL + "|postData=" + postData + "|resp=" + response.toString());
 				return response.toString();
-
 			}
-			
-		} catch (Exception e) {
+
+		} catch (SocketTimeoutException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + URL + "] [postData][" + postData + "]" + e);
+			return "TIMEOUT";
+		} catch (SocketException e) {
+			e.printStackTrace();
+			oLog.error("[Timeout][" + URL + "] [postData][" + postData + "]" + e);
+			return "TIMEOUT";
+		}  catch (IOException | NoSuchAlgorithmException | KeyManagementException e) {
 			e.printStackTrace();
 			oLog.error("[Error in  curl][" + URL + "] [postData][" + postData + "]" + e);
 			return null;
