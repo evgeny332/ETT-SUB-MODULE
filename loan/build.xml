@@ -1,0 +1,51 @@
+<project name="fonetwish" default="zip" basedir=".">
+
+<property name="dir.src" value="src"/>
+
+<property name="dir.out" value="out"/>
+<property name="dir.lib" value="lib"/>
+<property name="dir.conf" value="conf"/>
+<property name="dir.out.lib" value="out/lib"/>
+<!--property name="dir.out.conf" value="out/conf"/ -->
+<property name="dir.out.compiled" value="out/compiled"/>
+<path id="classpath">
+ <fileset dir="${dir.lib}" includes="**/*.jar"/>
+    </path>
+<target name="cleanall" description="Removing the all generated files.">
+<delete dir="${dir.out}"/>
+<delete file="loan.zip"/>
+</target>
+
+<target name="prepare" depends="cleanall">
+
+<mkdir dir="${dir.out}"/>
+<mkdir dir="${dir.out.lib}"/>
+<mkdir dir="${dir.out.compiled}"/>
+</target>
+
+<target name="compile" depends="prepare" description="Compilation of all source code.">
+
+<javac srcdir="${dir.src}" destdir="${dir.out.compiled}" classpathref="classpath" />
+</target>
+
+ <target name="copy" depends="compile" description="Copy config.properties">
+		<copy todir="${dir.out}">
+			<fileset dir="${dir.conf}"/>
+		</copy>
+		<copy todir="${dir.out.lib}">
+			<fileset dir="${dir.lib}"/>
+		</copy>
+</target>
+
+<target name="jar" depends="copy" description="copy">
+<jar jarfile="${dir.out.lib}/loan.jar" basedir="${dir.out.compiled}"/>
+</target>
+<target name="cleancompiled"  depends="jar" description="Removing compiled files.">
+<delete dir="out/compiled"/>
+</target>
+<target name="zip"  depends="cleancompiled" description="zip ">
+<zip destfile="loan.zip"   basedir="out"  update="true"/>
+</target>
+<target name="clean" depends="jar"  description="Removing compiled">
+</target>
+</project>

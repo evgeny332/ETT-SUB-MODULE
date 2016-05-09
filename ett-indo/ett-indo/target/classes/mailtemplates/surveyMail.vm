@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Untitled Document</title>
+</head>
+
+<body>
+
+
+<div id="main" style="height:469px; width:725px; border-color:#000000; border-width:thick; background-color:#f3f3f3">
+    <div id="top" style="width:725px; height:70px; background-image:url(http://images.headlinesapp.mobi/survey/top.png);  background-position:right ; background-repeat:no-repeat;"></div>
+
+
+    <div id="middle" style="height:297px;width:653px; background-color:#FFFFFF; margin-left:34px; margin-right:10px; margin-top:0px">
+        <p style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:23px; color:#494949; margin-left:20px; margin-top:15px; color:#4D6BBB;"><br>
+            Hi ${firstName},</p>
+        <p style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:16px; color:#262626;margin-left:20px; margin-right:20px">
+            The best advice comes from the best users. Headlines believes this too and wants your valuable feedback.
+        <p>
+        <p style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; color:#5b5b5b;margin-left:20px; margin-right:20px">
+            Take out 2 minutes. Take a small survey. Help Headlines become what you want.
+            </font>
+            <a href="https://docs.google.com/forms/d/1fw-ba5q4x95UbWcf3Jj5blZy5KH0_s5OV_MFjwE4mvo/viewform " target="_blank"><button style="width:110px;height:46px;background-color:#376DBA;color:white; margin-left:0px; margin-top:29px;">Take Survey</button></a>
+
+        <p style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; color:#5b5b5b;margin-left:20px; margin-right:20px">
+            Cheers!<br/ > Team Headlines</div>
+
+    <div id="bottom" style="width:750px; height:19px; background-image:url(http://images.headlinesapp.mobi/survey/Shadow.png);margin-left:45px; margin-top:0px; background-repeat:no-repeat;"></div>
+
+    <div id="footer" style="height:2px;">
+        <div id="left" style="width:301px; margin-left:301px; height:74px;float:right">
+            <div id="linkleft" style="float:left;width:150px; height:50px; border-right:thin; solid #999999;">
+                <div style="width:75px;height:54px; float:left; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 90%; color:#5b5b5b; font-size: 90% "><p>Follow us:</p></div>
+                <div style="width:75px;height:74px; float:right; ">
+                    &nbsp;<a href="https://www.facebook.com/headlinesapp" target="_blank"><img src="http://images.headlinesapp.mobi/survey/facebookicon.png" style="margin-top:15px; "/></a>
+                    &nbsp;&nbsp;<a href="https://twitter.com/headlinessocial" target="_blank"><img 	src="http://images.headlinesapp.mobi/survey/twittericon.png" /></a></div>
+            </div>
+            <div style="float:none; widtht:150px; height:74px; ">
+                <div style="width:75px;height:74px; float:left; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 90%; color:#5b5b5b; "><p>&nbsp;&nbsp;Rate us:</p></div>
+                <div style="width:75px;height:74px; float:right; ">&nbsp;<a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?ty
+pe=Purple+Software&id=618155018
+" target="_blank"><img src="http://images.headlinesapp.mobi/survey/istore.png" style="margin-top:15px; "/></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

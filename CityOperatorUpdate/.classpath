@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry exported="true" kind="lib" path="E:/workspace/ShoppingRewards/WebContent/WEB-INF/lib/mysql-connector-java-5.1.18-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/CityUpdate/WebContent/WEB-INF/lib/apache-logging-log4j.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/CityUpdate/WebContent/WEB-INF/lib/java-json.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:property-placeholder location="classpath:config.properties"/>
+    <bean id="dataSource" 
+      	class="org.springframework.jdbc.datasource.DriverManagerDataSource" scope="singleton">
+      	<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      	<property name="url" value="${db.url}"/>
+      	<property name="username" value="${db.user}"/>
+      	<property name="password" value="${db.pass}"/>
+   	</bean>
+    <bean id="transactionManager" 
+      	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      	<property name="dataSource"  ref="dataSource" />    
+   	</bean>      
+
+    <bean id="jdbcTemplateObject" class="org.springframework.jdbc.core.JdbcTemplateObject">
+    	<property name="dataSource"  ref="dataSource" />
+    	<property name="transactionManager"  ref="transactionManager" />
+        </bean>
+
+    <bean id="receiver" class="com.rh.main.Receiver">
+		<constructor-arg index="0"><value>${queue.url}</value></constructor-arg>
+        <constructor-arg index="1" value="${queue.name}" />
+        <constructor-arg index="2" ref="jdbcTemplateObject" />
+    </bean>
+
+    <!-- queue config -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+            <property name="connectionFactory">
+                    <ref bean="jmsConnectionFactory" />
+            </property>
+            <property name="defaultDestinationName" value="PUSH_NOTIFICATION" />
+    </bean>
+
+    <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+            <property name="brokerURL" value="tcp://localhost:61616?wireFormat.maxInactivityDuration=0"/>
+            <property name="useAsyncSend" value="true"/>
+    </bean>
+
+</beans>

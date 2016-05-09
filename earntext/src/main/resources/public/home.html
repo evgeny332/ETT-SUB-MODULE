@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css"href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css"href="//cdn.datatables.net/select/1.1.2/css/select.dataTables.min.css" />
+<link rel="stylesheet" type="text/css"href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css"href="css/buttons.dataTables.min.css" />
+<link rel="stylesheet" type="text/css"href="css/home.css" />
+<title>DataTables</title>
+</head>
+<body>
+	<!-- <select id="role_selector" multiple="multiple">
+		<option th:each="role : ${T(sample.model.UserRole).values()}"
+			th:text="${role}"></option>
+	</select>
+-->
+	<table border="0"  align="center">
+		<thead><tr><th colspan="2" align="center"><h3>EarnText</h3></th></tr></thead>
+		<tbody><tr><th colspan="2">Please do not fetch data multiple times.</th></tr>
+		<tr>
+            <td align="right">Select Date (IST):</td>
+            <td><select id="myselect" name="myselect"></select></td>
+        </tr>
+        
+    </tbody></table>
+	<table id="example" class="display" cellspacing="0" width="100%">
+	
+		<thead>
+			<tr align="left">
+				<th>id</th>
+				<th>ettId</th>
+				<th>msisdn</th>
+				<th>createdTime</th>
+				<th>createdTimeIST</th>
+				<!-- <th>message</th> -->
+				<th>respCode</th>
+				<th>vendor</th>
+				<th>status</th>
+				
+			</tr>
+		</thead>
+	</table>
+	</br>
+	</br>
+	<table id="info" class="info" cellspacing="0" width="0" border="1">
+		<thead>
+		<tr align="center"><th>Status Code</th><th>Meaning</th></thead>
+			<body >
+			<tr align="center"><td>0</td><td>Some Error Or Source and Dest. Number same</td></tr>
+			<tr align="center"><td>1</td><td>Successfully submitted</td></tr>
+			<tr align="center"><td>2</td><td>BParty Number in DND</td></tr>
+			<tr align="center"><td>3</td><td>Day Limit Exceed</td></tr>
+			<tr align="center"><td>4</td><td>DND HOUR Fail</td></tr>
+			<tr align="center"><td>6</td><td>Unable to connect SMS sender</td></tr>
+			</body>
+	</table>
+	
+
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/buttons/1.1.2/js/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+	<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+	<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/buttons/1.1.2/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/buttons/1.1.2/js/buttons.print.min.js"></script>
+	
+	<script type="text/javascript" src="//cdn.datatables.net/select/1.1.2/js/dataTables.select.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="/js/home.js"></script>
+</body>
+</html>

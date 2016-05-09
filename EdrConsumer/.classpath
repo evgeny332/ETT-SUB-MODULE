@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/activemq-all-5.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils-1.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-collections-3.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-dbcp-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-lang-2.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ezmorph-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/hsqldb.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/json-lib.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.1.5-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.apache.commons.dbcp.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/spring.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/MyPCDrive/D/softwareSetup/Dev/jar/quartz-1.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/MyPCDrive/D/softwareSetup/Dev/jar/spring-context-support-3.2.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyPCDrive/D/softwareSetup/Dev/jar/spring-tx-3.1.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyPCDrive/D/softwareSetup/Dev/jar/joda-time-2.8.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyPCDrive/D/softwareSetup/Dev/jar/commons-pool-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Jar/joda-time-2.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,26 @@
+package com.web.rest.dto;
+
+
+
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+/**
+ * @author Ankur
+ */
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+public class BeforRegisterDto {
+
+	private String msisdn;
+
+	public String getMsisdn() {
+		return msisdn;
+	}
+
+	public void setMsisdn(String msisdn) {
+		this.msisdn = msisdn;
+	}
+	
+	
+}

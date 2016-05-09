@@ -1,0 +1,95 @@
+<table width="620" border="0" align="center" cellpadding="0" cellspacing="0"  bgcolor="#f1f1f1">
+    <tbody>
+    <tr>
+        <td align="center" valign="middle">
+            <table cellspacing="0" cellpadding="0" align="center" width="600">
+                <tbody>
+                <tr>
+                    <td align="center" valign="middle">
+                        <table cellspacing="0" cellpadding="0" align="center" width="100%" style="font:Arial,Helvetica,sans-serif">
+                            <tbody>
+                            <tr>
+                                <td align="center" style="padding-top:10px">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody><tr>
+                                            <td width="100%" valign="top"> <img src="http://images.headlinesapp.mobi/remindertemplate/top.png" width="600" height="70" border="0">
+                                            </td>
+                                        </tr>
+                                        </tbody></table>
+                                    <table cellspacing="0" cellpadding="0" align="center" width="100%">
+                                        <tbody><tr>
+                                            <td align="left" valign="top" style="padding-bottom:0px;padding-top:5px">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="20" bgcolor="#FFFFFF">
+                                                    <tbody><tr>
+                                                        <td><font face="Arial, Helvetica, sans-serif" style="font-size:14px"><span style="font-family:Calibri, Verdana, Arial, Helvetica, sans-serif; font-size:20px; color:#366ebb;">
+                                                Hi ${NAME}, </span> <span style="font-family:Calibri, Verdana, Arial, Helvetica, sans-serif; font-size:16px; color:#000000; "><br><br>
+																				Your friends have had an interesting week. Take a look at this week's Top Stories:</span></font>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody></table>
+                                            </td>
+                                        </tr>
+                                        </tbody><tbody>
+                                    ${FEED}
+
+
+                                    <tr>
+                                        <td width="500"  valign="top" align="left"  style="padding-top:10px; padding-left:20px;font-family:Calibri, Verdana, Arial, Helvetica, sans-serif; font-size:16px;"  bgcolor="#FFFFFF">
+
+                                           <p> Never miss an important update by your friends. Stay in touch with Headlines.</p>
+                                    <span style="font-family:Calibri, Verdana, Arial, Helvetica, sans-serif; font-size:14px; color:#366ebb;">
+
+                                       <p> <b>Cheers! </b><br>Team Headlines </p>
+                                    </span>
+                                        </td>
+
+
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="middle"><img src="http://images.headlinesapp.mobi/remindertemplate/Shadow.png" width="584" height="19" border="0"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <table  cellspacing="0" cellpadding="5" align="left">
+                            <tbody>
+                            <tr>
+                                <td align="left"><p style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:13px;">Follow us:</p></td>
+                                <td align="left">
+                                    <p><a href="https://www.facebook.com/headlinesapp" target="_blank"><img border="0" src="http://images.headlinesapp.mobi/remindertemplate/facebookicon.png"><br>
+                                    </a>
+                                    </p>
+                                </td>
+                                <td align="left">
+                                    <p><a href="https://twitter.com/headlinessocial" target="_blank"><img border="0" src="http://images.headlinesapp.mobi/remindertemplate/twittericon.png"><br>
+                                    </a>
+                                    </p>
+                                </td>
+
+                                <td align="left"><p style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:13px;">Rate us:</p></td>
+                                <td align="left">
+                                    <p><a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=618155018" target="_blank"><img border="0" src="http://images.headlinesapp.mobi/remindertemplate/istore.png"><br>
+                                    </a>
+                                    </p>
+                                </td>
+
+                            </tr>
+                            </tbody></table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+        </td>
+    </tr>
+    </tbody>
+</table>

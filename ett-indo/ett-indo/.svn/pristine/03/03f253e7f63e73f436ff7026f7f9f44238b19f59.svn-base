@@ -1,0 +1,83 @@
+package com.service.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
+import org.springframework.stereotype.Service;
+
+import com.domain.entity.InstalledAppsFirstTime;
+import com.service.CustomDatabaseService;
+
+@Service
+public class CustomDatabaseServiceImpl implements CustomDatabaseService {
+
+	private static Logger LOGGER = LoggerFactory.getLogger(CustomDatabaseServiceImpl.class);
+	
+	@Autowired
+	javax.sql.DataSource dataSource;
+	
+	@PersistenceContext
+	EntityManager entityManager;
+	
+	@Override
+	public void saveInstalledAppsFirstTime(List<InstalledAppsFirstTime> installedAppsFirstTimeList) {
+		
+		if(installedAppsFirstTimeList.isEmpty()){
+			return;
+		}
+		
+		StringBuilder queryBuilder = new StringBuilder("INSERT IGNORE INTO InstalledAppsFirstTime (id,appKey,createdTs,ettId,createdTime) values ");
+		
+		String placeHolder = "(?,?,?,?,?)";
+		for(int i=0;i<installedAppsFirstTimeList.size();i++){
+			if(i!=0)
+				queryBuilder.append(",");
+			queryBuilder.append(placeHolder);
+		}
+		
+		final String query = queryBuilder.toString();
+		LOGGER.info("final query {}",query);
+		Connection connection = null;
+		try{
+			connection = DataSourceUtils.getConnection(dataSource);
+			if(connection!=null){
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+                int i=1;
+                for(InstalledAppsFirstTime installedAppsFirstTime : installedAppsFirstTimeList){
+                	preparedStatement.setString(i++, installedAppsFirstTime.getId());
+                	preparedStatement.setString(i++, installedAppsFirstTime.getAppKey());
+                	preparedStatement.setDate(i++, new java.sql.Date(installedAppsFirstTime.getCreatedTs().getTime()));
+                	preparedStatement.setLong(i++, installedAppsFirstTime.getEttId());
+                	preparedStatement.setDate(i++, new java.sql.Date(installedAppsFirstTime.getCreatedTime().getTime()));
+                	//preparedStatement.addBatch();
+                }
+                long time1= System.currentTimeMillis();
+                preparedStatement.execute();
+                //preparedStatement.executeBatch();
+                //connection.createStatement().execute(query);
+                LOGGER.info("Time in inserting InstalledAppsFirstTime : {} ms", (System.currentTimeMillis() - time1));
+			}
+		} catch (SQLException e) {
+			LOGGER.error("Error occured while inserting from CustomDataBaseService "+e);
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }finally {
+            DataSourceUtils.releaseConnection(connection,dataSource);
+           /* if(connection!=null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }*/
+        }
+	}
+
+}

@@ -1,0 +1,45 @@
+package com.web.rest.dto;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.ALWAYS)
+public class PopUpAlertDto {
+
+		private String heading;
+		private String text;
+		private int noOfButton;
+		private String buttonsText[];
+		private String actinoUrl[];
+		public String getHeading() {
+			return heading;
+		}
+		public void setHeading(String heading) {
+			this.heading = heading;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+		public int getNoOfButton() {
+			return noOfButton;
+		}
+		public void setNoOfButton(int noOfButton) {
+			this.noOfButton = noOfButton;
+		}
+		public String[] getButtonsText() {
+			return buttonsText;
+		}
+		public void setButtonsText(String[] buttonsText) {
+			this.buttonsText = buttonsText;
+		}
+		public String[] getActinoUrl() {
+			return actinoUrl;
+		}
+		public void setActinoUrl(String[] actinoUrl) {
+			this.actinoUrl = actinoUrl;
+		}
+		
+		
+	}
