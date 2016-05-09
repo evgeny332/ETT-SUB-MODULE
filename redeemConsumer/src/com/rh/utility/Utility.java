@@ -2,6 +2,9 @@ package com.rh.utility;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.security.MessageDigest;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -19,6 +22,27 @@ public class Utility {
 
 	private static Log log = LogFactory.getLog(Utility.class);
 
+	public void SendUDP(String strFinal, String IP, String port) {
+
+		System.out.println("[ETT][SendUDP] [SendUDP] [OnlineDA Message] FINAL String [" + strFinal + "]:::" + IP + "::" + port);
+		try {
+			
+			DatagramSocket clientSocket = new DatagramSocket();
+			int localport = clientSocket.getLocalPort();
+			String portn = localport + "";
+			strFinal = strFinal.replace("LPORT", portn);
+			InetAddress IPAddress = InetAddress.getByName(IP);
+			DatagramPacket sendPacket = new DatagramPacket(strFinal.getBytes(), strFinal.getBytes().length, IPAddress, Integer.parseInt(port));
+			clientSocket.send(sendPacket);
+			log.info("[ETT] [SendUDP] [OnlineDA Message] SendUDP[" + strFinal + "] [IP:" + IP + " Port:" + port + "]");
+			clientSocket.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("[ETT][SendUDP] [OnlineDA Message] Exception When send Packet!!!!!!!!!! " , e);
+		}
+	}
+	
 	public static String getMobilePulsaResponse(String id) {
 		if (id.equalsIgnoreCase("TIMEOUT") || id.equalsIgnoreCase("")) {
 			return id;

@@ -1,21 +1,9 @@
-package com.rh.main;
+/*package com.rh.main;
 
-import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 
-import javax.jms.Connection;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.Queue;
-import javax.jms.Session;
-import javax.jms.TextMessage;
-
-import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.rh.config.ConfigHolder;
-import com.rh.remote.SendGetRequest;
 
 public class sendSMS implements Runnable {
 
@@ -23,15 +11,15 @@ public class sendSMS implements Runnable {
 	private String queueName;
 	private String url;
 
-	 BlockingQueue<String> fifo = null;
+	BlockingQueue<String> fifo = null;
 	public sendSMS(BlockingQueue<String> fifo) {
 
 		
-		/*this.url = paramString1;
-		this.queueName = paramString2;*/
+		this.url = paramString1;
+		this.queueName = paramString2;
 		this.fifo=fifo;
 		new Thread(this).start();
-/*		ConfigHolder configHolder = null;
+		ConfigHolder configHolder = null;
 		try {
 			configHolder = new ConfigHolder();
 		} catch (IOException e) {
@@ -42,11 +30,11 @@ public class sendSMS implements Runnable {
 			if (configHolder.getProperties().getProperty("FLIPKART_EGV_SMS_ENABLED").equals("true")) {
 				new Thread(this).start();
 			}
-		}*/
+		}
 	}
 
 	//@Override
-	/*public void run() {
+	public void run() {
 		log.info("In sendSMS.java: starting app");
 		ActiveMQConnectionFactory localActiveMQConnectionFactory = new ActiveMQConnectionFactory(this.url);
 		Connection localConnection = null;
@@ -78,7 +66,7 @@ public class sendSMS implements Runnable {
 			e.printStackTrace();
 			System.out.println("Error in fetching sms queue element" + e);
 		}
-	}*/
+	}
 	
 	@Override
 	public void run() {
@@ -93,3 +81,4 @@ public class sendSMS implements Runnable {
 		}
 	}
 }
+*/

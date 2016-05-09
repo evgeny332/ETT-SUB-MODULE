@@ -158,6 +158,6 @@ public class UserRedeem {
 	}
 
 	public static enum RedeemType {
-		RECHARGE, LOAN, EGV;
+		RECHARGE, LOAN, EGV, BROWSEPLAN;
 	}
 }

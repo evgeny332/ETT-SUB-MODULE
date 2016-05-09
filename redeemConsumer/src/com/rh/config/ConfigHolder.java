@@ -20,8 +20,13 @@ public class ConfigHolder {
 
 	private Map<String, String> operatorKeyMapOxygenPrepaid;
 	private Map<String, String> operatorKeyMapOxygenPostpaid;
+	private Map<String, String> operatorKeyMapOxygenPrepaid_1;
+	private Map<String, String> operatorKeyMapOxygenPostpaid_1;
+	private Map<String, String> circleKeyMapOxygen;
+	
 	private Map<String, String> operatorKeyMapOxygenDth;
 	private Map<Integer, Integer> validityPriceMapNexgenTV;
+	private Map<Integer, Integer> amountfirstRedeemBonus;
 	
 	private List<Long> barredEttId;
 
@@ -43,11 +48,15 @@ public class ConfigHolder {
 			String[] operatorIdPostPaid = props.getProperty("OPERATOR_ID_POSTPAID").split(",");
 			String[] operatorDth = props.getProperty("OPERATOR_DTH").split(",");
 			String[] operatorIdDth = props.getProperty("OPERATOR_ID_DTH").split(",");
+			String[] circleKeyOxygen = props.getProperty("CIRCLE_KEY_OXYGEN").split(",");
 			String[] operatorKeyOxygenPrepaid = props.getProperty("OPERATOR_KEY_OXYGEN_PREPAID").split(",");
 			String[] operatorKeyOxygenPostpaid = props.getProperty("OPERATOR_KEY_OXYGEN_POSTPAID").split(",");
+			String[] operatorKeyOxygenPrepaid_1 = props.getProperty("OPERATOR_KEY_OXYGEN_PREPAID_1").split(",");
+			String[] operatorKeyOxygenPostpaid_1 = props.getProperty("OPERATOR_KEY_OXYGEN_POSTPAID_1").split(",");
 			String[] operatorKeyOxygenDth = props.getProperty("OPERATOR_KEY_OXYGEN_DTH").split(",");
 			String[] nexGenValidity = props.getProperty("NEXGENTV_VALIDITY").split(",");
 			String[] nexGenPrice = props.getProperty("NEXGENTV_PRICE").split(",");
+			String[] firstRedeemBonus = props.getProperty("FIRST_REDEEM_BONUS").split("#");
 
 			operatorKeyMap = new HashMap<String, String>();
 			operatorKeyMapGETAPI = new HashMap<String, String>();
@@ -59,22 +68,34 @@ public class ConfigHolder {
 			dthOperatorIdMap = new HashMap<>();
 			operatorKeyMapOxygenPrepaid = new HashMap<String, String>();
 			operatorKeyMapOxygenPostpaid = new HashMap<String, String>();
+			operatorKeyMapOxygenPrepaid_1 = new HashMap<String, String>();
+			operatorKeyMapOxygenPostpaid_1 = new HashMap<String, String>();
+			circleKeyMapOxygen = new HashMap<String, String>();
 			operatorKeyMapOxygenDth = new HashMap<String, String>();
 			validityPriceMapNexgenTV = new HashMap<Integer, Integer>();
+			amountfirstRedeemBonus = new HashMap<Integer, Integer>();
 
+			for (int i = 0; i<firstRedeemBonus[0].split(",").length; i++){
+				amountfirstRedeemBonus.put(Integer.valueOf(firstRedeemBonus[0].split(",")[i]), Integer.valueOf(firstRedeemBonus[1].split(",")[i]));
+			}
+			
 			for (int i = 0; i < operators.length; i++) {
 				operatorKeyMap.put(operators[i].toUpperCase(), operatorKeys[i]);
 				operatorKeyMapGETAPI.put(operators[i].toUpperCase(), operatorKeysGETAPI[i]);
 				operatorIdMap.put(operators[i].toUpperCase(), Integer.valueOf(operatorIds[i]));
 				operatorKeyMapOxygenPrepaid.put(operators[i].toUpperCase(), operatorKeyOxygenPrepaid[i]);
-
+				operatorKeyMapOxygenPrepaid_1.put(operators[i].toUpperCase(), operatorKeyOxygenPrepaid_1[i]);
 			}
+			
 			for (int i = 0; i < circles.length; i++) {
 				circleIdMap.put(circles[i].toUpperCase(), Integer.valueOf(circleIds[i]));
+				circleKeyMapOxygen.put(circles[i].toUpperCase(), circleKeyOxygen[i]);
+				
 			}
 			for (int i = 0; i < operatorPostPaid.length; i++) {
 				postPaidOperatorIdMap.put(operatorPostPaid[i].toUpperCase(), Integer.valueOf(operatorIdPostPaid[i]));
 				operatorKeyMapOxygenPostpaid.put(operatorPostPaid[i].toUpperCase(), operatorKeyOxygenPostpaid[i]);
+				operatorKeyMapOxygenPostpaid_1.put(operatorPostPaid[i].toUpperCase(), operatorKeyOxygenPostpaid_1[i]);
 			}
 			for (int i = 0; i < operatorDth.length; i++) {
 				dthOperatorIdMap.put(operatorDth[i], Integer.valueOf(operatorIdDth[i]));
@@ -130,6 +151,14 @@ public class ConfigHolder {
 		return operatorKeyMapGETAPI.get(operator);
 	}
 
+	public Map<Integer, Integer> getAmountfirstRedeemBonus() {
+		return amountfirstRedeemBonus;
+	}
+	
+	public Integer getfirstRedeemBonus(int amount){
+		return amountfirstRedeemBonus.get(amount);
+	}
+
 	public Map<String, Integer> getOperatorIdMapI() {
 		return operatorIdMap;
 	}
@@ -151,12 +180,23 @@ public class ConfigHolder {
 	}
 
 	public String getOperatorKeyMapOxygenPrepaid(String operator) {
-		// System.out.println("[operator=]["+operator+" ["+operatorKeyMapOxygenPrepaid.get(operator)+"]");
 		return operatorKeyMapOxygenPrepaid.get(operator.toUpperCase());
 	}
 
 	public String getOperatorKeyMapOxygenPostpaid(String operator) {
 		return operatorKeyMapOxygenPostpaid.get(operator.toUpperCase());
+	}
+	
+	public String getOperatorKeyMapOxygenPrepaid_1(String operator) {
+		return operatorKeyMapOxygenPrepaid_1.get(operator.toUpperCase());
+	}
+
+	public String getOperatorKeyMapOxygenPostpaid_1(String operator) {
+		return operatorKeyMapOxygenPostpaid_1.get(operator.toUpperCase());
+	}
+	
+	public String getCircleKeyMapOxygen(String circle){
+		return circleKeyMapOxygen.get(circle.toUpperCase());
 	}
 
 	public String getOperatorKeyMapOxygenDth(String operator) {

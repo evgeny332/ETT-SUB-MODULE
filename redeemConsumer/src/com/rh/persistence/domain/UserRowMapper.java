@@ -15,6 +15,9 @@ public class UserRowMapper  implements RowMapper {
 		user.setDeviceId(rs.getString("deviceId"));
 		user.setAppVersion(rs.getString("appVersion"));
 		user.setMsisdn(rs.getString("msisdn"));		
+		user.setRegDate(rs.getDate("regDate"));
+		user.setRedeemCount(rs.getInt("redeemCount"));
+		user.setOtp(rs.getInt("otp"));
 		return user;
 	}
 }

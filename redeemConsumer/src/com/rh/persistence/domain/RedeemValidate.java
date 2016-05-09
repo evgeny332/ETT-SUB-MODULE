@@ -2,8 +2,6 @@ package com.rh.persistence.domain;
 
 public class RedeemValidate {
 	
-
-   
     private String ettId;
 
     private String msisdn;
