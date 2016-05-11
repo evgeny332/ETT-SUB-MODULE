@@ -46,13 +46,13 @@ public class ParseMiniMob {
 	static ArrayList<String> countries = new ArrayList<String>();
 	static ApiOfferDataBean bean = new ApiOfferDataBean();
 	static HashMap<String, String> hm = new HashMap<String, String>();
-	static Logger error = Logger.getLogger("error");
-	static Logger logger = Logger.getLogger("DATA");
+//	static Logger logger = Logger.getLogger("logger");
+	static Logger logger = Logger.getLogger(ParseMiniMob.class);
 	static String countri;
 	static ReadUrl readUrl;
 
 	public static void MiniMob( ReadUrl readUrl1) {
-		
+		logger.info("Start");
 		readUrl = readUrl1; 
 		try {
 
@@ -92,9 +92,10 @@ public class ParseMiniMob {
 					}
 				}
 			}
+			logger.info("Done");
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message MiniMob Parsing JSON:"+e);
+			logger.info("logger Message MiniMob Parsing JSON:"+e);
 		}
 
 	}
@@ -126,7 +127,7 @@ public class ParseMiniMob {
 		}
 		}catch(Exception e){
 			e.printStackTrace();
-			error.info("MiniMob"+e);
+			logger.info("MiniMob"+e);
 		}
 		
 	}
@@ -134,7 +135,7 @@ public class ParseMiniMob {
 	public static void parseUrlWithID(String id) {
 		String url = ConfigHolder.urlAvalableOffers2 + id;
 		result = readUrl.readURL(url);
-		System.out.println(url);
+//		System.out.println(url);
 		try {
 			JSONObject jsonObject = new JSONObject(result);
 			offerName = jsonObject.getString("name");
@@ -172,7 +173,7 @@ public class ParseMiniMob {
 			// String extradata2 = extradata1.replace("{", "");
 			extradata = Joiner.on("^|").withKeyValueSeparator("~>").join(hm);
 
-			System.out.println("jsonObject2 : " + jsonObject);
+//			System.out.println("jsonObject2 : " + jsonObject);
 
 			bean.setOfferName(offerName);
 			bean.setDescription(Description);
@@ -197,7 +198,7 @@ public class ParseMiniMob {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("MiniMob:"+e);
+			logger.info("MiniMob:"+e);
 		}
 	}
 }

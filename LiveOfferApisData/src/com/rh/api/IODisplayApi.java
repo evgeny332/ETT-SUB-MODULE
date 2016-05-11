@@ -40,8 +40,8 @@ public class IODisplayApi {
 	static List<String> countries = new ArrayList<String>();
 	static ApiOfferDataBean bean = new ApiOfferDataBean();
 	static HashMap<String, String> hm = new HashMap<String, String>();
-	static Logger error = Logger.getLogger("error");
-	static Logger logger = Logger.getLogger("DATA");
+//	static Logger logger = Logger.getLogger("logger");
+	static Logger logger = Logger.getLogger(IODisplayApi.class);
 	static String countri;
 	static String osversion = "NA";
 	private static String extradata = "NA";
@@ -56,7 +56,7 @@ public class IODisplayApi {
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message IODisplay URL"+e);
+			logger.info("logger Message IODisplay URL"+e);
 		}
 	}
 
@@ -75,16 +75,15 @@ public class IODisplayApi {
 						platform = jsonObject.getString("os");
 						parseData(jsonObject, country);
 					}
-				} else {
-					if (jsonObject.getString("os").equalsIgnoreCase("android") || jsonObject.getString("os").equalsIgnoreCase("ios"))
+				} else if (jsonObject.getString("os").equalsIgnoreCase("android") || jsonObject.getString("os").equalsIgnoreCase("ios")){
 						platform = jsonObject.getString("os");
 					parseData(jsonObject, country);
 				}
 			}
-			System.out.print("done");
+		logger.info("done");
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message IODisplay Parsing JSON:"+e);
+			logger.info("logger Message IODisplay Parsing JSON:"+e);
 		}
 
 	}
@@ -158,7 +157,7 @@ public class IODisplayApi {
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
-			error.info("Error Message IODisplay Parsing Data:"+e);
+			logger.info("logger Message IODisplay Parsing Data:"+e);
 		}
 	}
 }

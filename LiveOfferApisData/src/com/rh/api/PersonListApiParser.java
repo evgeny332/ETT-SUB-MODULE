@@ -39,10 +39,11 @@ public class PersonListApiParser {
 	private static String extradata = "NA";
 	static int isIncent = 1;
 	static String platform = "NA";
-	static Logger error = Logger.getLogger("error");
-	static Logger logger = Logger.getLogger("DATA");
+//	static Logger logger = Logger.getLogger("logger");
+	static Logger logger = Logger.getLogger(PersonListApiParser.class);
 
 	public static void personaList(ReadUrl readUrl) {
+		logger.info("Start");
 		try {
 			String url = ConfigHolder.presonaListApi;
 			result = readUrl.readURL(url);
@@ -50,7 +51,7 @@ public class PersonListApiParser {
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message PersonList URL"+e);
+			logger.info("logger Message PersonList URL"+e);
 		}
 	}
 
@@ -82,10 +83,10 @@ public class PersonListApiParser {
 					}
 				}
 			}
-
+logger.info("DOne");
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message PersonList Parsing JSON:"+e);
+			logger.info("logger Message PersonList Parsing JSON:"+e);
 		}
 		
 
@@ -148,7 +149,7 @@ public class PersonListApiParser {
 		ApiOfferDataBean.insertIntoDB();
 	}catch(Exception e){
 		e.printStackTrace();
-		error.info("Error Message PersonList Parsing Data:"+e);
+		logger.info("logger Message PersonList Parsing Data:"+e);
 	}
 	}
 }

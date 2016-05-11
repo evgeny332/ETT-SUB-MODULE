@@ -40,18 +40,19 @@ public class SupersonicParsing {
 	static int isIncent = 3;
 	private static String applicationSize = "NA";
 	private static String minOsVersion = "NA";
-	static Logger error = Logger.getLogger("error");
+	// static Logger logger = Logger.getLogger("logger");
 	static Logger logger = Logger.getLogger("DATA");
 
 	public static void superSonic(ReadUrl readUrl) {
+		logger.info("Start");
 		try {
 			String url = ConfigHolder.Supersonic;
 			result = readUrl.readURL(url);
-			logger.info("Supersonic:"+url);
+			logger.info("Supersonic:" + url);
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message IODisplay URL"+e);
+			logger.info("logger Message IODisplay URL" + e);
 		}
 	}
 
@@ -66,97 +67,114 @@ public class SupersonicParsing {
 				String key = (String) itr.next();
 				JSONObject jsonObject = jsonobj1.getJSONObject(key);
 				countries = jsonObject.getJSONArray("countries").toString();
-				String platforms = jsonObject.getJSONArray("supportedPlatforms").toString();
+				String platforms = jsonObject
+						.getJSONArray("supportedPlatforms").toString();
 				if ((ConfigHolder.Platform).equalsIgnoreCase("false")) {
 					if (platforms.contains("android")) {
 						platform = platforms.replaceAll("[\\[\"\\]]", "");
 						parseData(jsonObject);
 					}
 				} else {
-					if (platforms.contains("android") || platforms.contains("iphone")) {
+					if (platforms.contains("android")
+							|| platforms.contains("iphone")) {
 						platform = platforms.replaceAll("[\\[\"\\]]", "");
 						parseData(jsonObject);
 					}
 				}
 
 			}
-
+			logger.info("Done");
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message Supersonic Parsing JSON:"+e);
-			
+			logger.info("logger Message Supersonic Parsing JSON:" + e);
+
 		}
 
 	}
 
 	public static void parseData(JSONObject jsonObject) {
-		try{
-		if (countries.contains("IN") || countries.contains("ID")) {
-			offerName = jsonObject.getString("title");
-			Description = jsonObject.getString("disclaimer");
-			payout = jsonObject.getDouble("payout");
-//			isIncent=jsonObject.getString("incentAllowed");
-			if(jsonObject.getString("incentAllowed").equalsIgnoreCase("true")){
-				isIncent = 1;
-			}else if (jsonObject.getString("incentAllowed").equalsIgnoreCase("false")){
-				isIncent = 0;
+		try {
+			if (countries.contains("IN") || countries.contains("ID")) {
+				offerName = jsonObject.getString("title");
+				Description = jsonObject.getString("disclaimer");
+				payout = jsonObject.getDouble("payout");
+				// isIncent=jsonObject.getString("incentAllowed");
+				if (jsonObject.getString("incentAllowed").equalsIgnoreCase(
+						"true")) {
+					isIncent = 1;
+				} else if (jsonObject.getString("incentAllowed")
+						.equalsIgnoreCase("false")) {
+					isIncent = 0;
+				}
+				payoutmode = jsonObject.getString("conciseType");
+				String country = jsonObject.getJSONArray("countries")
+						.toString();
+				String countrie = country.replaceAll("[\\[\\]]", "");
+				countries = countrie.replace("\"", "");
+				imageurl = jsonObject.getJSONArray("images").getJSONObject(0)
+						.getString("url");
+				playstoreurl = jsonObject.getString("reviewOnlyUrl");
+				packagename = jsonObject.getString("applicationBundleId");
+				actionurl = jsonObject.getString("url");
+				id = jsonObject.getString("offerId");
+				String rewards = jsonObject.getString("rewards");
+				if (jsonObject.has("minOsVersion")) {
+					minOsVersion = jsonObject.getString("minOsVersion");
+				}
+				String applicationCategories = jsonObject
+						.getString("applicationCategories");
+				if (jsonObject.has("applicationSize")) {
+					applicationSize = jsonObject.getString("applicationSize");
+				}
+				String applicationDeveloper = jsonObject
+						.getString("applicationDeveloper");
+				String game = jsonObject.getString("game");
+				String purchase = jsonObject.getString("purchase");
+
+				hm.put("id", id);
+				hm.put("rewards", rewards);
+				hm.put("minOsVersion", minOsVersion);
+				hm.put("applicationCategories", applicationCategories);
+				hm.put("applicationSize", applicationSize);
+				hm.put("applicationDeveloper", applicationDeveloper);
+				hm.put("game", game);
+				hm.put("purchase", purchase);
+
+				extradata = Joiner.on("^|").withKeyValueSeparator("~>")
+						.join(hm);
+
+				bean.setOfferName(offerName);
+				bean.setDescription(Description);
+				bean.setPayout(payout);
+				bean.setPackageName(packagename);
+				bean.setImageUrl(imageurl);
+				bean.setDailycap(dailycap);
+				bean.setTotalcap(totalcap);
+				bean.setCountries(countries);
+				bean.setVendorName(vandorName);
+				bean.setCurrency(payoutCurrency);
+				bean.setMode(payoutmode);
+				bean.setActionUrl(actionurl);
+				bean.setPalystoreUrl(playstoreurl);
+				bean.setStatus(status);
+				bean.setIsIncent(isIncent);
+				bean.setExtraData(extradata);
+				bean.setPlatform(platform);
+				// logger.info(" offerName=" + offerName + " Description=" +
+				// Description + " Payout=" + payout + " packageName=" +
+				// packagename + " imageurl=" + imageurl + " dailycap=" +
+				// dailycap + " totalcap=" + totalcap + " country=" + countries
+				// + " vandorName=" + vandorName + " Currency=" + payoutCurrency
+				// + " payoutMode=" + payoutmode + " actionUrl=" + actionurl +
+				// " playstoreUrl=" + playstoreurl + " status=" + status +
+				// " isIncent=" + isIncent + " extraData=" + extradata +
+				// " platform=" + platform);
+
+				ApiOfferDataBean.insertIntoDB();
 			}
-			payoutmode = jsonObject.getString("conciseType");
-			String country = jsonObject.getJSONArray("countries").toString();
-			String countrie = country.replaceAll("[\\[\\]]", "");
-			countries = countrie.replace("\"", "");
-			imageurl = jsonObject.getJSONArray("images").getJSONObject(0).getString("url");
-			playstoreurl = jsonObject.getString("reviewOnlyUrl");
-			packagename = jsonObject.getString("applicationBundleId");
-			actionurl = jsonObject.getString("url");
-			id = jsonObject.getString("offerId");
-			String rewards = jsonObject.getString("rewards");
-			if (jsonObject.has("minOsVersion")) {
-				minOsVersion = jsonObject.getString("minOsVersion");
-			}
-			String applicationCategories = jsonObject.getString("applicationCategories");
-			if (jsonObject.has("applicationSize")) {
-				applicationSize = jsonObject.getString("applicationSize");
-			}
-			String applicationDeveloper = jsonObject.getString("applicationDeveloper");
-			String game = jsonObject.getString("game");
-			String purchase = jsonObject.getString("purchase");
-
-			hm.put("id", id);
-			hm.put("rewards", rewards);
-			hm.put("minOsVersion", minOsVersion);
-			hm.put("applicationCategories", applicationCategories);
-			hm.put("applicationSize", applicationSize);
-			hm.put("applicationDeveloper", applicationDeveloper);
-			hm.put("game", game);
-			hm.put("purchase", purchase);
-
-			extradata = Joiner.on("^|").withKeyValueSeparator("~>").join(hm);
-
-			bean.setOfferName(offerName);
-			bean.setDescription(Description);
-			bean.setPayout(payout);
-			bean.setPackageName(packagename);
-			bean.setImageUrl(imageurl);
-			bean.setDailycap(dailycap);
-			bean.setTotalcap(totalcap);
-			bean.setCountries(countries);
-			bean.setVendorName(vandorName);
-			bean.setCurrency(payoutCurrency);
-			bean.setMode(payoutmode);
-			bean.setActionUrl(actionurl);
-			bean.setPalystoreUrl(playstoreurl);
-			bean.setStatus(status);
-			bean.setIsIncent(isIncent);
-			bean.setExtraData(extradata);
-			bean.setPlatform(platform);
-//			logger.info(" offerName=" + offerName + " Description=" + Description + " Payout=" + payout + " packageName=" + packagename + " imageurl=" + imageurl + " dailycap=" + dailycap + " totalcap=" + totalcap + " country=" + countries + " vandorName=" + vandorName + " Currency=" + payoutCurrency + " payoutMode=" + payoutmode + " actionUrl=" + actionurl + " playstoreUrl=" + playstoreurl + " status=" + status + " isIncent=" + isIncent + " extraData=" + extradata + " platform=" + platform);
-
-			ApiOfferDataBean.insertIntoDB();
-		}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message Supersonic Parsing Data:"+e);
+			logger.info("logger Message Supersonic Parsing Data:" + e);
 		}
 	}
 

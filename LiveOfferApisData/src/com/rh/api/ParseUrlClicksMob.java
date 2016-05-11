@@ -63,8 +63,8 @@ public class ParseUrlClicksMob {
 	static HashMap<String, String> hm = new HashMap<String, String>();
 	static String extradata = "NA";
 	static String platform = "NA";
-	static Logger error = Logger.getLogger("error");
-	static Logger logger = Logger.getLogger("DATA");
+//	static Logger logger = Logger.getLogger("logger");
+	static Logger logger = Logger.getLogger(ParseUrlClicksMob.class);
 
 	public static void clicksMob(ReadUrl readUrl1) {
 		try {
@@ -74,7 +74,7 @@ public class ParseUrlClicksMob {
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message ClicksMob URL"+e);
+			logger.info("logger Message ClicksMob URL"+e);
 		}
 	}
 
@@ -218,10 +218,10 @@ public class ParseUrlClicksMob {
 				}
 
 			}
-
+			logger.info("Done");
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message ClicksMob Parsing Data:"+e);
+			logger.info("logger Message ClicksMob Parsing Data:"+e);
 		}
 
 	}

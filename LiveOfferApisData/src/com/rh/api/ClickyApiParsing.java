@@ -101,14 +101,11 @@ public class ClickyApiParsing {
 			countries = platformObj.getJSONArray("countries").toString();
 			if (countries.contains("IN") || countries.contains("ID")) {
 				offerName = jsonObject.getString("name");
-				String Description1 = jsonObject.getString("description");
-				String Description2 = Description1.replace("\\n", "");
-				String Description3 = Description2.replace("\"", "");
-				Description = Description3.replace(" ", "");
+				Description = jsonObject.getString("description");
 				payout = jsonObject.getDouble("payout");
 				payoutmode = jsonObject.getString("offer_model");
-				
-				  countries = countries.replaceAll("[\\[\\]]", "");
+
+				countries = countries.replaceAll("[\\[\\]]", "");
 				countries = countries.replace("\"", "");
 				imageurl = jsonObject.getString("icon");
 				playstoreurl = jsonObject.getString("target_url");

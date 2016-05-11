@@ -1,5 +1,6 @@
 package com.rh.main;
 
+import com.rh.api.ClickyApiParsing;
 import com.rh.api.IODisplayApi;
 import com.rh.api.ParseCrunchieMediaUrl;
 import com.rh.api.ParseMiniMob;
@@ -23,6 +24,7 @@ public class StartApp {
 		mappstreetparsing.MappStreet(readUrl);
 		SupersonicParsing.superSonic(readUrl);
 		ParseWoobi.woobi(readUrl);
+		ClickyApiParsing.clickyUrlParsing(readUrl);
 
 	}
 }

@@ -56,10 +56,11 @@ public class ParseWoobi {
 	private static String offerCompEstTme = "NA";
 	private static String isPaid = "NA";
 	private static String addId = "NA";
-	static Logger error = Logger.getLogger("error");
-	static Logger logger = Logger.getLogger("DATA");
+//	static Logger logger = Logger.getLogger("logger");
+	static Logger logger = Logger.getLogger(ParseWoobi.class);
 
 	public static void woobi(ReadUrl readUrl) {
+		logger.info("Start");
 		try {
 			String url = ConfigHolder.Woobi;
 			result = readUrl.readURL(url);
@@ -67,7 +68,7 @@ public class ParseWoobi {
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message Woobi URL" + e);
+			logger.info("logger Message Woobi URL" + e);
 		}
 	}
 
@@ -99,8 +100,9 @@ public class ParseWoobi {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message Woobi Parsing JSON:" + e);
+			logger.info("logger Message Woobi Parsing JSON:" + e);
 		}
+		logger.info("DONE");
 
 	}
 
@@ -195,7 +197,7 @@ public class ParseWoobi {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message Woobi Parsing Data:"+e);
+			logger.info("logger Message Woobi Parsing Data:"+e);
 		}
 	}
 

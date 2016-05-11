@@ -35,14 +35,14 @@ public class mappstreetparsing {
 	static String id = "NA";
 	static String tags = "NA";
 	static HashMap<String, String> hm = new HashMap<String, String>();
-	static Logger error = Logger.getLogger("error");
-	static Logger logger = Logger.getLogger("DATA");
+	// static Logger logger = Logger.getLogger("logger");
+	static Logger logger = Logger.getLogger(mappstreetparsing.class);
 	private static String extradata = "NA";
 	static int isIncent = 3;
 	static String platform = "NA";
 
 	public static void MappStreet(ReadUrl readUrl) {
-
+		logger.info("Start");
 		try {
 
 			String url = ConfigHolder.MappStreetApi;
@@ -74,16 +74,17 @@ public class mappstreetparsing {
 						parseData(jsonObject);
 					}
 				} else {
-					if (platforms.contains("Android") || platforms.contains("iOS")) {
+					if (platforms.contains("Android")
+							|| platforms.contains("iOS")) {
 						platform = platforms.replaceAll("[\\[\"\\]]", "");
 						parseData(jsonObject);
 					}
 				}
 			}
-
+			logger.info("DONE");
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message MappStreet URL" + e);
+			logger.info("logger Message MappStreet URL" + e);
 		}
 
 	}
@@ -91,7 +92,8 @@ public class mappstreetparsing {
 	public static void parseData(JSONObject jsonObject) {
 		try {
 			countries = jsonObject.getString("country_iso");
-			if (countries.equalsIgnoreCase("IN") || countries.equalsIgnoreCase("ID")) {
+			if (countries.equalsIgnoreCase("IN")
+					|| countries.equalsIgnoreCase("ID")) {
 				countries = jsonObject.getString("country_iso");
 				String offerName1 = jsonObject.getString("brand_title");
 				String offerName2[] = offerName1.split("-");
@@ -132,7 +134,8 @@ public class mappstreetparsing {
 				if (obj instanceof JSONObject) {
 					JSONObject jb3 = jsonObject.getJSONObject("capping");
 					if (jb3.has("product_capping")) {
-						dailycap = jb3.getJSONArray("product_capping").getJSONObject(0).getString("capping_limit");
+						dailycap = jb3.getJSONArray("product_capping")
+								.getJSONObject(0).getString("capping_limit");
 
 					} else if (obj instanceof JSONArray) {
 						dailycap = "NA";
@@ -142,9 +145,11 @@ public class mappstreetparsing {
 
 				String contentlocking = jsonObject.getString("content_locking");
 
-				if (jsonObject.getString("incentivized").equalsIgnoreCase("Yes")) {
+				if (jsonObject.getString("incentivized")
+						.equalsIgnoreCase("Yes")) {
 					isIncent = 1;
-				} else if (jsonObject.getString("incentivized").equalsIgnoreCase("No")) {
+				} else if (jsonObject.getString("incentivized")
+						.equalsIgnoreCase("No")) {
 					isIncent = 0;
 				}
 				String startdate = jsonObject.getString("start_date");
@@ -193,7 +198,7 @@ public class mappstreetparsing {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Error Message Mappstreet Parsing Data:" + e);
+			logger.info("logger Message Mappstreet Parsing Data:" + e);
 		}
 	}
 
