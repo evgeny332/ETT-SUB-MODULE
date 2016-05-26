@@ -75,9 +75,9 @@ public class DBPersister {
 			Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
 			//System.out.println(simpleJdbcCallResult);
 		}
-	public List<PendingCredits> getTodayList(List<PendingCredits> creditList, String startDate, String endDate) {
+	public List<PendingCredits> getTodayList(List<PendingCredits> creditList, String startDate, String endDate,String APP_OPEN_COM_OFFERID) {
 		//String query="select * from PendingCredits where date(date_add(creditDate,INTERVAL 19800 SECOND))=date(date_add(now(),INTERVAL 19800 SECOND)) and eligibleStatus=0 and amount>0 and offerId<>115";
-		String query = "select * from PendingCredits where creditDate>='"+startDate+"' and creditDate<'"+endDate+"' and eligibleStatus=0 and amount>0 and offerId<>115";
+		String query = "select * from PendingCredits where creditDate>='"+startDate+"' and creditDate<'"+endDate+"' and eligibleStatus=0 and amount>0 and offerId not in("+APP_OPEN_COM_OFFERID+")";
 		log.info("Select Query : "+query);
 		/*System.out.println("Select Query : "+query);
 		System.exit(0);

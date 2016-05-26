@@ -47,6 +47,7 @@ public class APIImpl {
 	int limit = 0;
 	private String startDate = "";
 	private String endDate = "";
+	private String APP_OPEN_COM_OFFERID="";
 	
 	public APIImpl(DBPersister dp, JmsTemplate jmsTemplate, DateService dateService) {
 		this.dbPersister = dp;
@@ -62,7 +63,7 @@ public class APIImpl {
 		pushTxt=configFile.getProperty("SUCCESS_PUSH");
 		log.info("pushTxt is :"+pushTxt);
 		limit = Integer.valueOf(configFile.getProperty("UNINSTALL_CHECK_LIMIT"));
-		
+		APP_OPEN_COM_OFFERID = configFile.getProperty("APP_OPEN_COM_OFFERID");
 		startDate = this.dateService.getDBDate();
 		endDate = this.dateService.getDateAfter24Hour(startDate);
 		if(startDate.equals("") || endDate.equals("")){
@@ -73,7 +74,7 @@ public class APIImpl {
 	}
 	
 	public void getTodayList() {
-		creditList=dbPersister.getTodayList(creditList,startDate,endDate);
+		creditList=dbPersister.getTodayList(creditList,startDate,endDate,APP_OPEN_COM_OFFERID);
 		log.info("Total size of list before unInstall check is : "+creditList.size());
 	}
 
