@@ -36,7 +36,7 @@ public class DBPersister {
 	 }
 
 	public void getList(List<PayoutHoldData> pushList, String dateNow) {
-		String query = "select * from PayoutHoldData where payoutTime<='"+dateNow+"' limit 500";
+		String query = "select * from PayoutHoldData where payoutTime<='"+dateNow+"' and status=0 limit 500";
 		log.info(("Select Query : "+query));
 		List<Map<String,Object>> listRow = jdbcTemplate.queryForList(query);
 		for(Map<String,Object> cRow : listRow){
