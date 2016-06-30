@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>BuzzCity</title>
+<script type="text/javascript" charset="utf8" src="js/jquery.js"></script>
+<script type="text/javascript">
+  var bcads_vars = {
+            partnerid : 150923,     // partner id          
+            get       : 'rich',    // ads type
+            sync      : 1         // synchronous method         
+}; 
+
+$(document).ready(function() {
+    $('div').click(function(e) {  
+     var param = getUrlParameter("temp");
+                $.ajax({
+                        type : "POST",
+                        url : "buzzcity/click",
+                        data : {
+                                "temp" : param,
+                        },
+                        success : function(result) {
+                                alert(result);
+                        },
+                        error : function(jqXHR, textStatus, errorThrown) {
+                                alert("error: ");
+                        },
+                });
+
+    });
+    function getUrlParameter(sParam) {
+                var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
+
+                for (i = 0; i < sURLVariables.length; i++) {
+                        sParameterName = sURLVariables[i].split('=');
+
+                        if (sParameterName[0] === sParam) {
+                                return sParameterName[1] === undefined ? true : sParameterName[1];
+                        }
+                }
+        };
+});
+</script> 
+<script type="text/javascript" src="http://js.buzzcity.net/bcads.js"></script> 
+</head>
+<body>
+</body>
+</html>

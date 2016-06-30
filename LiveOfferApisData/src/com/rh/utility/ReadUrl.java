@@ -8,8 +8,8 @@ import java.net.URLConnection;
 import org.apache.log4j.Logger;
 
 public class ReadUrl {
-	static Logger error = Logger.getLogger("error");
-	static Logger logger = Logger.getLogger("DATA");
+//	static Logger error = Logger.getLogger("error");
+	static Logger logger = Logger.getLogger(ReadUrl.class);
 	public String readURL(String url) {
 		
 		String result = "";
@@ -30,7 +30,7 @@ public class ReadUrl {
 			logger.info("done parsing URL");
 		} catch (Exception e) {
 			e.printStackTrace();
-			error.info("Read Url Error "+e);
+			logger.info("Read Url Error "+e);
 		}
 		return result;
 	}

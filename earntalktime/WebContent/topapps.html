@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/bestapps.css">
+<link rel="stylesheet" type="text/css" media="only screen and (min-device-width: 1200px)" href="css/bestappsbig.css"/>
+<script type="text/javascript" charset="utf8" src="js/jquery.js"></script>
+<!-- <script type="text/javascript" src="js/bestapps.js"></script> -->
+<script>
+var ettId;
+
+window.onload = function() {
+
+	ettId = getUrlParameter("ettId");
+	$.ajax({
+		type : "POST",
+		url : "api/bestapps/show",
+		data : {
+			"id" : "23"
+		},
+		success : function(result) {
+
+			$('#head').html("");
+			$('#head').html("<div class=\"heading\"><p>Trending Apps</p></div>" + result);
+			
+			$('[ontap]').each(function(){
+				//alert("hello");
+			    $(this).on("click touchstart", this, nextEvent);
+			});
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			// alert("error");
+			// alert("error: " + textStatus + " (" + errorThrown + ")");
+		},
+	});
+}
+
+function nextEvent() {
+    
+    $(this).on('click touchend', function(e){
+    	//alert("Hello");
+    	eval($(this).attr("ontap"));
+        $(this).off('click touchend');
+    });
+    //behaviour for move
+    $(this).on('touchmove', function(e){
+    	//alert("Hello");
+        $(this).off('touchend');
+    });     
+}
+
+function click12(url,title){
+
+	//window.location.href = url;
+	//alert("Hello1");
+	$.ajax({
+		type : "POST",
+		url : "api/bestapps/click",
+		data : {
+			"ettId" : ettId,
+			"url" : url,
+			"title" : title
+		},
+		success : function(result) {
+
+			if(result === "true"){
+				//alert(url);
+				window.location.href = url;
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+
+			// alert("error");
+			// alert("error: " + textStatus + " (" + errorThrown + ")");
+		},
+	});
+}
+
+function getUrlParameter(sParam) {
+	var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
+
+	for (i = 0; i < sURLVariables.length; i++) {
+		sParameterName = sURLVariables[i].split('=');
+
+		if (sParameterName[0] === sParam) {
+			return sParameterName[1] === undefined ? true : sParameterName[1];
+		}
+	}
+};
+</script>
+<title>Trending Apps</title>
+</head>
+<body>
+
+ <div class="container" id="head" >
+
+  <div class="heading">
+   <p>Trending Apps</p>
+  </div>
+ </div>
+
+</body>
+</html>

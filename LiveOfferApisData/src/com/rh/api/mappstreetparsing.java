@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.google.common.base.Joiner;
 import com.rh.bean.ApiOfferDataBean;
+import com.rh.dbo.DBservice;
 import com.rh.utility.ConfigHolder;
 import com.rh.utility.ReadUrl;
 
@@ -40,14 +41,16 @@ public class mappstreetparsing {
 	private static String extradata = "NA";
 	static int isIncent = 3;
 	static String platform = "NA";
+	private static int counter=1;
 
 	public static void MappStreet(ReadUrl readUrl) {
 		logger.info("Start");
 		try {
 
 			String url = ConfigHolder.MappStreetApi;
-			result = readUrl.readURL(url);
 			logger.info(" MappStreet Url" + url);
+			result = readUrl.readURL(url);
+			
 			System.out.println(" MappStreet Url" + url);
 			parseJson(result);
 		} catch (Exception e) {
@@ -127,7 +130,7 @@ public class mappstreetparsing {
 					}
 				}
 				id = jsonObject.getString("campaign_id");
-				status = jsonObject.getInt("status");
+//				status = jsonObject.getInt("status");
 				actionurl = jsonObject.getString("url");
 
 				Object obj = jsonObject.get("capping");
@@ -181,21 +184,21 @@ public class mappstreetparsing {
 			bean.setActionUrl(actionurl);
 			bean.setPalystoreUrl(playstoreurl);
 			bean.setStatus(status);
+			
+			
+			System.out.print(status);
 			bean.setIsIncent(isIncent);
 			bean.setExtraData(extradata);
 			bean.setPlatform(platform);
+			if(counter==1){
+				String query1 = "Delete from ApiOfferData where vendorName='"+ vandorName + "'";
+				DBservice.UpdateData(query1);
+				counter=2;
+				}
+				
 			ApiOfferDataBean.insertIntoDB();
 
-			// logger.info(" offerName=" + offerName + " Description=" +
-			// Description + " Payout=" + payout + " packageName=" + packagename
-			// + " imageurl=" + imageurl + " dailycap=" + dailycap +
-			// " totalcap=" + totalcap + " country=" + countries +
-			// " vandorName=" + vandorName + " Currency=" + payoutCurrency +
-			// " payoutMode=" + payoutmode + " actionUrl=" + actionurl +
-			// " playstoreUrl=" + playstoreurl + " status=" + status +
-			// " isIncent=" + isIncent + " extraData=" + extradata +
-			// " platform=" + platform);
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("logger Message Mappstreet Parsing Data:" + e);

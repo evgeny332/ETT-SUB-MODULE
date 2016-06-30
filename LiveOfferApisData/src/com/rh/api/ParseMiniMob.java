@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.google.common.base.Joiner;
 import com.rh.bean.ApiOfferDataBean;
+import com.rh.dbo.DBservice;
 import com.rh.utility.ConfigHolder;
 import com.rh.utility.ReadUrl;
 
@@ -50,6 +51,7 @@ public class ParseMiniMob {
 	static Logger logger = Logger.getLogger(ParseMiniMob.class);
 	static String countri;
 	static ReadUrl readUrl;
+	private static int counter=1;
 
 	public static void MiniMob( ReadUrl readUrl1) {
 		logger.info("Start");
@@ -57,8 +59,9 @@ public class ParseMiniMob {
 		try {
 
 			String url = ConfigHolder.urlAvalableOffers;
-			result = readUrl.readURL(url);
 			logger.info("ParseMiniMobs:"+url);
+			result = readUrl.readURL(url);
+			
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -115,7 +118,7 @@ public class ParseMiniMob {
 			countri = country2.replace("\"", "");
 			System.out.print(countri);
 
-			status = jsonObject.getInt("status");
+//			status = jsonObject.getInt("status");
 			storeId = jsonObject.getString("storeId");
 			incentivized = jsonObject.getString("incentivized");
 			weekelyconversioncap = jsonObject.getString("weeklyConversionCap");
@@ -192,6 +195,12 @@ public class ParseMiniMob {
 			bean.setIsIncent(isIncent);
 			bean.setExtraData(extradata);
 			bean.setPlatform(platform);
+			if(counter==1){
+				String query1 = "Delete from ApiOfferData where vendorName='"+ vandorName + "'";
+				DBservice.UpdateData(query1);
+				counter=2;
+				}
+				
 //			logger.info(" offerName=" + offerName + " Description=" + Description + " Payout=" + payout + " packageName=" + packagename + " imageurl=" + imageurl + " dailycap=" + dailycap + " totalcap=" + totalcap + " country=" + countri + " vandorName=" + vandorName + " Currency=" + payoutCurrency + " payoutMode=" + payoutmode + " actionUrl=" + actionurl + " playstoreUrl=" + playstoreurl + " status=" + status + " isIncent=" + isIncent + " extraData=" + extradata + " platform=" + platform);
 
 			ApiOfferDataBean.insertIntoDB();

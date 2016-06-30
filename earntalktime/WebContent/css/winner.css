@@ -1,0 +1,38 @@
+nav{
+    background: linear-gradient(to bottom, #f39c34 0%,#f39c34 50%,#f39c34 100%) repeat scroll 0 0 #f39c34;
+    border-color: #f39c34;
+}
+
+.navbar-inverse{
+    border-color: #f39c34;
+}
+.navbar-inverse .navbar-brand{
+    color: #fff;
+}
+
+h1 {
+	font-weight: bold;
+	color: #F89C1C;
+}
+
+#cancel a{
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+}
+.default {
+	display: none;
+}
+
+.container {
+	padding: 0;
+}
+
+.row{
+	margin: 0;
+}
+
+.ui-datepicker-trigger{
+	position: relative;
+	bottom: -0px;
+}

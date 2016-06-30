@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #D8D8D7;
+}
+
+a, a.visited {
+	color: black;
+}
+
+.container {
+	width: 98%;
+	margin: 0 1%;
+	/* background-color: gray; */
+	/* margin: 0 auto; */
+}
+
+.heading {
+	text-align: center;
+	font-size: 4.5vw;
+}
+
+.section {
+	/* display: block; */
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	background-color: white;
+	display: block;
+	float: left;
+	text-align: center;
+	font-size: 2.4vw;
+	font-weight: bold;
+	margin: 1% 0 1% 1.6%;
+}
+
+.icon {
+	/* background-color: blue; */
+	width: 100%;
+	margin: 5% 0 0 0;
+	/* text-align: center; */
+}
+
+img {
+	width: 80px;
+	height: 80px;
+}
+
+.text {
+	padding: 0;
+	margin: 0 5%;
+	text-align: left;
+}
+
+.title {
+	clear: both;
+	width: 90%;
+	padding: 0;
+	float: left;
+}
+
+p {
+	margin: 4px 0;
+}
+
+.left {
+	/* 	background-color: aqua;*/
+	width: 60%;
+	padding: 0;
+	float: left;
+}
+
+.right {
+	position: relative;
+	font-weight: normal;
+	color: #F89C1C;
+	float: right;
+	z-index: 5px;
+}
+
+.col:first-child {
+	margin-left: 0;
+}
+
+/*  GROUPING  */
+.group:before, .group:after {
+	content: "";
+	display: table;
+}
+
+.group:after {
+	clear: both;
+}
+
+.group {
+	zoom: 1; /* For IE 6/7 */
+}
+/*  GRID OF THREE  */
+.span_3_of_3 {
+	width: 100%;
+}
+
+.span_2_of_3 {
+	width: 66.13%;
+}
+
+.span_1_of_3 {
+	width: 32.26%;
+}
+	
+}
+/*  GO FULL WIDTH BELOW 240 PIXELS */
+@media only screen and (max-width: 240px) {
+	.col {
+		margin: 1% 0 1% 0%;
+	}
+	.span_3_of_3, .span_2_of_3, .span_1_of_3 {
+		width: 100%;
+	}
+}
+
+span.stars, span.stars span {
+	display: block;
+	background: url(../img/stars8x16.png) 0 -8px repeat-x;
+	width: 40px;
+	height: 8px;
+}
+
+span.stars span {
+	background-position: 0 0;
+}

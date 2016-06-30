@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WorldT20</title>
+<style>
+@CHARSET "UTF-8";
+
+body {
+	background-color: #D8D8D7;
+	font-family: sans-serif;
+}
+
+.container {
+	width: 100%;
+}
+
+.section {
+	color: #2c2c2c;
+	/* clear: both; */
+	padding: 0px;
+	margin: 0px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a {
+	/* display: block; */
+	text-align: centre;
+	font-size: 3.3vw;
+	padding: 2% 36%;
+	margin: 0 1% 1%;
+	text-decoration: none;
+	background-color: #F89C1C;
+	border-radius: 1px;
+	color: white;
+	padding: 2% 36%;
+}
+
+#points {
+	color: #F89C1C;
+	display: inline-block;
+}
+
+#points2 {
+	display: inline-block;
+}
+
+p {
+	margin: 1% 1%;
+	padding: 1px;
+}
+
+.top {
+	margin: 0 2%;
+}
+
+.top_head {
+	color: #935601;
+	font-size: 5.1vw;
+	margin: 2% 0;
+	text-align: center;
+}
+
+.top_details {
+	text-align: left;
+	margin: 3% 0;
+	font-size: 3.8vw;
+}
+
+.top_predictions {
+	color: #935601;
+	text-align: center;
+	font-size: 4.2vw;
+	margin: 3% 0;
+}
+
+.col {
+	background-color: white;
+	display: block;
+	float: left;
+	text-align: center;
+	width: 100%;
+	border-radius: 5px;
+	margin: 1% 0 1% 0;
+}
+
+.col.head {
+	background-color: #f3f3f3;
+}
+
+.row {
+	margin: 1% 2%;
+	float: left;
+	width: 96%;
+}
+
+.left {
+	text-align: left;
+	float: left;
+	width: 50%;
+	padding: 1% 2%;
+}
+
+.right {
+	text-align: right;
+	width: 42%;
+	float: right;
+	padding: 1% 2%;
+}
+
+.flag {
+	float: left;
+	width: 25.5%;
+	padding: 0;
+}
+
+.flag.right {
+	width: 31%;
+}
+
+.flag img {
+	width: 100%;
+	max-height: 100%;
+}
+
+.team {
+	text-align: left;
+	margin: 0 0 0 2%;
+	font-size: 4.8vw;
+	float: left;
+}
+
+.vs {
+	color: #707070;
+	padding: 1% 0;
+	margin: 0;
+	float: right;
+}
+
+.time {
+	font-size: 3.5vw;
+}
+
+.rest {
+	color: #707070;
+	font-size: 3.2vw;
+}
+
+.rest.winner p {
+	margin: 1% 1% 0;
+}
+
+.toggle {
+	color: #F89C1C;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 15%;
+	background-color: #f5f5f5;
+}
+
+.inactiveLink {
+	pointer-events: none;
+	cursor: default;
+	background-color: #707070;
+}
+
+::selection {
+	background: white;
+}
+
+::-moz-selection {
+	background: white;
+}
+</style>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+<script>
+	var filterExample = angular.module('wt20', []);
+
+	filterExample.config([ '$locationProvider', function($locationProvider) {
+		$locationProvider.html5Mode(true);
+	} ]);
+
+	filterExample.filter('putSpaces', function() {
+		return function(text) {
+
+			var str = text.replace(/\s+/g, '\u00A0');
+			return str;
+		};
+	})
+
+	filterExample.filter('putHyphens', function() {
+		return function(text) {
+
+			var str = text.replace(/\s+/g, '-');
+			return str;
+		};
+	})
+	function studentController($scope, $http, $location, $window) {
+
+		$scope.toggle = 0;
+		var ettId = $location.search().ettId;
+		var data = $.param({
+			ettId : ettId,
+			call : "get"
+		});
+		var uri = "api/t20/updateChance";
+		$http.post(uri, data).success(function(response) {
+			$scope.point = response;
+			if ($scope.point == null) {
+				$scope.point = 1;
+			}
+		}).error(function(data, status, headers, config) {
+			$scope.point = 1;
+		});
+
+		var url = "api/t20/";
+		var data1 = $.param({
+			ettId : ettId,
+			call : "getMatches"
+		});
+		$http.post(url,data1).success(function(response) {
+			$scope.matchs = response;
+		});
+
+		$scope.updateChance = function(matchId) {
+
+			$scope.toggle=0;
+			if ($scope.point == 0) {
+				alert("you don't have chances");
+				return;
+			}
+			var winner = angular.element($("#" + matchId + "")).find('.toggle').text();
+
+			if (winner == '' || winner == null) {
+				alert("choose one team");
+				return;
+			}
+
+			var data = $.param({
+				ettId : ettId,
+				call : "update",
+				matchId : matchId,
+				winner : winner
+			});
+			var uri = "api/t20/updateChance";
+			$http.post(uri, data).success(function(response) {
+				$window.location.reload();
+			}).error(function(data, status, headers, config){
+				$window.location.reload();
+			});
+		}
+	}
+</script>
+</head>
+<body>
+
+ <div class="container" ng-app="wt20" ng-cloak>
+
+  <div class="section" id="accordion" ng-controller="studentController">
+
+   <div class="col head">
+    <div class="top">
+     <p class="top_head">ICC T20 World Cup Contest</p>
+     <p class="top_details">Win along with your favorite teams this World Cup!.</p>
+     <p class="top_details">
+      Download Apps & Invite Friends to get a chance to predict your choice of winner. For every match,<b> 500 lucky users will win &#8377; 20 </b> for guessing the Winning Team.
+     </p>
+     <p class="top_predictions">Your curent available chances are {{ point }}</p>
+     <p class="top_details" style="font-size: 3.5vw" ng-hide=" point ==0 ">Tap on the Flag to select or change existing selection</p>
+     <p class="top_details" style="font-size: 3.5vw" ng-show=" point ==0 ">Get more chances by Downloading Apps or Inviting Friends</p>
+    </div>
+   </div>
+
+   <div class="col" ng-repeat="match in matchs">
+   
+   <div ng-if="match.status == 0">
+    <div class="row">
+     <div class="left">
+      <p class="time">{{ match.date | date: "d'th' MMM yyyy | h:mm a"}}</p>
+     </div>
+     <div class="right">
+      <p class="rest">Venue: {{ match.venue }}</p>
+     </div>
+    </div>
+
+    <div id="{{ match.id }}" class="row">
+     <div class="left" style="cursor: pointer;" ng-click="toggle = 1">
+      <div class="flag left">
+       <img ng-src="http://54.209.220.78:8888/images/Flags/{{ match.teamA | putHyphens}}.png">
+      </div>
+      <span class="team left" ng-class="{'toggle' : toggle == 1 && match.teamA != 'TBD' || match.teamA == match.selected && toggle==0}">{{ match.teamA | putSpaces}}</span> <span class="team vs">v</span>
+     </div>
+     <div class="right" style="cursor: pointer;" ng-click="toggle = 2">
+      <div class="flag right">
+       <img ng-src="http://54.209.220.78:8888/images/Flags/{{ match.teamB | putHyphens}}.png">
+      </div>
+      <span class="team right" ng-class="{'toggle' : toggle == 2 && match.teamB != 'TBD' ||  match.teamB == match.selected && toggle==0}">{{ match.teamB | putSpaces}}</span>
+     </div>
+    </div>
+
+    <div class="row">
+     <div class="left">
+      <p class="rest winner">Tap on flag to choose team</p>
+     </div>
+     <div class="right">
+       <a href="#" ng-class="{'inactiveLink' : toggle == 0 || point == 0}" ng-click="updateChance(match.id); toggle=0">Submit</a>
+     </div>
+    </div>
+   </div>
+   
+   <div ng-if="match.status == 1">
+    <div class="row">
+     <div class="left">
+      <p class="time">{{ match.date | date: "d'th' MMM yyyy | h:mm a"}}</p>
+     </div>
+     <div class="right">
+      <p class="rest">Venue: {{ match.venue }}</p>
+     </div>
+    </div>
+
+    <div id="{{ match.id }}" class="row">
+     <div class="left">
+      <div class="flag left">
+       <img ng-src="http://54.209.220.78:8888/images/Flags/{{ match.teamA | putHyphens}}.png">
+      </div>
+      <span class="team left" >{{ match.teamA | putSpaces}}</span> <span class="team vs">v</span>
+     </div>
+     <div class="right">
+      <div class="flag right">
+       <img ng-src="http://54.209.220.78:8888/images/Flags/{{ match.teamB | putHyphens}}.png">
+      </div>
+      <span class="team right" >{{ match.teamB | putSpaces}}</span>
+     </div>
+    </div>
+
+    <div class="row">
+     <div class="left">
+      <p class="rest winner" ng-hide="match.winner == ''">{{ match.winner | putSpaces}} won by {{ match.winMargin | putSpaces }}</p>
+     </div>
+     <div class="right">
+      <a href="{{ match.resultUrl }}" ng-class="{'inactiveLink' : match.resultUrl == '#' || match.resultUrl == ''}">Winners</a>
+     </div>
+    </div>
+   </div>
+</div>
+  </div>
+ </div>
+ <!-- <div class="footer">
+  <iframe frameborder="0" border="0" cellspacing="0" src="https://www.cricruns.com/livebarwidget2" style="border-style: none; width: 100%; max-height: 78px;"></iframe>
+ </div> -->
+</body>
+</html>

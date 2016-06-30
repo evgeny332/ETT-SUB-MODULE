@@ -14,6 +14,7 @@ import com.rh.bean.ApiOfferDataBean;
 import com.rh.clicksmob.beans.ClicksMobOfferBean;
 import com.rh.clicksmob.beans.CountryPlatformSet;
 import com.rh.clicksmob.beans.OfferPayout;
+import com.rh.dbo.DBservice;
 import com.rh.utility.ConfigHolder;
 import com.rh.utility.ReadUrl;
 
@@ -63,18 +64,20 @@ public class ParseUrlClicksMob {
 	static HashMap<String, String> hm = new HashMap<String, String>();
 	static String extradata = "NA";
 	static String platform = "NA";
-//	static Logger logger = Logger.getLogger("logger");
+	// static Logger logger = Logger.getLogger("logger");
 	static Logger logger = Logger.getLogger(ParseUrlClicksMob.class);
+	private static int counter = 1;
 
 	public static void clicksMob(ReadUrl readUrl1) {
 		try {
 			String url = ConfigHolder.clicksMobApi;
+			logger.info("ClicksMob:" + url);
 			result = readUrl1.readURL(url);
-			logger.info("ClicksMob:"+url);
+
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("logger Message ClicksMob URL"+e);
+			logger.info("logger Message ClicksMob URL" + e);
 		}
 	}
 
@@ -140,13 +143,12 @@ public class ParseUrlClicksMob {
 					adultTraffic = jsonObject.getString("adultTraffic");
 					mediabuyerAllowed = jsonObject.getString("mediabuyerAllowed");
 					keyworderAllowed = jsonObject.getString("keyworderAllowed");
-					if(jsonObject.getString("incentiveAllowed").equalsIgnoreCase("1")){
-						isIncent =2;
+					if (jsonObject.getString("incentiveAllowed").equalsIgnoreCase("1")) {
+						isIncent = 2;
+					} else if (jsonObject.getString("incentiveAllowed").equalsIgnoreCase("0")) {
+						isIncent = 1;
 					}
-					else if(jsonObject.getString("incentiveAllowed").equalsIgnoreCase("0")){
-						isIncent =1;
-					}
-					
+
 					if (jsonObject.has("iosbundleID") && jsonObject.has("androidPackageName")) {
 
 					} else if (jsonObject.has("") && jsonObject.has("")) {
@@ -210,8 +212,11 @@ public class ParseUrlClicksMob {
 					bean1.setIsIncent(isIncent);
 					bean1.setExtraData(extradata);
 					bean1.setPlatform(platform);
-					// ApiOfferDataBean.count = 0;
-//					logger.info(" offerName=" + offerName + " Description=" + Description + " Payout=" + payout + " packageName=" + packagename + " imageurl=" + imageurl + " dailycap=" + dailycap + " totalcap=" + totalcap + " country=" + countri + " vandorName=" + vandorName + " Currency=" + payoutCurrency + " payoutMode=" + payoutmode + " actionUrl=" + actionurl + " playstoreUrl=" + playstoreurl + " status=" + status + " isIncent=" + isIncent + " extraData=" + extradata + " platform=" + platform);
+					if (counter == 1) {
+						String query1 = "Delete from ApiOfferData where vendorName='" + vandorName + "'";
+						DBservice.UpdateData(query1);
+						counter = 2;
+					}
 
 					ApiOfferDataBean.insertIntoDB();
 
@@ -221,10 +226,8 @@ public class ParseUrlClicksMob {
 			logger.info("Done");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("logger Message ClicksMob Parsing Data:"+e);
+			logger.info("logger Message ClicksMob Parsing Data:" + e);
 		}
 
 	}
 }
-
-

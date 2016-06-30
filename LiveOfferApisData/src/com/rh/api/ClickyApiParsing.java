@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.google.common.base.Joiner;
 import com.rh.bean.ApiOfferDataBean;
+import com.rh.dbo.DBservice;
 import com.rh.utility.ConfigHolder;
 import com.rh.utility.ReadUrl;
 
@@ -49,13 +50,15 @@ public class ClickyApiParsing {
 	private static String rpc;
 	private static String votes;
 	private static String average;
+	private static int counter=1;
 
 	public static void clickyUrlParsing(ReadUrl readUrl) {
 		logger.info("START: ");
 		try {
 			String url = ConfigHolder.Clicky;
-			result = readUrl.readURL(url);
 			logger.info("Clicky:" + url);
+			result = readUrl.readURL(url);
+			
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -168,6 +171,13 @@ public class ClickyApiParsing {
 				bean.setExtraData(extradata);
 				bean.setPlatform(platform);
 				bean.setIsIncent(isIncent);
+				
+				if(counter==1){
+				String query1 = "Delete from ApiOfferData where vendorName='"+ vandorName + "'";
+				DBservice.UpdateData(query1);
+				counter=2;
+				}
+				
 				ApiOfferDataBean.insertIntoDB();
 			}
 		} catch (Exception e) {

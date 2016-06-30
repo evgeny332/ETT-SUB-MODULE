@@ -9,6 +9,7 @@ import com.rh.api.ParseWoobi;
 import com.rh.api.PersonListApiParser;
 import com.rh.api.SupersonicParsing;
 import com.rh.api.mappstreetparsing;
+import com.rh.utility.OfferStatus;
 import com.rh.utility.ReadUrl;
 
 public class StartApp {
@@ -25,6 +26,7 @@ public class StartApp {
 		SupersonicParsing.superSonic(readUrl);
 		ParseWoobi.woobi(readUrl);
 		ClickyApiParsing.clickyUrlParsing(readUrl);
+		OfferStatus.changeOfferStatus();
 
 	}
 }

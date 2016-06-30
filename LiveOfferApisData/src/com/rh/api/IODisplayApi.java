@@ -12,11 +12,12 @@ import org.json.JSONObject;
 
 import com.google.common.base.Joiner;
 import com.rh.bean.ApiOfferDataBean;
+import com.rh.dbo.DBservice;
 import com.rh.utility.ConfigHolder;
 import com.rh.utility.ReadUrl;
 
 public class IODisplayApi {
-	static int count = 0;
+//	static int count = 0;
 	ArrayList<String> listdata = new ArrayList<String>();
 	static String result = "NA";
 	static String offerName = "NA";
@@ -46,13 +47,15 @@ public class IODisplayApi {
 	static String osversion = "NA";
 	private static String extradata = "NA";
 	static int isIncent = 3;
+	private static int counter=1;
 
 	public static void ioDisplayApi(ReadUrl readUrl) {
 		logger.info("Start");
 		try {
 			String url = ConfigHolder.ioDisplayApi;
-			result = readUrl.readURL(url);
 			logger.info("IODisplay:"+url);
+			result = readUrl.readURL(url);
+			
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -151,7 +154,12 @@ public class IODisplayApi {
 				bean.setPlatform(platform);
 
 //				logger.info(" offerName=" + offerName + " Description=" + Description + " Payout=" + payout + " packageName=" + packagename + " imageurl=" + imageurl + " dailycap=" + dailycap + " totalcap=" + totalcap + " country=" + countri + " vandorName=" + vandorName + " Currency=" + payoutCurrency + " payoutMode=" + payoutmode + " actionUrl=" + actionurl + " playstoreUrl=" + playstoreurl + " status=" + status + " isIncent=" + isIncent + " extraData=" + extradata + " platform=" + platform);
-
+				
+				if(counter==1){
+				String query1 = "Delete from ApiOfferData where vendorName='"+ vandorName + "'";
+				DBservice.UpdateData(query1);
+				counter=2;
+				}
 				ApiOfferDataBean.insertIntoDB();
 
 			}

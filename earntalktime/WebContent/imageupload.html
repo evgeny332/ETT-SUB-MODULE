@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Me" />
+<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="css/demo.css" />
+<link rel="stylesheet" type="text/css" href="css/component.css" />
+<script type="text/javascript" charset="utf8" src="js/jquery.js"></script>
+<script src="js/upload.js"></script>
+<link rel="stylesheet" href="css/jquery-ui.css">
+<!-- <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
+<!-- <script src="http://codegena.com/assets/js/image-preview-for-link.js"></script>
+<link href="http://codegena.com/assets/css/image-preview-for-link.css" rel="stylesheet"> -->
+<title>Image Upload</title>
+</head>
+<body>
+ <div class="container">
+  
+  <header>
+   <h1>Upload Image</h1>
+  </header>
+  <div class="component" id="cohtable">
+  <h4>* Maximum individual file size limit: 50 kb</h4>
+   <div class="daterange">
+    <form method="POST" enctype="multipart/form-data" onsubmit="event.preventDefault(); return getTable();" id="fine">
+     <span>Select File:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="upfile" accept="image/*" readonly="readonly" required="required" id="myFile" onchange="getSize();" multiple/></span>&nbsp;&nbsp;
+     <input type="submit" value="Upload">
+    <ul class="gallery-image-list" id="uploads"></ul>
+    </form>
+    <button id="button" onclick="getFiles();"> GetFilesList</button>
+    <br><br>
+    <div id="messages"></div>
+   </div>
+   <div style="display: none" id="hidtable">
+   <hr>
+   <table ><thead><tr><th>FileName</th><th>Size</th></tr></thead><tbody></tbody>
+   </table>
+   </div>
+   <img hidden="" alt="loading" src="img/loading.gif" class="ajax-loader">
+  </div>
+ </div>
+</body>
+</html>

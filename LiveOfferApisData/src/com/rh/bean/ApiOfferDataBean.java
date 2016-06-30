@@ -1,7 +1,6 @@
 package com.rh.bean;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
@@ -26,8 +25,9 @@ public class ApiOfferDataBean {
 	private static int isIncent;
 	private static String extraData;
 	private static String Platform;
-//	static Logger error = Logger.getLogger("error");
+	// static Logger error = Logger.getLogger("error");
 	static Logger logger = Logger.getLogger(ApiOfferDataBean.class);
+
 	public static String getPlatform() {
 		return Platform;
 	}
@@ -184,11 +184,12 @@ public class ApiOfferDataBean {
 	}
 
 	public static void insertIntoDB() {
-		logger.info("Start");
+//		logger.info("Start");
+		
 		try {
 			String query = "insert into ApiOfferData(offerName,description,packageName,currency ,payout,imageUrl ,mode ,totalcap ,dailycap ,palystoreUrl,countries ,status,vendorName,actionUrl,isIncent,extraData,platform) values(? ,?,?,? ,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pt1 = DBservice.getPS(query);
-//			logger.info(query);
+			// logger.info(query);
 
 			pt1.setString(1, offerName);
 			pt1.setString(2, description);
@@ -209,10 +210,10 @@ public class ApiOfferDataBean {
 			pt1.setString(17, Platform);
 
 			pt1.executeUpdate();
-			logger.info("Done");
+//			logger.info("Done");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("SqlError:"+e);
+			logger.info("SqlError:" + e);
 
 		}
 

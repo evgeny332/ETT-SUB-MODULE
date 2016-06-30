@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<script type="text/javascript" charset="utf8" src="js/jquery.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/luckydraw.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<link href="css/winner.css" rel="stylesheet">
+<title>Winners</title>
+</head>
+
+<body>
+
+ <!-- Page Content -->
+ <div class="container">
+  <!-- Project One -->
+  <div class="row">
+   <div class="col-xs-12 col-md-12">
+   
+   <h1 style="text-align: center;">Leap Year Draw</h1>
+   <br>
+    <h4 id="points"></h4>
+    <br>
+    
+    <div class="table-responsive" style="display: none">
+    <p onclick="getCancel();" id="cancel"><a>See Cancelled Tickets</a></p>
+     <table id="tbody" class="table">
+     </table>
+    </div>
+   </div>
+  </div>
+    <span id="type" style="visibility: hidden;">download</span>
+ </div>
+ <!-- /.container -->
+</body>
+</html>

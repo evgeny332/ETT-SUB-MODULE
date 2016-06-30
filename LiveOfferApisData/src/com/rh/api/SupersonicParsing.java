@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.google.common.base.Joiner;
 import com.rh.bean.ApiOfferDataBean;
+import com.rh.dbo.DBservice;
 import com.rh.utility.ConfigHolder;
 import com.rh.utility.ReadUrl;
 
@@ -41,14 +42,16 @@ public class SupersonicParsing {
 	private static String applicationSize = "NA";
 	private static String minOsVersion = "NA";
 	// static Logger logger = Logger.getLogger("logger");
-	static Logger logger = Logger.getLogger("DATA");
+	static Logger logger = Logger.getLogger(SupersonicParsing.class);
+	private static int counter=1;
 
 	public static void superSonic(ReadUrl readUrl) {
 		logger.info("Start");
 		try {
 			String url = ConfigHolder.Supersonic;
-			result = readUrl.readURL(url);
 			logger.info("Supersonic:" + url);
+			result = readUrl.readURL(url);
+			
 			parseJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,11 +102,9 @@ public class SupersonicParsing {
 				Description = jsonObject.getString("disclaimer");
 				payout = jsonObject.getDouble("payout");
 				// isIncent=jsonObject.getString("incentAllowed");
-				if (jsonObject.getString("incentAllowed").equalsIgnoreCase(
-						"true")) {
+				if (jsonObject.getString("incentAllowed").equalsIgnoreCase("true")) {
 					isIncent = 1;
-				} else if (jsonObject.getString("incentAllowed")
-						.equalsIgnoreCase("false")) {
+				} else if (jsonObject.getString("incentAllowed").equalsIgnoreCase("false")) {
 					isIncent = 0;
 				}
 				payoutmode = jsonObject.getString("conciseType");
@@ -160,15 +161,11 @@ public class SupersonicParsing {
 				bean.setIsIncent(isIncent);
 				bean.setExtraData(extradata);
 				bean.setPlatform(platform);
-				// logger.info(" offerName=" + offerName + " Description=" +
-				// Description + " Payout=" + payout + " packageName=" +
-				// packagename + " imageurl=" + imageurl + " dailycap=" +
-				// dailycap + " totalcap=" + totalcap + " country=" + countries
-				// + " vandorName=" + vandorName + " Currency=" + payoutCurrency
-				// + " payoutMode=" + payoutmode + " actionUrl=" + actionurl +
-				// " playstoreUrl=" + playstoreurl + " status=" + status +
-				// " isIncent=" + isIncent + " extraData=" + extradata +
-				// " platform=" + platform);
+				if(counter==1){
+					String query1 = "Delete from ApiOfferData where vendorName='"+ vandorName + "'";
+					DBservice.UpdateData(query1);
+					counter=2;
+					}
 
 				ApiOfferDataBean.insertIntoDB();
 			}

@@ -23,13 +23,15 @@ public class ConfigHolder {
 	public static String password = "";
 	public static String Woobi = "";
 	public static String Clicky = "";
+	public static String host1 = "";
+	public static String user1 = "";
+	public static String password1 = "";
 	static Logger error = Logger.getLogger(ConfigHolder.class);
 	static {
 		try {
 
 			Properties prop = new Properties();
-			prop.load(ConfigHolder.class.getClassLoader().getResourceAsStream(
-					"config.properties"));
+			prop.load(ConfigHolder.class.getClassLoader().getResourceAsStream("config.properties"));
 			urlMyOffers = prop.getProperty("urlMyOffers");
 			urlAvalableOffers = prop.getProperty("urlAvalableOffers");
 			urlAvalableOffers2 = prop.getProperty("urlAvalableOffers2");
@@ -38,16 +40,18 @@ public class ConfigHolder {
 			presonaListApi = prop.getProperty("presonaListApi");
 			Platform = prop.getProperty("Platform");
 			Country = prop.getProperty("Country");
-			incentivizedDescription = prop
-					.getProperty("incentivizedDescription");
+			incentivizedDescription = prop.getProperty("incentivizedDescription");
 			crunchiemediaApi = prop.getProperty("crunchiemediaApi");
 			MappStreetApi = prop.getProperty("MappStreetApi");
 			Supersonic = prop.getProperty("Supersonic");
 			Woobi = prop.getProperty("Woobi");
-			Clicky=prop.getProperty("Clicky");
+			Clicky = prop.getProperty("Clicky");
 			host = prop.getProperty("host");
 			user = prop.getProperty("user");
 			password = prop.getProperty("password");
+			host1 = prop.getProperty("host1");
+			user1 = prop.getProperty("user1");
+			password1 = prop.getProperty("password1");
 
 		} catch (IOException ex) {
 			error.info("FileNotFoundException : " + ex.getMessage());
