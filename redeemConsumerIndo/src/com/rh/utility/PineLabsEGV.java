@@ -39,10 +39,13 @@ public class PineLabsEGV {
 
 		try {
 			pineLabs = dbPersister.getPineLabs(userRedeem.getMsisdn());
+			if(!pineLabs.getPurchaseValue().equals((int)userRedeem.getAmount()+"")){
+				return "";
+			}
 			long start = System.currentTimeMillis();
-			long tId = System.currentTimeMillis() + userRedeem.getEttId();
-			userRedeem.setTrans_id_ett(String.valueOf(tId));
-			String trans = getVouchers(tId);
+//			long tId = System.currentTimeMillis() + userRedeem.getEttId();
+			userRedeem.setTrans_id_ett(String.valueOf(userRedeem.getId()));
+			String trans = getVouchers(userRedeem.getId());
 			if (!trans.equals("FAILED")) {
 				System.out.println("RECHARGE URL| PINELABS |RESP|" + trans + " |TIME|" + (System.currentTimeMillis() - start));
 				return trans;
@@ -77,12 +80,13 @@ public class PineLabsEGV {
 				giftVoucher.setAmount(Integer.parseInt(details2.getVoucherAmount()));
 				giftVoucher.setCode(details2.getVoucherNumber());
 				giftVoucher.setDispatchStatus("DISPATCHED");
+				giftVoucher.setStatus("ACTIVE");
 				giftVoucher.setEttId(userRedeem.getEttId());
 				giftVoucher.setExpiryDate(details2.getExpiryDate());
 				giftVoucher.setPin(details2.getPin());
 				giftVoucher.setTransactionId(details2.getVoucherId() + "");
 				giftVoucher.setMedium("INLINE");
-				giftVoucher.setName(details2.getBrandId() + "");
+				giftVoucher.setName(pineLabs.getBrandName());
 				userRedeem.setTrans_id(details2.getVoucherId() + "");
 
 				dbPersister.insertGiftVoucher(giftVoucher);
