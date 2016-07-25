@@ -1,0 +1,49 @@
+<div class="bottom-spacing">
+
+</div>
+
+<div class="module">
+    <h2><span>Reference Table</span></h2>
+
+    <div class="module-table-body">
+        <form action="">
+            <table id="myTable" class="tablesorter">
+                <thead>
+                <tr>
+                    <th style="width:3%">Id</th>
+                    <th style="width:8%">ApiName</th>
+                    <th style="width:8%">OfferName</th>
+                    <th style="width:8%">Payout</th>
+                    <th style="width:8%">Description</th>
+                    <th style="width:8%">ImageUrl</th>
+                    <th style="width:8%">ActionUrl</th>
+                    <th style="width:8%">Mode</th>
+                    <th style="width:8%">TotalCap</th>
+                    <th style="width:8%">DailyCap</th>
+                    <th style="width:8%"><b>PackageName</b></th>
+                    <th style="width:8%">PlayStoreUrl</th>
+                    <th style="width:8%">Countries</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="ref in reference">
+                    <td class="align-center">{{$index + 1}}</td>
+                    <td>{{ref.ApiName }}</td>
+                    <td class="align-center">{{ref.OfferName | true_false}}</td>
+                    <td class="align-center">{{ref.Payout|true_false}}</td>
+                    <td class="align-center">{{ref.Description | true_false}}</td>
+                    <td class="align-center">{{ref.ImageUrl | true_false}}</td>
+                    <td class="align-center">{{ref.ActionUrl | true_false}}</td>
+                    <td class="align-center">{{ref.Mode | true_false}}</td>
+                    <td class="align-center">{{ref.TotalCap | true_false}}</td>
+                    <td class="align-center">{{ref.DailyCap | true_false}}</td>
+                    <td class="align-center">{{ref.PackageName | true_false}}</td>
+                    <td class="align-center">{{ref.PlayStoreUrl | true_false}}</td>
+                    <td class="align-center">{{ref.Countries | true_false}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <div style="clear: both"></div>
+    </div>
+</div>

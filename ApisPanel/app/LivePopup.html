@@ -1,0 +1,31 @@
+<div class="ngdialog-message" ng-app="postApp" ng-controller="postController">
+    <h3>{{ ngDialogData.offerName}}</h3>
+    <br>
+    <div style="width:100%" class="bottom_source">
+        <form name="userForm" ng-submit="goLive(ngDialogData.status)" novalidate>
+        <div class="uptable" ng-show="ngDialogData.status == 0">
+            <div class="upcol"><span class="column1">OfferId</span><span class="column2"><input ng-model="user.offerId" required type="text"/></span></div>
+            <div class="upcol"><span class="column1">OfferName</span><span class="column2"><input ng-model="user.offerName" type="text" ng-init="user.offerName=ngDialogData.offerName" /></span></div>
+            <div class="upcol"><span class="column1">category</span><span class="column2"><input ng-model="user.category" type="text" ng-init="user.category=ngDialogData.Mode"/></span></div>
+            <div class="upcol"><span class="column1">appKey</span><span class="column2"><input ng-model="user.appKey" type="text"/></span></div>
+            <div class="upcol"><span class="column1">description</span><span class="column2"><input ng-model="user.description" type="text" ng-init="user.description=ngDialogData.Description"/></span></div>
+            <div class="upcol"><span class="column1">imageUrl</span><span class="column2"><input ng-model="user.imageUrl" type="text" ng-init="user.imageUrl=ngDialogData.ImageUrl"/></span></div>
+            <div class="upcol"><span class="column1">actionUrl</span><span class="column2"><input ng-model="user.actionUrl" type="text" ng-init="user.actionUrl=ngDialogData.ActionUrl"/></span></div>
+            <div class="upcol"><span class="column1">offerAmount</span><span class="column2"><input ng-model="user.offerAmount" required type="text" ng-init="user.offerAmount=ngDialogData.payout"/></span></div>
+            <div class="upcol"><span class="column1">offerType</span><span class="column2"><input ng-model="user.offerType" type="text"/></span></div>
+            <div class="upcol"><span class="column1">size</span><span class="column2"><input ng-model="user.size" type="text" /></span></div>
+            <div class="upcol"><span class="column1">vendor</span><span class="column2"><input ng-model="user.vendor" type="text" ng-init="user.vendor=ngDialogData.VendorName"/></span></div>
+            <div class="upcol"><span class="column1">gender</span><span class="column2"><input ng-model="user.gender" type="text"/></span></div>
+            <div class="upcol"><span class="column1">rating</span><span class="column2"><input ng-model="user.rating" type="text"/></span></div>
+            <div class="upcol"><span class="column1">packageName</span><span class="column2"><input ng-model="user.packageName" type="text" ng-init="user.packageName=ngDialogData.PackageName"/></span></div>
+            <div class="upcol"><span class="column1">title</span><span class="column2"><input ng-model="user.title" type="text" /></span></div>
+            <div class="upcol"><span class="column1">appVersion</span><span class="column2"><input ng-model="user.appVersion" type="text" /></span></div>
+        </div>
+            <div ng-show="ngDialogData.status == 1">
+                <h4>This Offer is currently Live. If you want to stop it click on the submit button</h4>
+                <br>
+            </div>
+        <div style="float: right; margin: 0% 5% 5% 0;"><button type="submit">Submit</button></div>
+        </form>
+    </div>
+</div>

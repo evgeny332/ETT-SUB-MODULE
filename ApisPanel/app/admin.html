@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>DashBoard</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/tablesorter.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/ngDialog.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/ngDialog-theme-default.css" media="screen"/>
+</head>
+<body ng-app="myApp" ng-controller="studentController">
+<!-- Header -->
+<div id="header">
+    <!-- Header. Status part -->
+    <div id="header-status">
+        <div class="container_12">
+            <div class="grid_8"><p style="color:black;font-family: Arial; margin:2px;font-size:36px">Offer Panel</p>
+            </div>
+            <div class="grid_4">
+                <a href="#/login" id="logout">
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <!--<div id="header-main">-->
+    <!--<div class="container_12">-->
+    <!--<div class="grid_12">-->
+
+    <!--</div>-->
+    <!--<div style="clear: both;"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div style="clear: both;"></div>-->
+
+    <div id="subnav">
+        <div class="container_12">
+            <div class="grid_12">
+                <ul id="nav">
+                    <li ng-attr-id="{{ tab == 1 && 'current' }}" ng-click="changeTab(1)"><a href="">Incent Offers</a></li>
+                    <li ng-attr-id="{{ tab == 2 && 'current' }}" ng-click="changeTab(2)"><a href="">Non-Incent Offers</a></li>
+                    <li ng-attr-id="{{ tab == 3 && 'current' }}" ng-click="changeTab(3)"><a href="">Reference</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+</div>
+
+<div class="container_12">
+
+    <div style="clear:both;">{{ tabs[0].template }}</div>
+    <div class="grid_12" ng-if="tab == 1" ng-include="'incent.html'"></div>
+    <div class="grid_12" ng-if="tab == 2" ng-include="'non-incent.html'"></div>
+    <div class="grid_12" ng-if="tab == 3" ng-include="'reference.html'"></div>
+    <div style="clear:both;"></div>
+
+    <div id="footer">
+        <div class="container_12">
+            <div class="grid_12">
+                <p>&copy; 2016. <a href="http://earntalktime.com/earntt/" title="Visit RationalHeads">RationalHeads
+                    Technologies Pvt. Ltd.</a></p>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    </div>
+</body>
+</html>

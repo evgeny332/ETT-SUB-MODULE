@@ -1,0 +1,87 @@
+<div class="bottom-spacing">
+    <span style="font-size: 15px;color: #f89C1C"><b>Filters</b></span>&nbsp;&nbsp;&nbsp;&nbsp;OfferName
+    <input type="text" class="input-short" ng-model="offerName"/>
+    &nbsp;&nbsp;Platform:
+    <select ng-click="filtera()" class="input-short" ng-model="platform">
+        <option value="">All</option>
+        <option value="Android">Android</option>
+        <option value="iOS">iOS</option>
+    </select>
+    &nbsp;&nbsp;Vendor:
+    <select class="input-short" ng-model="vendor">
+        <option value="">All</option>
+        <option value="ClicksMob">ClicksMob</option>
+        <option value="MiniMobs">MiniMobs</option>
+        <option value="IosDisplay">IosDisplay</option>
+        <option value="crunchiemedia">Crunchiemedia</option>
+        <option value="Persona">Persona</option>
+        <option value="Supersonic">Supersonic</option>
+        <option value="MappStreet">MappStreet</option>
+    </select>
+    &nbsp;&nbsp;PackageName:<input type="text" class="input-short" ng-model="package"/>
+    &nbsp;&nbsp;Mode:<input type="text" class="input-short" ng-model="Mode"/>
+    &nbsp;&nbsp;Countries:<input type="text" class="input-short" ng-model="countries"/>
+</div>
+
+<div class="module">
+    <h2><span>Table</span></h2>
+
+    <div class="module-table-body">
+        <form action="">
+            <table id="myTable" class="tablesorter" ts-wrapper>
+                <thead>
+                <tr>
+                    <th style="width:3%" ts-criteria="Id">id</th>
+                    <th class="header" style="width:12%" ts-criteria="offerName|lowercase">OfferName</th>
+                    <th class="header" style="width:10%" ts-criteria="VendorName|lowercase">Vendor</th>
+                    <th class="header" style="width:8%" ts-criteria="payout|parseFloat">Payout</th>
+                    <th class="header" style="width:8%" ts-criteria="Mode|lowercase">Mode</th>
+                    <th class="header" style="width:8%" ts-criteria="TotalCap|parseInt">TotalCap</th>
+                    <th class="header" style="width:8%" ts-criteria="DailyCap|parseInt">DailyCap</th>
+                    <th class="header" style="width:13%" ts-criteria="PackageName|lowercase"><b>PackageName</b></th>
+                    <th style="width:10%">Countries</th>
+                    <th class="header" style="width:6%" ts-criteria="platform|lowercase">Platform</th>
+                    <th class="header" style="width:5%" ts-criteria="status|lowercase">Status</th>
+                    <!--<th style="width:10%">Settings</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in nonincent.offers | filter:{VendorName:vendor} | filter:{Mode:Mode} | filter:{Countries:countries} | filter:{offerName:offerName} | filter:{PackageName:package} | filter:{platform:platform} " ts-repeat>
+                    <td class="align-center">{{$index + 1}}</td>
+                    <td><a ng-click="openPopup(data)" style="text-decoration:none; cursor:pointer">{{data.offerName | cut:true:20:' ..'}}</a></td>
+                    <td>{{data.VendorName}}</td>
+                    <td>{{data.payout}}</td>
+                    <td>{{data.Mode}}</td>
+                    <td>{{data.TotalCap}}</td>
+                    <td>{{data.DailyCap}}</td>
+                    <td>{{data.PackageName | cut:true:30:' ..'}}</td>
+                    <td>{{data.Countries | cut:true:20:' ..'}}</td>
+                    <td>{{data.platform | titleCase | cut:true:20:' ..'}}</td>
+                    <td><button ng-class="(data.status == 1 ? 'stopButton' : 'liveButton' )" ng-click="takeLive(data)">{{data.status == 1 ? 'Stop' : 'Start' }}</button></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </form>
+        <div class="pager" id="pager">
+            <form action="">
+                <div>
+                    Page No.:
+                    <input type="text" class="pagedisplay input-short align-center" ng-model="currentPage"/>
+                </div>
+            </form>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+<div class="pagination">
+    <a href="" class="button" ng-click="changePage(1)"><span><img src="images/arrow-stop-180-small.gif" height="9" width="12" alt="First"/> First</span></a>
+    <a href="" class="button" ng-click="changePage(currentPage-1)"><span><img src="images/arrow-180-small.gif" height="9" width="12" alt="Previous"/> Prev</span></a>
+    <div class="numbers" >
+        <a ng-click="changePage($index+1)" ng-repeat="no in getNumber() track by $index" ng-class="(($index+1) == currentPage) ? 'current':'page'">{{$index+1}}</a>
+    </div>
+    <a href="" class="button" ng-click="changePage(currentPage+1)"><span>Next <img src="images/arrow-000-small.gif" height="9" width="12" alt="Next"/></span></a>
+    <a href="" class="button last" ng-click="changePage(noOfPages)"><span>Last <img src="images/arrow-stop-000-small.gif" height="9" width="12" alt="Last"/></span></a>
+    <div style="clear: both;"></div>
+</div>

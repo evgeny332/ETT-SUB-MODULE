@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a78d3958-b28f-4e9e-bd75-38fae5517a71" name="NewServer" url="http://localhost:63342">
+        <fileTransfer host="108.161.133.119" port="22" rootFolder="/home/Development1/apache-tomcat-7.0.55/webapps/" accessType="SFTP" password="dfcfdfcbdfd8dfc4dfdedfcbdfc6dfc1dfdedfc3dfc7dfcfdfeadf99df98df9bdf89" username="root">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

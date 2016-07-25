@@ -1,0 +1,29 @@
+<div class="ngdialog-message">
+    <h3>{{ ngDialogData.offerName}}</h3>
+    <div class="top_source">
+        <div class="image_container"><img ng-src="{{ ngDialogData.ImageUrl | enttoChar }}"></div>
+        <div class="desc">
+            <h4>{{ ngDialogData.VendorName}}</h4>
+            <p>{{ ngDialogData.Description | titleCase | cut:true:200:' ..' }}</p>
+            <p>DailyCap : <b>{{ngDialogData.DailyCap}}</b></p>
+            <p>Payout : <b>{{ngDialogData.payout}}</b></p>
+            <a class="modebutton" ng-show="ngDialogData.Mode != 'NA'"><b>{{ngDialogData.Mode}}</b></a>
+            <a class="modebutton" ng-show="ngDialogData.isIncent != 3"><b>{{ngDialogData.isIncent | incent}}</b></a>
+        </div>
+    </div>
+    <br>
+    <div style="width:100%" class="bottom_source">
+        <p><b>ActionUrl</b> : <a href="{{ngDialogData.ActionUrl}}" target="_blank">{{ngDialogData.ActionUrl}}</a></p>
+        <p><b>Countries</b> : {{ngDialogData.Countries | titleCase}}</p>
+        <p><b>Platform</b> : {{ngDialogData.platform | titleCase}}</p>
+        <p ng-show="ngDialogData.PlayStoreUrl != 'NA'"><b>Preview Url</b> :
+            <a href="{{ngDialogData.PlayStoreUrl}}" target="_blank">{{ngDialogData.PlayStoreUrl}}</a></p>
+        <!--<p ng-show="ngDialogData.incentivizeddescription != 'NA'"><b>Incentivized Dbescription</> :-->
+        <!--{{ngDialogData.incentivizeddescription}}</p>-->
+        <!--<p ng-show="ngDialogId">Dialog Id: <code>{{ngDialogId}}</code></p>-->
+        <div ng-repeat="des in ngDialogData.extraData.split('^|')">
+            <p class="data-passed-through" ng-show="ngDialogData.extraData"><b>{{des | split:'~>':0 | titleCase}}</b> :
+                {{des | split:'~>':1 | cut:true:300:' ..'}} </p>
+        </div>
+    </div>
+</div>
