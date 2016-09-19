@@ -1,0 +1,22 @@
+function Validate()
+{
+	var senderid = document.AddSenderId.senderid.value ; 
+	if(senderid == "")
+	{
+		alert("SenderId can't be blank");
+		document.AddSenderId.senderid.focus();
+		return false ; 
+	}
+	for(var index =0 ; index < SenderNameList.length ; index++)
+	{
+			if(senderid == SenderNameList[index])
+			{
+				alert("SenderId Already Exist ");
+				document.AddSenderId.senderid.focus();
+				return false ; 
+			}
+	}
+	var cfm  = confirm("Add new sender id "+senderid);
+	return cfm ; 
+
+}

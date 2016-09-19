@@ -1,0 +1,34 @@
+@charset "utf-8";
+.tbl_top {
+	height: 100px;
+	width: 645px;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: top;
+	left: 78px;
+	top: 0px;
+	right: 78px;
+	clip: rect(0px,78px,auto,78px);
+}
+.tbl_top_tr {
+	background-image: url(res/images/topbar_1.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.tbl_top_td_left {
+	background-image: url(res/images/topnav_left.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: left top;
+	height: 20px;
+}
+.tbl_top_td_right {
+	background-attachment: fixed;
+	background-image: url(res/images/topnav_rt.jpg);
+	background-repeat: no-repeat;
+	background-position: right top;
+	height: 20px;
+}
+.tbl_top_td_cent {
+}

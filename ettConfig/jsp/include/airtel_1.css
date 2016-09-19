@@ -1,0 +1,483 @@
+body
+{
+font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #7B7B7B;
+	text-decoration: none;
+	font-weight: normal;
+	.padding-bottom:0px; 
+	.margin-bottom:0px;
+}
+
+a {
+	FONT-SIZE: 11px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11grey {
+	FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial14brown {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #8f0201; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.airtel_live_left_rd {
+	FONT-SIZE: 11px; COLOR: #c30100; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11red2 {
+	FONT-SIZE: 11px; COLOR: #e12035; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.topnavtxt {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.whttxtbold {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+whttext {
+	FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.arial12red {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; COLOR: #a71817; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.foryou_hm {
+	FONT-SIZE: 11px; COLOR: #600101; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial10black {
+	FONT-SIZE: 10px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11black {
+	FONT-SIZE: 11px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial12black {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.hellotunes_txt {
+	FONT-SIZE: 10px; COLOR: #c54e4c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11black {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.txtbox_hm {
+	BORDER-RIGHT: #a9a9a9 1px solid; BORDER-TOP: #a9a9a9 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #a9a9a9 1px solid; COLOR: #000000; BORDER-BOTTOM: #a9a9a9 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.arial10green {
+	FONT-SIZE: 10px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.news_headlines {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #16a3c5; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.btn_hm {
+	BORDER-RIGHT: #a9a9a9 1px solid; BORDER-TOP: #a9a9a9 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #a9a9a9 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #a9a9a9 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 13px; BACKGROUND-COLOR: #b3b3b3;
+}
+.bottomtxt {
+	FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial14green {
+	FONT-SIZE: 14px; COLOR: #417062; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11_de {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11_de A:link {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11_de A:active {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11_de A:hover {
+	FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11_de A:visited {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11_ac {
+	FONT-SIZE: 11px; COLOR: #8b8989; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11green {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial15red {
+	FONT-SIZE: 13px; COLOR: #d90b0c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.verdana11black {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11red {
+	FONT-SIZE: 11px; COLOR: #d90b0c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.foryou_hm {
+	FONT-SIZE: 11px; COLOR: #600101; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial10black {
+	FONT-SIZE: 10px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11black {
+	FONT-SIZE: 11px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11blacklink a {
+	FONT-SIZE: 11px; COLOR: #605F5F; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none; font-weight:bold;
+}
+.arial11blacklink a:active {
+	FONT-SIZE: 11px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none; font-weight:bold;
+}
+.arial10green {
+	FONT-SIZE: 10px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.news_headlines {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #16a3c5; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.btn_hm {
+	BORDER-RIGHT: #a9a9a9 1px solid; BORDER-TOP: #a9a9a9 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #a9a9a9 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #a9a9a9 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 13px; BACKGROUND-COLOR: #b3b3b3;
+}
+.bottomtxt {
+	FONT-SIZE: 10px; COLOR: #f0b3b3; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+.arial14green {
+	FONT-SIZE: 14px; COLOR: #417062; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.tabs_de {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.tabs_de A:link {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.tabs_de A:active {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.tabs_de A:hover {
+	FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.tabs_de A:visited {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.tabs_ac {
+	FONT-SIZE: 11px; COLOR: #8b8989; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.bread_crumbs {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.red_heading {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #e12035; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.red_heading_n {
+	FONT-SIZE: 15px; COLOR: #e12035; FONT-FAMILY: Verdana,Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.verdana11black {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11red {
+	FONT-SIZE: 11px; COLOR: #d90b0c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.mediacenter_date {
+	FONT-SIZE: 11px; COLOR: #9e9c9c; FONT-STYLE: italic; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.leftnav {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #636363; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.leftnav_n {
+	FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.bodytext {
+	FONT-SIZE: 11px; COLOR: #4c4c4c; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.bodytxt_b_btmborder {
+	FONT-SIZE: 12px; COLOR: #4c4c4c; LINE-HEIGHT: 15px; BORDER-BOTTOM: #636363 1px dotted; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.bodytext_border {
+	FONT-SIZE: 12px; COLOR: #4c4c4c; LINE-HEIGHT: 15px; BORDER-BOTTOM: #636363 1px dotted; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.leftnav_active {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+
+}
+.blue_heading {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #3aa8b6; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.bodytext_blue {
+	FONT-SIZE: 11px; COLOR: #09a3b4; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.blue_heading_n {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #47a0a7; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.blue_text {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #006093; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arialtopnav, .arialtopnav a{
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arialtopnav A.link{
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arialtopnav A.hover{
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arialtopnav A:visited{
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arialtopnav A:active{
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11grey2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11grey2 A:link {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11grey2 A:visited {
+	FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11grey2 A:active {
+	FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11grey2 A:hover {
+	FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.whttext {
+	FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.hellotunes_txt {
+	FONT-SIZE: 10px; COLOR: #c54e4c; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.datacard_ac {
+	FONT-SIZE: 11px; COLOR: #b4e0d7; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.arial12grey {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial14grey {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #7b7b7b; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.white_text {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #ffffff; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial14green {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #62928c; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11greenunderline {
+	FONT-SIZE: 11px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: underline;
+}
+.verdana15green {
+	FONT-WEIGHT: bold; FONT-SIZE: 15px; COLOR: #62928c; LINE-HEIGHT: 15px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial14greenunderline {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.verdana16black {
+	FONT-WEIGHT: normal; FONT-SIZE: 18px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial12green {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.chkmail {
+	FONT-SIZE: 11px; COLOR: #36739f; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial12darkgrey {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #585858; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial16black {
+	FONT-WEIGHT: normal; FONT-SIZE: 16px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.box_roaming {
+	BORDER-RIGHT: #d5d5d5 1px solid; BORDER-TOP: #d5d5d5 1px solid; FONT-SIZE: 11px; PADDING-BOTTOM: 10px; BORDER-LEFT: #d5d5d5 1px solid; COLOR: #4c4c4c; LINE-HEIGHT: 15px; PADDING-TOP: 10px; BORDER-BOTTOM: #d5d5d5 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-ALIGN: center; TEXT-DECORATION: none;
+}
+.box_faq {
+	BORDER-RIGHT: #d5d5d5 0px solid; PADDING-RIGHT: 10px; BORDER-TOP: #d5d5d5 0px solid; PADDING-LEFT: 10px; FONT-SIZE: 11px; PADDING-BOTTOM: 5px; BORDER-LEFT: #d5d5d5 0px solid; COLOR: #4c4c4c; LINE-HEIGHT: 15px; PADDING-TOP: 5px; BORDER-BOTTOM: #d5d5d5 0px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.whttext_Error {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; FONT-WEIGHT: bold; FONT-SIZE: 25px; PADDING-BOTTOM: 20px; COLOR: #ffffff; PADDING-TOP: 20px; FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: black; TEXT-ALIGN: center;
+}
+.box_roaming_Error {
+	BORDER-RIGHT: #d5d5d5 1px solid; BORDER-TOP: #d5d5d5 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 14px; PADDING-BOTTOM: 10px; BORDER-LEFT: #d5d5d5 1px solid; COLOR: black; LINE-HEIGHT: 15px; PADDING-TOP: 10px; BORDER-BOTTOM: #d5d5d5 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11green {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11greens{
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11green-normal {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial11green11 {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial10darkgrey {
+	FONT-WEIGHT: normal; FONT-SIZE: 10px; COLOR: #333333; LINE-HEIGHT: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none;
+}
+.arial12new {
+	FONT-SIZE: 12px; COLOR: #68b4c7; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.arial11new {
+	FONT-SIZE: 11px; COLOR: #68b4c7; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+.verdana11gr {
+	FONT-SIZE: 11px; COLOR: #63aba2; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+.Airtel_med12grey {
+	FONT-SIZE: 12px; COLOR: #5d5d5d; FONT-FAMILY: Airtel-med;
+}
+.airtel14red {
+	FONT-SIZE: 14px; COLOR: #e12035; FONT-FAMILY: Airtel-Bold;
+}
+.arial11grey22
+{
+font-family:Arial, Helvetica, sans-serif;
+size:16px;
+color:#646363;
+}
+.airtel28redBoldheading {
+	FONT-WEIGHT: normal; FONT-SIZE: 28px; COLOR: #dd2027; FONT-FAMILY: Airtel-Bold, Airtel-med
+}
+
+.navigator a{
+	color:#fff;
+	padding-left:8px;
+}
+.navigatorred a{color:#C60000;
+}
+
+/*---------------tabbing css----------------*/
+UL.tabNavigation {
+list-style: none;
+margin: 0;
+padding: 0;
+padding-left:5px;
+
+}
+
+
+UL.tabNavigation LI {
+display: inline;
+padding-left:1px;
+width:125px;
+}
+
+UL.tabNavigation LI A {
+background:url(/wps/wcm/connect/1d505b0049101bf4906efa06b0343da9/grey-image.gif?MOD=AJPERES);
+color: #000;                    
+padding-top:9px;
+text-decoration: none;
+padding-left:15px;
+padding-bottom:0px;
+padding-right:20px;
+
+}
+
+UL.tabNavigation LI A.selected
+{
+background:url(/wps/wcm/connect/4d293680491025d6a594ff06b0343da9/white-image.gif?MOD=AJPERES);
+color: #ff0000;
+text-decoration:none;
+padding-top:9px;
+padding-left:15px;
+padding-bottom:0px;
+padding-right:20px;	
+}
+
+UL.tabNavigation LI A:focus {
+outline: 0;
+}
+
+div.tabs > div {
+padding: 5px;
+margin-top: 3px;
+
+}
+
+
+#inner-container{
+background:url(/wps/wcm/connect/c8a2e50049101bdf901ffa06b0343da9/bg_postpaid_services.gif?MOD=AJPERES);
+background-repeat:no-repeat; 
+margin-top:-10px;
+.margin-top:0px;
+
+}
+img,img a{border:none}
+#first, #second, #third,#fourth{padding-top:20px;}
+.TopImg img{margin-top:-1px;}
+.clear{clear:both;}
+
+
+
+/*
+	List Expander 
+*/
+
+.listexpander{width:100%;}
+.listexpander, .listexpander ul, .listexpander li{
+	margin:0;
+	padding:0;
+list-style:none;
+
+}
+.listexpander ul{
+	/*
+	Uncomment this if you want to initially hide the child lists. 
+	If you do, Javascript disabled and CSS enabled browsers will not be able to use this list.
+	display:none;
+	*/ 
+}
+.listexpander li{
+	line-height:200%;
+	margin-top:0px;
+	cursor:default;
+	text-indent:30px;
+	font-weight:bold;
+	width:100%;
+}
+
+.listexpander li.collapsed, .listexpander li.expanded{cursor:pointer;} 
+
+/* first level */
+
+.listexpander li, .listexpander li.collapsed{background:#ffffff url(res/images/collapsed.gif) no-repeat 5px .4em;} 
+.listexpander li.expanded{background:#ffffff url(res/images/expanded.gif) no-repeat 5px .4em;}
+
+/* second level */
+
+.listexpander li ul, .listexpander li li{background:#ffffff;font-weight:normal;}
+
+
+/* etc. */
+
+/* buttons */
+
+p.listexpander{
+	height:1em;
+	margin:1em 0;
+}
+p.listexpander a{
+	float:left;
+	height:1.5em;
+	line-height:1.5em;
+	padding:0 10px;
+	border:1px solid #eee;
+	margin-right:5px;
+	cursor:pointer;
+}
+p.listexpander a:hover{
+	background:#ffffff;
+}
+
+/* float fix */
+.listexpander li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.listexpander li{
+	display: inline-block;
+}
+/* Hides from IE-mac \*/
+* html .listexpander li{
+	height: 1%;
+}
+.listexpander li{
+	display: block;
+}
+/* End hide from IE-mac */
+/* end float fix */
+
+.background {
+	background-image: url(res/images/mod_bg.jpg);
+	background-repeat: no-repeat;
+}

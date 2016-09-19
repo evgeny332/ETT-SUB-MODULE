@@ -1,0 +1,81 @@
+.listexpander {
+	WIDTH: 100%
+}
+.listexpander {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.listexpander UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.listexpander LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.listexpander UL {
+	
+}
+.listexpander LI {
+	MARGIN-TOP: 1px; FONT-WEIGHT: bold; WIDTH: 100%; CURSOR: default; TEXT-INDENT: 30px; LINE-HEIGHT: 200%
+}
+.listexpander LI.collapsed {
+	CURSOR: pointer
+}
+.listexpander LI.expanded {
+	CURSOR: pointer
+}
+.listexpander LI {
+	BACKGROUND: url(res/images/collapsed.gif) #eee no-repeat 5px 0.4em
+}
+.listexpander LI.collapsed {
+	BACKGROUND: url(res/images/collapsed.gif) #eee no-repeat 5px 0.4em
+}
+.listexpander LI.expanded {
+	BACKGROUND: url(res/images/expanded.gif) #eee no-repeat 5px 0.4em
+}
+.listexpander LI UL {
+	FONT-WEIGHT: normal; BACKGROUND: #f8f8f8
+}
+.listexpander LI LI {
+	FONT-WEIGHT: normal; BACKGROUND: #f8f8f8
+}
+.listexpander LI LI.collapsed {
+	BACKGROUND: url(res/images/collapsed.gif) #f8f8f8 no-repeat 5px 0.4em
+}
+.listexpander LI LI.expanded {
+	BACKGROUND: url(res/images/expanded.gif) #f8f8f8 no-repeat 5px 0.4em
+}
+.listexpander LI LI UL {
+	BACKGROUND: #fff
+}
+.listexpander LI LI LI {
+	BACKGROUND: #fff
+}
+.listexpander LI LI LI.collapsed {
+	BACKGROUND: url(res/images/collapsed.gif) #fff no-repeat 5px 0.4em
+}
+.listexpander LI LI LI.expanded {
+	BACKGROUND: url(res/images/expanded.gif) #fff no-repeat 5px 0.4em
+}
+.listexpander LI LI LI LI {
+	MARGIN-LEFT: 30px; WIDTH: auto; TEXT-INDENT: 0px
+}
+P.listexpander {
+	MARGIN: 1em 0px; HEIGHT: 1.5em
+}
+P.listexpander A {
+	BORDER-RIGHT: #eee 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #eee 1px solid; PADDING-LEFT: 10px; FLOAT: left; PADDING-BOTTOM: 0px; BORDER-LEFT: #eee 1px solid; CURSOR: pointer; LINE-HEIGHT: 1.5em; MARGIN-RIGHT: 5px; PADDING-TOP: 0px; BORDER-BOTTOM: #eee 1px solid; HEIGHT: 1.5em
+}
+P.listexpander A:hover {
+	BACKGROUND: #f8f8f8
+}
+.listexpander LI:unknown {
+	CLEAR: both; DISPLAY: block; VISIBILITY: hidden; HEIGHT: 0px; content: "."
+}
+.listexpander LI {
+	DISPLAY: inline-block
+}
+HTML .listexpander LI {
+	HEIGHT: 1%
+}
+.listexpander LI {
+	DISPLAY: block
+}

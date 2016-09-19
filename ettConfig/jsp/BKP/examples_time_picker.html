@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>NoGray Time Picker</title>
+
+<script language="javascript" src="mootools.v1.11.js"></script>
+<script language="javascript" src="nogray_time_picker_min.js"></script>
+<script language="javascript">
+	window.addEvent("domready", function (){
+		var tp1 = new TimePicker('time1_picker', 'time1', 'time1_toggler');
+		var tp2 = new TimePicker('time2_picker', 'time2', 'time2_toggler', {format24:true});
+		
+	});
+</script>
+
+<style>
+	* {font-family:Arial, Helvetica, sans-serif;
+		font-size:9pt;}
+		
+	/* table list */
+	.table_list {border-collapse:collapse;
+		border:solid #cccccc 1px;
+		width:100%;}
+	
+	.table_list td {padding:5px;
+		border:solid #efefef 1px;}
+	
+	.table_list th {background:#75b2d1;
+		padding:5px;
+		color:#ffffff;}
+	
+	.table_list tr.odd {background:#e1eff5;}
+	
+	.time_picker_div {padding:5px;
+		border:solid #999999 1px;
+		background:#ffffff;}
+		
+</style>
+</head>
+<body>
+
+<!-- Begin: AdBrite -->
+<script type="text/javascript">
+   var AdBrite_Title_Color = '0000FF';
+   var AdBrite_Text_Color = '000000';
+   var AdBrite_Background_Color = 'FFFFFF';
+   var AdBrite_Border_Color = 'FFFFFF';
+</script>
+
+
+<b>Try It:</b>
+<br />
+<br />
+Standard time picker (12 hours format):<br />
+<input type="text" name="time1" id="time1" /> <a href="#" id="time1_toggler">Open time picker</a>
+<div id="time1_picker" class="time_picker_div"></div>
+
+<br /><br />
+24 hour format:<br />
+<input type="text" name="time2" id="time2" /> <a href="#" id="time2_toggler">Open time picker</a>
+<div id="time2_picker" class="time_picker_div"></div>
+
+
+</body>
+</html>

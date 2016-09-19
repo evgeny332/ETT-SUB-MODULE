@@ -1,0 +1,448 @@
+var msgText;
+var flag;
+function createHTTPObject(){
+        if ( window.ActiveXObject ){
+                return new ActiveXObject("Microsoft.XMLHTTP");
+        }else if ( window.XMLHttpRequest ){
+                return new XMLHttpRequest();
+        }else{
+                alert("Your browser does not support AJAX.");
+                return null;
+        }
+}
+function callAjaxForWhiteListNum()
+{
+//alert("papa");
+document.FileUpload.action="";
+var whiteListData       = new Array();
+        httpObject = createHTTPObject();
+        if ( httpObject != null ){
+                var urlToCall = "../TestPriporityUser?requestType=WHITE_LIST_SUB&USER_NAME=<%=userName%>&TRAN_ID=<%=mileSeconds%>" ;
+                alert(urlToCall);
+                httpObject.onreadystatechange = function(){
+                        if ( httpObject.readyState == 4 ){
+                                        if(httpObject.responseText){
+                                                whiteListData = httpObject.responseText.split("|");
+                                                var listOfNumber        = whiteListData.length -1;
+                                                if(whiteListData.length >= 20 ){
+                                                        confirm("Are you Sure You Want Process this Campaign");
+                                                }else{
+                                                        var restOfNumnber  = 20 - whiteListData.length - 1;
+                                                        alert(restOfNumnber);
+                                                        if(confirm("You can test on maximum 20 numbers, you have presently defined "+ listOfNumber +" test numbers. Do you want to add"+ restOfNumnber + "more ?") ){
+                                                                document.getElementById('msisdntable').style.display='none' ;
+                                                                document.getElementById('msisdnFiled').style.display='';
+                                                                document.getElementById('messageFiledMSG').innerHTML= "Kindly Enter "+ restOfNumnber+" MSISDN \n Using Commas(,)  Seperator \n  Like  91xxxxxxxxxx,91yyyyyyyyyy";
+
+                                                        }else{
+                                                                confirm("Are you Sure You Want Process this Campaign");
+                                                                testUserValidation();
+                                                         }
+                                                }
+                                        }else{
+                                                alert("No Record Found");
+                                        }
+                       }
+                };
+                httpObject.open("GET",urlToCall,true);
+                httpObject.send( null );
+        }
+
+}
+function testUserValidation(){
+
+        //<%String urlToList = response.encodeURL(request.getContextPath()+"/TestPriporityUser");%>
+	//alert("ankit");
+        var url = "../TestPriporityUser?requestType=SUBMIT_REQUEST";
+        document.getElementById("FileUpload").action=url;
+        alert(url);
+        document.getElementById("FileUpload").submit();
+
+}
+function ValidateFile()
+{
+	var msg_type 	= document.FileUpload.message_type.value;
+	var file 	= document.FileUpload.MessageFile.value;
+	var extension 	= file.substr(file.indexOf(".")+1); 
+	//alert(extension);
+	//alert(msg_type);
+	if(msg_type=="PICTURE" || msg_type=="LOGO")
+	{
+		//if(extension=="png" || extension=="jpg" || extension=="gif" || extension=="bmp" || extension=="jpeg" || extension=="JPEG" || extension=="JPG")
+		if(extension=="png" || extension=="PNG" || extension=="jpg" || extension=="gif" || extension=="GIF" || extension=="bmp" || extension=="BMP" || extension=="jpeg" || extension=="JPEG" || extension=="JPG")
+			return true;
+		else
+		{
+			alert("Please upload correct file.");
+			return false;
+		}
+	}
+	else if(msg_type=="RINGTONE")
+	{
+		alert("RINGTONE");
+		//if(extension=="mp3" || extension=="amr" || extension=="wav" || extension=="ems" || extension=="txt" || extension=="SKCL" || extension=="skcl" || extension=="EMELODY" || extension=="emelody" || extension=="rtttl")
+		if(extension=="txt" || extension=="SKCL" || extension=="skcl" || extension=="EMELODY" || extension=="emelody" || extension=="rtttl" || extension=="RTTTL" || extension=="MIDI" || extension=="midi")
+                        return true;
+                else
+		{
+                        alert("Please upload correct file.");
+			return false;
+		}
+	}
+	else
+		return true;
+}
+function checkMessageType()
+{
+	var messageType = document.FileUpload.message_type.value;
+	if(messageType=="PICTURE" || messageType=="RINGTONE" || messageType=="LOGO")
+	{
+		document.getElementById("message_file_tr").style.display="";
+		document.getElementById("messagingService_type_tr").style.display="";
+                document.getElementById("message_tr").style.display="";
+	}
+	else
+	{
+		document.getElementById("message_file_tr").style.display="none";
+		document.getElementById("messagingService_type_tr").style.display="none";
+                document.getElementById("message_tr").style.display="";
+	}
+	return true;
+}
+function checkMessagingServiceType()
+{
+        var messagingType = document.FileUpload.messagingService.value;
+        //alert("messageType="+messageType);
+        if(messagingType=="ems")
+        {
+                document.getElementById("message_tr").style.display="";
+        }
+        else
+        {
+                document.getElementById("message_tr").style.display="none";
+        }
+        return true;
+}
+function initialize_campaign_id()
+{
+	var i,j,slashIndex;
+	var FileName = document.FileUpload.DataFile.value.indexOf('.');
+        var curDateTime = new Date();
+        var curmonth = curDateTime.getMonth()+1;
+        var curTime =(curDateTime.getDate()<10?"0":"")+curDateTime.getDate()+"/"+(curmonth<10?"0":"")+curmonth+"/"+curDateTime.getYear()+"_"+((curDateTime.getHours() < 10) ? "0" : "") + curDateTime.getHours() + ":"+ ((curDateTime.getMinutes() < 10) ? "0" : "") +curDateTime.getMinutes() + ":"+ ((curDateTime.getSeconds() < 10) ? "0" : "") + curDateTime.getSeconds()+":"+ ((curDateTime.getMilliseconds() < 10) ? "0" : "") + curDateTime.getMilliseconds();
+        i=document.FileUpload.DataFile.value.lastIndexOf('.');
+	slashIndex = document.FileUpload.DataFile.value.lastIndexOf("\\");
+ //      document.FileUpload.campaign_name.value=document.FileUpload.DataFile.value.substring(slashIndex+1,i)+"_"+curTime;
+	var Final_name = document.FileUpload.DataFile.value.substring(slashIndex+1,i)+"_"+curTime;
+	while(Final_name.indexOf(" ") != -1 )
+	{
+		Final_name = Final_name.replace(" ","_");
+	}
+	document.FileUpload.campaign_name.value=Final_name;
+	//alert("Final_name"+Final_name);
+}
+function updateTemplate()
+{
+	var IndexValue = document.FileUpload.template.selectedIndex;
+	var SelectedVal = document.FileUpload.template.options[IndexValue].value;
+	document.FileUpload.message.value = SelectedVal ;
+	countChar(SelectedVal); 
+}
+function countChar(Value)
+{
+        var val = Value ;
+	document.FileUpload.charcount.value = val.length;
+        if(val.length > 960)
+        {
+                alert("More than 960 Charactors are not allowed in Message");
+                document.FileUpload.message.value  = val.substring(0,960);
+                document.FileUpload.charcount.value = (document.FileUpload.message.value).length;
+        }
+}
+function setLength(str)
+{
+	if(str.length < 2)
+		return "0"+str;
+	else
+		return str;
+}
+function trim(str)
+{
+	return 	str.replace("/ /g","");
+}
+function valideDateTime(DateTime)
+{
+	var SelDay = trim(DateTime.substring(0,DateTime.indexOf("-")));
+	SelDay = setLength(SelDay);
+	DateTime = DateTime.substring(DateTime.indexOf("-")+1);
+
+	var SelMon = trim(DateTime.substring(0,DateTime.indexOf("-")));
+	SelMon = setLength(SelMon);
+	DateTime = DateTime.substring(DateTime.indexOf("-")+1);
+
+	var SelYear = trim(DateTime.substring(0,DateTime.indexOf(" ")));
+	DateTime = DateTime.substring(DateTime.indexOf(" ")+1);
+
+	var SelHour = trim(DateTime.substring(0,DateTime.indexOf(":")));
+	SelHour = setLength(SelHour);
+
+	DateTime = DateTime.substring(DateTime.indexOf(":")+1);
+	var SelMin = trim(DateTime.substring(0,DateTime.indexOf(":")));
+	SelMin = setLength(SelMin);
+
+	DateTime = DateTime.substring(DateTime.indexOf(":")+1);
+	var SelSec = trim(DateTime) ;
+	SelSec = setLength(SelSec);
+
+	var SelectedDate = new Date(SelYear,SelMon,SelDay,SelHour,SelMin,SelSec);
+	var SelectedDateNow = SelYear+SelMon+SelDay+SelHour+SelMin+SelSec;
+//	alert(ServerDateTime + " - " + SelectedDateNow);
+	if(SelectedDateNow < ServerDateTime )
+	{
+		alert("Invalid Shedule Time");
+		return false ;
+	}
+	if(SelHour > 23 || SelHour < 0 || SelMin > 59 || SelMin < 0 || SelSec > 59 || SelSec < 0)
+	{
+		alert("Invalid Shedule Time");
+                return false ;
+	}
+	return true;
+
+}
+function Validate(button)
+{
+	var allowd = ".txt.xls.xlsx" ; 
+	var file = document.FileUpload.DataFile.value ; 
+	//alert("button in Validate="+button);
+	var msg_type_van    = document.FileUpload.message_type.value;
+	if(button=="submit")
+	{
+		if(file == "")
+		{
+			alert("Please select msisdn file");
+			document.FileUpload.DataFile.focus(); 
+			return false ; 
+		}
+		var File_Ext = file.substring(file.lastIndexOf("."));
+		if(File_Ext == "" || allowd.indexOf(File_Ext) == -1 )
+		{
+			alert("Invalid file format . Please select txt or xls");
+			return false ;
+		}
+	}
+	else
+	{
+		document.FileUpload.DataFile.value="";
+	}
+	if(!Validate1()){
+                //alert("Final check");
+                return false;
+        }
+
+	var DateTime = document.FileUpload.DateTime.value;
+	if(DateTime == "")
+        {
+		var cfm  = confirm("Time is not selected . Current Time will be selected");
+		if(cfm == false)	
+		{
+			return false ; 
+		}
+	}
+	else if (valideDateTime(DateTime) == false)
+	{
+		return false ;
+	}
+	var campaign_name = document.FileUpload.campaign_name.value;
+	if(campaign_name == "")
+        {
+		alert("Blank Campaign Name is not allowed") ;
+		return false ;  
+	}
+	var message = document.FileUpload.message.value;
+	var messagingService = document.FileUpload.messagingService.value;
+	if(messagingService == "ems")
+	{
+		if(message == "")
+        	{
+			alert("Blank Message is not allowed") ;
+			return false ;  
+		}
+	}
+	if(msg_type_van == "VERNACULAR")
+	{
+		//inchange();
+		//alert(document.FileUpload.message.value);
+		var msgval = document.FileUpload.message.value;
+		displayResults( msgval, document.getElementById("message").id );
+                //alert("I Am Converting to Unicode SMS");
+	}
+	else
+	{
+		if(Check_Ascii() == false)
+        	{
+			document.FileUpload.message.focus();
+	                return false;
+        	}
+	}
+	
+	var result = ValidateFile();
+	if(result==true)
+	{
+		callAjax(message,button);
+		//var msgText = document.FileUpload.msgText.value;
+		/*if(msgText=="ok")
+                {
+           	     if(button=="test")
+                     {
+                	     alert(button);
+                             //document.FileUpload.action="../UploadFile";
+                             document.FileUpload.submit();
+                             alert("ok");
+                             return true;
+                    }
+                    else
+                    	return true;
+		}
+                else
+                {
+			alert(msgText);
+                        return false;
+                }*/
+		//return false;
+	}
+	else
+		return false ;
+	//return false ;
+}
+function callAjax(message,button)
+{
+	var msg;
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+  	{// code for IE7+, Firefox, Chrome, Opera, Safari
+  		xmlhttp=new XMLHttpRequest();
+  	}
+	else
+  	{// code for IE6, IE5
+  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	}
+	xmlhttp.onreadystatechange=function()
+  	{
+		//alert("xmlhttp.readyState="+xmlhttp.readyState);
+  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    		{
+			msg = xmlhttp.responseText;
+			//msg = xmlhttp.responseXML.getElementsByTagName("result")[0].firstChild.nodeValue;
+			//alert("msg===="+msg);
+			if( msg!="ok"){
+				alert(msg);
+				return false;
+			}else{
+				if(button=="test")
+                     		{
+                	     		//alert("button in if="+button);
+					/*url = "../UploadFile";
+					flag = flag+1;
+	                       		document.FileUpload.action=url;
+        				document.FileUpload.submit();*/
+					callAjaxForWhiteListNum();
+                    		}
+                		else
+				{
+	                       		//alert("button in else="+button);
+					url = "../UploadFile";
+					//alert(url);
+					document.FileUpload.action=url;
+					document.FileUpload.submit();
+				}
+			}
+		}
+  	}
+	url = "../CheckFilteringContent?message="+message;
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send();
+	//alert("msg="+msg);
+}
+function ValidateFileWithMsg()
+{
+	alert("ValidateFileWithMsg");
+	var allowd = ".txt.xls.xlsx" ; 
+	var file = document.FileUpload.DataFile.value ; 
+	if(file == "")
+	{
+		alert("Please select msisdn file");
+		document.FileUpload.DataFile.focus(); 
+		return false ; 
+	}
+	var File_Ext = file.substring(file.lastIndexOf("."));
+	if(File_Ext == "" || allowd.indexOf(File_Ext) == -1 )
+	{
+		alert("Invalid file format . Please select txt or xls");
+		return false ;
+	}
+	var DateTime = document.FileUpload.DateTime.value;
+	if(DateTime == "")
+        {
+		alert("Time is not selected . Current Time will be selected");
+	}
+	var campaign_name = document.FileUpload.campaign_name.value;
+	if(campaign_name == "")
+        {
+		alert("Blank Campaign Name is not allowed") ;
+		return false ;  
+	}
+	
+	return true ;
+}
+
+function Check_Ascii()
+{
+        var val = document.FileUpload.message.value;
+        var i = 0;
+        var len = val.length;
+        for(i =0 ; i < len ; i++)
+        {
+                var  valu = val.charCodeAt(i);
+                if( valu >126 || valu ==94)
+                {
+                        alert("Character ["+val.charAt(i)+"] at position - ["+(i+1)+"] is not supported ");
+                        return false ;
+                }
+        }
+        return true;
+}
+
+function hexdigit(v) {
+   symbs = "0123456789ABCDEF";
+   return symbs.charAt(v & 0x0f);
+}
+
+function hexval(v) {
+   return hexdigit(v >>> 12) + hexdigit(v >>> 8) + hexdigit(v >>> 4) + hexdigit(v);
+}
+
+function uni2j(val) {
+   if (val == 10) return "\\n"
+   else if (val == 13) return "\\r"
+   else if (val == 92) return "\\\\"
+   else if (val == 34) return "\\\""
+   else if (val < 32 || val > 126) return "\\u" + hexval(val)
+   else return String.fromCharCode(val);
+}
+
+function uni2java(uni, fld_java) {
+   lit = '';
+   for (i = 0; i < uni.length; i++) {
+      v = uni.charCodeAt(i);
+      lit = lit + uni2j(v);
+   }
+
+   fld_java.value = lit + '';
+}
+
+function inchange() {
+   uni2java(document.FileUpload.message.value, document.FileUpload.outunicodemessage);
+}
+        
+

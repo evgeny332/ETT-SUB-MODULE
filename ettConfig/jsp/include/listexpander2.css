@@ -1,0 +1,60 @@
+.listexpander2 {
+	WIDTH: 100%
+}
+.listexpander2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.listexpander2 UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.listexpander2 LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.listexpander2 UL {
+	
+}
+.listexpander2 LI {
+	MARGIN-TOP: 0px; FONT-WEIGHT: bold; WIDTH: 100%; CURSOR: default; TEXT-INDENT: 30px; LINE-HEIGHT: 200%
+}
+.listexpander2 LI.collapsed {
+	CURSOR: pointer
+}
+.listexpander2 LI.expanded {
+	CURSOR: pointer
+}
+.listexpander2 LI {
+	BACKGROUND: url(res/images/collapsed.gif) #ffffff no-repeat 5px 0.4em
+}
+.listexpander2 LI.collapsed {
+	BACKGROUND: url(res/images/collapsed.gif) #ffffff no-repeat 5px 0.4em
+}
+.listexpander2 LI.expanded {
+	BACKGROUND: url(res/images/expanded.gif) #ffffff no-repeat 5px 0.4em
+}
+.listexpander2 LI UL {
+	FONT-WEIGHT: normal; BACKGROUND: #ffffff
+}
+.listexpander2 LI LI {
+	FONT-WEIGHT: normal; BACKGROUND: #ffffff
+}
+P.listexpander2 {
+	MARGIN: 1em 0px; HEIGHT: 1em
+}
+P.listexpander2 A {
+	BORDER-RIGHT: #eee 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #eee 1px solid; PADDING-LEFT: 10px; FLOAT: left; PADDING-BOTTOM: 0px; BORDER-LEFT: #eee 1px solid; CURSOR: pointer; LINE-HEIGHT: 1.5em; MARGIN-RIGHT: 5px; PADDING-TOP: 0px; BORDER-BOTTOM: #eee 1px solid; HEIGHT: 1.5em
+}
+P.listexpander2 A:hover {
+	BACKGROUND: #ffffff
+}
+.listexpander2 LI:unknown {
+	CLEAR: both; DISPLAY: block; VISIBILITY: hidden; HEIGHT: 0px; content: "."
+}
+.listexpander2 LI {
+	DISPLAY: inline-block
+}
+ HTML .listexpander2 LI {
+	HEIGHT: 1%
+}
+.listexpander2 LI {
+	DISPLAY: block
+}

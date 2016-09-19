@@ -1,0 +1,109 @@
+
+.textbox {
+FONT: 11px Tahoma, Arial, Helvetica, Geneva;
+
+}
+
+.content {
+FONT: 11px Tahoma, Arial, Helvetica, Geneva;
+FONT-WEIGHT: normal;
+COLOR: #666666;
+}
+
+
+.contentbold {
+FONT: 11px Tahoma, Arial, Helvetica, Geneva;
+FONT-WEIGHT: bold;
+COLOR: #666666;
+
+}
+
+.contentwhite {
+FONT: 11px Tahoma, Arial, Helvetica, Geneva;
+FONT-WEIGHT: normal	;
+COLOR: #FFFFFF;
+}
+
+.contentblack {
+FONT: 11px Tahoma, Arial, Helvetica, Geneva;
+FONT-WEIGHT: normal	;
+COLOR: #000000;
+width:55;
+}
+
+.contentred {
+FONT: 11px Tahoma, Arial, Helvetica, Geneva;
+FONT-WEIGHT: normal	;
+COLOR: #FF0000;
+background: #F7EBEB;
+}
+
+.contentredtext {
+FONT: 11px Tahoma, Arial, Helvetica, Geneva;
+FONT-WEIGHT: normal	;
+COLOR: #FFFFFF;
+}
+
+
+.moduleheadingh1 {
+font-size: 1.6em;
+font-family: Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif;
+font-weight: normal;
+color: #980000;
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+
+.moduleheadingh2 {
+font-size: 1.1em;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: normal;
+color: #980000;
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+
+.moduleheadingh3 {
+font-size: 0.8em;
+font-family: Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif;
+font-weight: normal;
+color: #980000;
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+
+A
+{
+    FONT: 11px "Tahoma" , "Arial", "Helvetica", "sans-serif";
+    COLOR: #ff0000;
+    LETTER-SPACING: 0px;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    FONT: 11px "Tahoma" , "Arial", "Helvetica","sans-serif";
+    COLOR: #ff0000;
+    LETTER-SPACING: 0px;
+    TEXT-DECORATION: underline
+}
+
+A:visited
+{
+    FONT: 11px "Tahoma" , "Arial", "Helvetica","sans-serif";
+    COLOR: #AB0000;
+    LETTER-SPACING: 0px;
+    TEXT-DECORATION: none
+}
+A:active
+{
+    FONT: 11px "Tahoma" , "Arial", "Helvetica","sans-serif";
+    COLOR: #ff0000;
+    LETTER-SPACING: 0px;
+    TEXT-DECORATION: none
+}

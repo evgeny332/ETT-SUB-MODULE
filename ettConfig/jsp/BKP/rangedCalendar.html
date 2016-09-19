@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC
+          "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Dynarch Calendar -- Range selection without SHIFT</title>
+    <script src="js/jscal2.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/lang/en.js"></script>
+    <link rel="stylesheet" type="text/css" href="include/jscal2.css" />
+    <link rel="stylesheet" type="text/css" href="include/border-radius.css" />
+    <link rel="stylesheet" type="text/css" href="include/steel.css" />
+  </head>
+  <body>
+    <table border=1>
+      <tr>
+        <td style="width: 20em">
+          <div id="cont"></div>
+          <div id="info" style="text-align: center; margin-top: 1em;"></div>
+        </td>
+      </tr>
+	<tr>
+          <td>
+            <input style="text-align: center" readonly="true" name="date" id="f_date" size="50" />
+          </td>
+          
+			<td>
+			<!--<input id="calendar-inputField" /><button id="calendar-trigger">...</button>-->
+			<input type="button" style="text-align: center" name="btn" id="btn" size="2" value="show calendar" onclick="show();"/>
+			</td>
+		</tr>
+		
+    </table>
+    <script type="text/javascript">
+		var flag=0;
+      var SELECTED_RANGE = null;
+      function getSelectionHandler() {
+				
+              var startDate = null;
+              var ignoreEvent = false;
+              return function(cal) {
+                      var selectionObject = cal.selection;
+					  
+
+                      if (ignoreEvent)
+                              return;
+
+                      var selectedDate = selectionObject.get();
+					  
+                      if (startDate == null) {
+                              startDate = selectedDate;
+                              SELECTED_RANGE = null;
+                              document.getElementById("info").innerHTML = "Click to select end date";
+								document.getElementById("f_date").value = selectionObject.print("%A (%Y-%m-%d)");
+                              
+                              cal.args.min = Calendar.intToDate(selectedDate);
+                              cal.refresh();
+                      } else {
+                              ignoreEvent = true;
+							  
+                              selectionObject.selectRange(startDate, selectedDate);
+                              ignoreEvent = false;
+                              SELECTED_RANGE = selectionObject.sel[0];
+							  
+                              
+
+                              startDate = null;
+                              //document.getElementById("info").innerHTML = selectionObject.print("%Y-%m-%d") +
+							  document.getElementById("info").innerHTML = "";
+                              document.getElementById("f_date").value = selectionObject.print("%A (%Y-%m-%d)");
+
+                              // (*)
+                              cal.args.min = null;
+                              cal.refresh();
+							  
+							  cal.hide();
+							  flag=0;
+                      }
+					  
+              };
+      };
+	  function show(){
+	  if(flag==0)
+	  {
+		flag=1;
+		Calendar.setup({
+              cont          : "cont",
+			  fdow          : 1,
+			  selectionType : Calendar.SEL_SINGLE,
+              onSelect      : getSelectionHandler()
+			  //onTimeChange : updateFields
+			  
+		});
+		}
+		else
+		{
+			return function(cal)
+			{
+				//alert(cal);
+				cal.hide();
+			}
+			flag=0;
+			
+			
+		}
+	 }
+	
+	  
+
+      </script>
+  </body>
+</html>
+

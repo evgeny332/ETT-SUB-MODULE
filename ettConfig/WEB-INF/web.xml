@@ -1,0 +1,1027 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2004 The Apache Software Foundation
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+	    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	    See the License for the specific language governing permissions and
+	    limitations under the License.
+	    -->
+
+	    <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	    version="2.4">
+
+	    <display-name>Welcome to Bulk SMS</display-name>
+	    <description>
+	    Welcome to Bulk SMS
+	    </description>
+
+	    <session-config>
+	    <session-timeout>30</session-timeout>
+	    </session-config>
+
+	    <!-- JSPC servlet mappings start -->
+		<servlet>
+
+		        <servlet-name>RedeemAmountConfig</servlet-name>
+		                <servlet-class>RedeemAmountConfig</servlet-class>
+		                    </servlet>
+
+    		<servlet-mapping>
+            	<servlet-name>RedeemAmountConfig</servlet-name>
+                    <url-pattern>/RedeemAmountConfig</url-pattern>
+                </servlet-mapping>
+
+         	<servlet>
+                 	<servlet-name>EditRedeemAmountConfig</servlet-name>
+                        <servlet-class>EditRedeemAmountConfig</servlet-class>
+                </servlet>
+
+    		<servlet-mapping>
+            		<servlet-name>EditRedeemAmountConfig</servlet-name>
+                    	<url-pattern>/EditRedeemAmountConfig</url-pattern>
+                </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>EditBrackingAlertDel</servlet-name>
+	    <servlet-class>EditBrackingAlertDel</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>EditBrackingAlertDel</servlet-name>
+	    <url-pattern>/EditBrackingAlertDel</url-pattern>
+	    </servlet-mapping>
+
+	<servlet>
+	            <servlet-name>RefundETTAmt</servlet-name>
+	                        <servlet-class>RefundETTAmt</servlet-class>
+	                                    </servlet>
+
+            <servlet-mapping>
+                        <servlet-name>RefundETTAmt</servlet-name>
+                                    <url-pattern>/RefundETTAmt</url-pattern>
+                                                </servlet-mapping>
+
+
+
+
+
+	    <servlet>
+	    <servlet-name>RefundAmt</servlet-name>
+	    <servlet-class>RefundAmt</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>RefundAmt</servlet-name>
+	    <url-pattern>/RefundAmt</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>UpdateRedeemAmountConfig</servlet-name>
+	    <servlet-class>UpdateRedeemAmountConfig</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>UpdateRedeemAmountConfig</servlet-name>
+	    <url-pattern>/UpdateRedeemAmountConfig</url-pattern>
+	    </servlet-mapping>	
+
+
+	    <servlet>
+	    <servlet-name>RefundBulkAmt</servlet-name>
+	    <servlet-class>RefundBulkAmt</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>RefundBulkAmt</servlet-name>
+	    <url-pattern>/RefundBulkAmt</url-pattern>
+	    </servlet-mapping>	
+
+	    <servlet>
+	    <servlet-name>UpdateBreakingAlert</servlet-name>
+	    <servlet-class>UpdateBreakingAlert</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>UpdateBreakingAlert</servlet-name>
+	    <url-pattern>/UpdateBreakingAlert</url-pattern>
+	    </servlet-mapping>	
+
+	    <servlet>
+	    <servlet-name>EditBrackingAlert</servlet-name>
+	    <servlet-class>EditBrackingAlert</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>EditBrackingAlert</servlet-name>
+	    <url-pattern>/EditBrackingAlert</url-pattern>
+	    </servlet-mapping>	
+
+	    <servlet>
+	    <servlet-name>BreakingAlertDetails</servlet-name>
+	    <servlet-class>BreakingAlertDetails</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>BreakingAlertDetails</servlet-name>
+	    <url-pattern>/BreakingAlertDetails</url-pattern>
+	    </servlet-mapping>	
+
+	    <servlet>
+	    <servlet-name>DeleteDataTodaysOffers</servlet-name>
+	    <servlet-class>DeleteDataTodaysOffers</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>DeleteDataTodaysOffers</servlet-name>
+	    <url-pattern>/DeleteDataTodaysOffers</url-pattern>
+	    </servlet-mapping>	
+
+	    <servlet>
+	    <servlet-name>ManageRequest</servlet-name>
+	    <servlet-class>ManageRequest</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>ManageRequest</servlet-name>
+	    <url-pattern>/ManageRequest</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>TruncateOffers</servlet-name>
+	    <servlet-class>TruncateOffers</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>TruncateOffers</servlet-name>
+	    <url-pattern>/TruncateOffers</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>DeleteBreakingAlert</servlet-name>
+	    <servlet-class>DeleteBreakingAlert</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>DeleteBreakingAlert</servlet-name>
+	    <url-pattern>/DeleteBreakingAlert</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>PayoutAmount</servlet-name>
+	    <servlet-class>PayoutAmount</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>PayoutAmount</servlet-name>
+	    <url-pattern>/PayoutAmount</url-pattern>
+	    </servlet-mapping>
+
+
+
+	    <servlet>
+	    <servlet-name>AddShareOffer</servlet-name>
+	    <servlet-class>AddShareOffer</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>AddShareOffer</servlet-name>
+	    <url-pattern>/AddShareOffer</url-pattern>
+	    </servlet-mapping>	
+
+
+	    <servlet>
+	    <servlet-name>UpdateShareOffer</servlet-name>
+	    <servlet-class>UpdateShareOffer</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>UpdateShareOffer</servlet-name>
+	    <url-pattern>/UpdateShareOffer</url-pattern>
+	    </servlet-mapping>	
+
+
+	    <servlet>
+	    <servlet-name>ViewShareOffer</servlet-name>
+	    <servlet-class>ViewShareOffer</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>ViewShareOffer</servlet-name>
+	    <url-pattern>/ViewShareOffer</url-pattern>
+	    </servlet-mapping>	
+
+	    <servlet>
+	    <servlet-name>EditShareOffer</servlet-name>
+	    <servlet-class>EditShareOffer</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>EditShareOffer</servlet-name>
+	    <url-pattern>/EditShareOffer</url-pattern>
+	    </servlet-mapping>	
+
+	    <servlet>
+	    <servlet-name>updateUserDetails</servlet-name>
+	    <servlet-class>updateUserDetails</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>updateUserDetails</servlet-name>
+	    <url-pattern>/updateUserDetails</url-pattern>
+	    </servlet-mapping>	
+
+
+	    <servlet>
+	    <servlet-name>OffersPayoutAmount</servlet-name>
+	    <servlet-class>OffersPayoutAmount</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>OffersPayoutAmount</servlet-name>
+	    <url-pattern>/OffersPayoutAmount</url-pattern>
+	    </servlet-mapping>	
+
+
+	    <servlet>
+	    <servlet-name>ManageUserServ</servlet-name>
+	    <servlet-class>ManageUserServ</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>ManageUserServ</servlet-name>
+	    <url-pattern>/ManageUserServ</url-pattern>
+	    </servlet-mapping>	
+
+
+	    <servlet>
+	    <servlet-name>CreateEntUser</servlet-name>
+	    <servlet-class>CreateEntUser</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>CreateEntUser</servlet-name>
+	    <url-pattern>/CreateEntUser</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>DeleteSenderId</servlet-name>
+	    <servlet-class>DeleteSenderId</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>DeleteSenderId</servlet-name>
+	    <url-pattern>/DeleteSenderId</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>CreateUser</servlet-name>
+	    <servlet-class>CreateUser</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>CreateUser</servlet-name>
+	    <url-pattern>/CreateUser</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>getUserList</servlet-name>
+	    <servlet-class>getUserList</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>getUserList</servlet-name>
+	    <url-pattern>/getUserList</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>checkUserName</servlet-name>
+	    <servlet-class>checkUserName</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>checkUserName</servlet-name>
+	    <url-pattern>/checkUserName</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>InsertConnection</servlet-name>
+	    <servlet-class>InsertConnection</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>InsertConnection</servlet-name>
+	    <url-pattern>/InsertConnection</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>DeleteConnection</servlet-name>
+	    <servlet-class>DeleteConnection</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>DeleteConnection</servlet-name>
+	    <url-pattern>/DeleteConnection</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>OracleConnectionUtil</servlet-name>
+	    <servlet-class>OracleConnectionUtil</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>OracleConnectionUtil</servlet-name>
+	    <url-pattern>/OracleConnectionUtil</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>DetailSummary</servlet-name>
+	    <servlet-class>DetailSummary</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>DetailSummary</servlet-name>
+	    <url-pattern>/DetailSummary</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>CurrentReport</servlet-name>
+	    <servlet-class>CurrentReport</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>CurrentReport</servlet-name>
+	    <url-pattern>/CurrentReport</url-pattern>
+	    </servlet-mapping>
+
+
+
+
+	    <servlet>
+	    <servlet-name>GroupSMS</servlet-name>
+	    <servlet-class>GroupSMS</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>GroupSMS</servlet-name>
+	    <url-pattern>/GroupSMS</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>UploadFile</servlet-name>
+	    <servlet-class>UploadFile</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>UploadFile</servlet-name>
+	    <url-pattern>/UploadFile</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>UploadContentFilteringFile</servlet-name>
+	    <servlet-class>UploadContentFilteringFile</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>UploadContentFilteringFile</servlet-name>
+	    <url-pattern>/UploadContentFilteringFile</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>UploadFile1</servlet-name>
+	    <servlet-class>UploadFile1</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>UploadFile1</servlet-name>
+	    <url-pattern>/UploadFile1</url-pattern>
+	    </servlet-mapping>
+
+
+
+
+
+	    <servlet>
+	    <servlet-name>FileStatus</servlet-name>
+	    <servlet-class>FileStatus</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>FileStatus</servlet-name>
+	    <url-pattern>/FileStatus</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>AddTemplate</servlet-name>
+	    <servlet-class>AddTemplate</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>AddTemplate</servlet-name>
+	    <url-pattern>/AddTemplate</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>ModifyTemplate</servlet-name>
+	    <servlet-class>ModifyTemplate</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>ModifyTemplate</servlet-name>
+	    <url-pattern>/ModifyTemplate</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>DeleteTemplate</servlet-name>
+	    <servlet-class>DeleteTemplate</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>DeleteTemplate</servlet-name>
+	    <url-pattern>/DeleteTemplate</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>HindiUploadFile</servlet-name>
+	    <servlet-class>HindiUploadFile</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>HindiUploadFile</servlet-name>
+	    <url-pattern>/HindiUploadFile</url-pattern>
+	    </servlet-mapping>
+
+
+
+
+
+	    <servlet>
+	    <servlet-name>CreateGroup</servlet-name>
+	    <servlet-class>CreateGroup</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>CreateGroup</servlet-name>
+	    <url-pattern>/CreateGroup</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>AddGroupMember</servlet-name>
+	    <servlet-class>AddGroupMember</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>AddGroupMember</servlet-name>
+	    <url-pattern>/AddGroupMember</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>GetGroupMemberDetails</servlet-name>
+	    <servlet-class>GetGroupMemberDetails</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>GetGroupMemberDetails</servlet-name>
+	    <url-pattern>/GetGroupMemberDetails</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>GetGroupMember</servlet-name>
+	    <servlet-class>GetGroupMember</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>GetGroupMember</servlet-name>
+	    <url-pattern>/GetGroupMember</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>SmsCallTest</servlet-name>
+	    <servlet-class>SmsCallTest</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>SmsCallTest</servlet-name>
+	    <url-pattern>/SmsCallTest</url-pattern>
+	    </servlet-mapping>
+
+
+
+
+
+
+	    <servlet>
+	    <servlet-name>UpdateGroupMember</servlet-name>
+	    <servlet-class>UpdateGroupMember</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>UpdateGroupMember</servlet-name>
+	    <url-pattern>/UpdateGroupMember</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>GetUserDetails</servlet-name>
+	    <servlet-class>GetUserDetails</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>GetUserDetails</servlet-name>
+	    <url-pattern>/GetUserDetails</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>DeleteGroup</servlet-name>
+	    <servlet-class>DeleteGroup</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>DeleteGroup</servlet-name>
+	    <url-pattern>/DeleteGroup</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>Login</servlet-name>
+	    <servlet-class>Login</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>Login</servlet-name>
+	    <url-pattern>/Login</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>getThroughputReport</servlet-name>
+	    <servlet-class>getThroughputReport</servlet-class>
+	    </servlet>
+
+	    <servlet-mapping>
+	    <servlet-name>getThroughputReport</servlet-name>
+	    <url-pattern>/getThroughputReport</url-pattern>
+	    </servlet-mapping>
+
+
+	    <servlet>
+	    <servlet-name>PopUpAlertUpdate</servlet-name>
+	    <servlet-class>PopUpAlertUpdate</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>PopUpAlertUpdate</servlet-name>
+	    <url-pattern>/PopUpAlertUpdate</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>PopUpAlert</servlet-name>
+	    <servlet-class>PopUpAlert</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>PopUpAlert</servlet-name>
+	    <url-pattern>/PopUpAlert</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>PopUpAlertAdd</servlet-name>
+	    <servlet-class>PopUpAlertAdd</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>PopUpAlertAdd</servlet-name>
+	    <url-pattern>/PopUpAlertAdd</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>PopUpAlertEdit</servlet-name>
+	    <servlet-class>PopUpAlertEdit</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>PopUpAlertEdit</servlet-name>
+	    <url-pattern>/PopUpAlertEdit</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>CampaignReportServlet</servlet-name>
+	    <servlet-class>CampaignReportServlet</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>CampaignReportServlet</servlet-name>
+	    <url-pattern>/CampaignReportServlet</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>OnlineReportServlet</servlet-name>
+	    <servlet-class>OnlineReportServlet</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>OnlineReportServlet</servlet-name>
+	    <url-pattern>/OnlineReportServlet</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>DndReportServlet</servlet-name>
+	    <servlet-class>DndReportServlet</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>DndReportServlet</servlet-name>
+	    <url-pattern>/DndReportServlet</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>DndSearchServlet</servlet-name>
+	    <servlet-class>DndSearchServlet</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>DndSearchServlet</servlet-name>
+	    <url-pattern>/DndSearchServlet</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>SummaryReport</servlet-name>
+	    <servlet-class>SummaryReport</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>SummaryReport</servlet-name>
+	    <url-pattern>/SummaryReport</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>CircleWiseReport</servlet-name>
+	    <servlet-class>CircleWiseReport</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>CircleWiseReport</servlet-name>
+	    <url-pattern>/CircleWiseReport</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>ErrorWiseReport</servlet-name>
+	    <servlet-class>ErrorWiseReport</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>ErrorWiseReport</servlet-name>
+	    <url-pattern>/ErrorWiseReport</url-pattern>
+	    </servlet-mapping>	
+
+	    <servlet>
+	    <servlet-name>de_SummaryReport</servlet-name>
+	    <servlet-class>de_SummaryReport</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>de_SummaryReport</servlet-name>
+	    <url-pattern>/de_SummaryReport</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>de_CircleWiseReport</servlet-name>
+	    <servlet-class>de_CircleWiseReport</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>de_CircleWiseReport</servlet-name>
+	    <url-pattern>/de_CircleWiseReport</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>BreakingAlert</servlet-name>
+	    <servlet-class>BreakingAlert</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>BreakingAlert</servlet-name>
+	    <url-pattern>/BreakingAlert</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>BrowsPlanLimitUpdate</servlet-name>
+	    <servlet-class>BrowsPlanLimitUpdate</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>BrowsPlanLimitUpdate</servlet-name>
+	    <url-pattern>/BrowsPlanLimitUpdate</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>BrowsPlanLimit</servlet-name>
+	    <servlet-class>BrowsPlanLimit</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>BrowsPlanLimit</servlet-name>
+	    <url-pattern>/BrowsPlanLimit</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>OfferProomotion</servlet-name>
+	    <servlet-class>OfferProomotion</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>OfferProomotion</servlet-name>
+	    <url-pattern>/OfferProomotion</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>Conformance_Report</servlet-name>
+	    <servlet-class>Conformance_Report</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>Conformance_Report</servlet-name>
+	    <url-pattern>/Conformance_Report</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>RedeemThreshold</servlet-name>
+	    <servlet-class>RedeemThreshold</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>RedeemThreshold</servlet-name>
+	    <url-pattern>/RedeemThreshold</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>RedeemThresholdUpdate</servlet-name>
+	    <servlet-class>RedeemThresholdUpdate</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>RedeemThresholdUpdate</servlet-name>
+	    <url-pattern>/RedeemThresholdUpdate</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>EditOfferD</servlet-name>
+	    <servlet-class>EditOfferD</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>EditOfferD</servlet-name>
+	    <url-pattern>/EditOfferD</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>UpdateOffer</servlet-name>
+	    <servlet-class>UpdateOffer</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>UpdateOffer</servlet-name>
+	    <url-pattern>/UpdateOffer</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>EditOfferDNew</servlet-name>
+	    <servlet-class>EditOfferDNew</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>EditOfferDNew</servlet-name>
+	    <url-pattern>/EditOfferDNew</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>UpdateOfferNew</servlet-name>
+	    <servlet-class>UpdateOfferNew</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>UpdateOfferNew</servlet-name>
+	    <url-pattern>/UpdateOfferNew</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>ViewOffer</servlet-name>
+	    <servlet-class>ViewOffer</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>ViewOffer</servlet-name>
+	    <url-pattern>/ViewOffer</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>ViewOfferNew</servlet-name>
+	    <servlet-class>ViewOfferNew</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>ViewOfferNew</servlet-name>
+	    <url-pattern>/ViewOfferNew</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>OfferDescription</servlet-name>
+	    <servlet-class>OfferDescription</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>OfferDescription</servlet-name>
+	    <url-pattern>/OfferDescription</url-pattern>
+	    </servlet-mapping>
+
+	    <servlet>
+	    <servlet-name>EarntTT_CDR</servlet-name>
+	    <servlet-class>EarntTT_CDR</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>EarntTT_CDR</servlet-name>
+	    <url-pattern>/EarntTT_CDR</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>AddNewOffer</servlet-name>
+	    <servlet-class>AddNewOffer</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>AddNewOffer</servlet-name>
+	    <url-pattern>/AddNewOffer</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>EditOffer</servlet-name>
+	    <servlet-class>EditOffer</servlet-class>
+
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>EditOffer</servlet-name>
+	    <url-pattern>/EditOffer</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>DeleteOffer</servlet-name>
+	    <servlet-class>DeleteOffer</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>DeleteOffer</servlet-name>
+	    <url-pattern>/DeleteOffer</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>AddNewOfferNew</servlet-name>
+	    <servlet-class>AddNewOfferNew</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>AddNewOfferNew</servlet-name>
+	    <url-pattern>/AddNewOfferNew</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>EditOfferNew</servlet-name>
+	    <servlet-class>EditOfferNew</servlet-class>
+
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>EditOfferNew</servlet-name>
+	    <url-pattern>/EditOfferNew</url-pattern>
+	    </servlet-mapping>
+	    <servlet>
+	    <servlet-name>DeleteOfferNew</servlet-name>
+	    <servlet-class>DeleteOfferNew</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    <servlet-name>DeleteOfferNew</servlet-name>
+	    <url-pattern>/DeleteOfferNew</url-pattern>
+	    </servlet-mapping>
+
+	   <servlet>
+	   <servlet-name>ViewOfferEvent</servlet-name>
+	   <servlet-class>ViewOfferEvent</servlet-class>
+	   </servlet>
+	   <servlet-mapping>
+	   <servlet-name>ViewOfferEvent</servlet-name>
+	   <url-pattern>/ViewOfferEvent</url-pattern>
+	   </servlet-mapping>
+
+	  <servlet>
+	  <servlet-name>DeleteEventOffer</servlet-name>
+	  <servlet-class>DeleteEventOffer</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  <servlet-name>DeleteEventOffer</servlet-name>
+	  <url-pattern>/DeleteEvent</url-pattern>
+	  </servlet-mapping>
+	<servlet>
+	<servlet-name>EditEventOffer</servlet-name>
+	<servlet-class>EditEventOffer</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>EditEventOffer</servlet-name>
+	<url-pattern>/EditEvent</url-pattern>
+	</servlet-mapping>
+
+	   <servlet>
+	   <servlet-name>UpdateOfferEvent</servlet-name>
+	   <servlet-class>UpdateOfferEvent</servlet-class>
+	   </servlet>
+	   <servlet-mapping>
+	   <servlet-name>UpdateOfferEvent</servlet-name>
+	   <url-pattern>/UpdateOfferEvent</url-pattern>
+	   </servlet-mapping>
+	  <servlet>
+	  <servlet-name>AddOfferEvent</servlet-name>
+	  <servlet-class>AddOfferEvent</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  <servlet-name>AddOfferEvent</servlet-name>
+	  <url-pattern>/AddOfferEvent</url-pattern>
+	  </servlet-mapping>
+	  <servlet>
+	  <servlet-name>EditShopping</servlet-name>
+	  <servlet-class>EditShopping</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  <servlet-name>EditShopping</servlet-name>
+	  <url-pattern>/EditShopping</url-pattern>
+	  </servlet-mapping>
+
+	<servlet>
+		<servlet-name>ViewShopping</servlet-name>
+		<servlet-class>ViewShopping</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewShopping</servlet-name>
+		<url-pattern>/ViewShopping</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddNewShopping</servlet-name>
+		<servlet-class>AddNewShopping</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddNewShopping</servlet-name>
+		<url-pattern>/AddNewShopping</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateShopping</servlet-name>
+		<servlet-class>UpdateShopping</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateShopping</servlet-name>
+		<url-pattern>/UpdateShopping</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AddNewOfferSeqNew</servlet-name>
+		<servlet-class>AddNewOfferSeqNew</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddNewOfferSeqNew</servlet-name>
+		<url-pattern>/AddNewOfferSeqNew</url-pattern>
+	</servlet-mapping>
+                     
+            <servlet>
+                  <servlet-name>PineLabsDetails</servlet-name>
+		  <servlet-class>PineLabsDetails</servlet-class>
+            </servlet>
+
+    		<servlet-mapping>
+            	<servlet-name>PineLabsDetails</servlet-name>
+                    <url-pattern>/PineLabsDetails</url-pattern>
+                </servlet-mapping>
+
+            <servlet>
+                  <servlet-name>PineLabsEdit</servlet-name>
+		  <servlet-class>PineLabsEdit</servlet-class>
+            </servlet>
+
+    		<servlet-mapping>
+            	<servlet-name>PineLabsEdit</servlet-name>
+                    <url-pattern>/PineLabsEdit</url-pattern>
+                </servlet-mapping>
+
+             <servlet>
+                  <servlet-name>UpdatePineLabs</servlet-name>
+		  <servlet-class>UpdatePineLabs</servlet-class>
+            </servlet>
+
+    		<servlet-mapping>
+            	<servlet-name>UpdatePineLabs</servlet-name>
+                    <url-pattern>/UpdatePineLabs</url-pattern>
+                </servlet-mapping>
+
+               <servlet>
+                  
+                   <servlet-name>PineLabsEditAll</servlet-name>
+                   <servlet-class>PineLabsEditAll</servlet-class>
+              </servlet>
+
+                <servlet-mapping>
+                    <servlet-name>PineLabsEditAll</servlet-name>
+                    <url-pattern>/PineLabsEditAll</url-pattern>
+                </servlet-mapping>
+
+
+
+	    <welcome-file-list>
+	    <welcome-file>jsp/Login.jsp</welcome-file>
+	    </welcome-file-list>
+
+	    <filter>
+	    <filter-name>ResponseOverrideFilter</filter-name>
+	    <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+	    </filter>
+	    <filter-mapping>
+	    <filter-name>ResponseOverrideFilter</filter-name>
+	    <url-pattern>*.jsp</url-pattern>
+	    </filter-mapping>  
+
+	    <!--<jsp-config>-->
+	    <taglib>
+	    <taglib-uri>/WEB-INF/displaytag.tld</taglib-uri>
+	    <taglib-location>/WEB-INF/displaytag.tld</taglib-location>
+	    </taglib>
+	    <taglib>
+	    <taglib-uri>/WEB-INF/displaytag-el.tld</taglib-uri>
+	    <taglib-location>/WEB-INF/displaytag-el.tld</taglib-location>
+	    </taglib>
+	    <!--</jsp-config>-->                         
+
+	    </web-app>

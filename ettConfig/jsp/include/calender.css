@@ -1,0 +1,46 @@
+Popup Calendar Styles .head {
+	FONT-FAMILY: arial; FONT-SIZE: 12px; FONT-WEIGHT: normal
+}
+.text {
+	FONT-FAMILY: arial; FONT-SIZE: 12px; z-index:100; FONT-WEIGHT: normal; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; PADDING-TOP: 2px
+}
+#popupcalendar {
+	BACKGROUND-COLOR: white; HEIGHT: 130px; LEFT: 0px; POSITION: absolute; TOP: 0px; VISIBILITY: hidden; WIDTH: 185px
+}
+A.cal-DayLink {
+	BACKGROUND-COLOR: transparent; COLOR: black; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal; TEXT-DECORATION: none
+}
+A.cal-DayLink:hover {
+	BACKGROUND-COLOR: transparent; COLOR: blue; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.cal-DayLink:active {
+	BACKGROUND-COLOR: transparent; COLOR: #0066ff; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal; TEXT-DECORATION: none
+}
+.cal-TextBox {
+	BACKGROUND-COLOR: #ffffff; COLOR: black; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal
+}
+A.cal-TodayLink {
+	BACKGROUND-COLOR: transparent; COLOR: red; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.cal-TodayLink:hover {
+	BACKGROUND-COLOR: transparent; COLOR: blue; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.cal-TodayLink:active {
+	BACKGROUND-COLOR: transparent; COLOR: #0066ff; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.cal-GreyDate {
+	BACKGROUND-COLOR: #eff3f7; COLOR: #155A7A; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal; TEXT-DECORATION: none
+}
+.cal-GreyInvalidDate {
+	BACKGROUND-COLOR: #ffffcc; COLOR: #999999; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal; TEXT-DECORATION: line-through
+}
+.cal-DayCell {
+	BACKGROUND-COLOR: white; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal
+}
+.cal-HeadCell {
+	BACKGROUND-COLOR: #e7e7e7; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold
+}
+.cal-Table {
+	BACKGROUND-COLOR: #bcbcbc; BORDER-BOTTOM-COLOR: #99cccc; BORDER-LEFT-COLOR: #99cccc; BORDER-RIGHT-COLOR: #99cccc; BORDER-TOP-COLOR: #99cccc
+}
+

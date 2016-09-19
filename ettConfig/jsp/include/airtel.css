@@ -1,0 +1,397 @@
+BODY {
+	BACKGROUND-IMAGE: url(res/images/bg_main.gif); MARGIN: 0px
+}
+A {
+	FONT-SIZE: 11px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11grey {
+	FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.airtel_live_left_rd {
+	FONT-SIZE: 11px; COLOR: #c30100; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11red2 {
+	FONT-SIZE: 11px; COLOR: #e12035; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.topnavtxt {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.whttxtbold {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+whttext {
+	FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial12red {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; COLOR: #a71817; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.foryou_hm {
+	FONT-SIZE: 11px; COLOR: #600101; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11gray {
+	PADDING-LEFT: 19px; FONT-SIZE: 11px; COLOR: #828282; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial11black {
+	PADDING-LEFT: 19px; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.input_box {
+	BORDER-RIGHT: #dedede 1px solid; BORDER-TOP: #dedede 1px solid; BORDER-LEFT: #dedede 1px solid; WIDTH: 166px; BORDER-BOTTOM: #dedede 1px solid; HEIGHT: 15px
+}
+.arial11grayn {
+	FONT-SIZE: 11px; COLOR: #828282; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial10black {
+	FONT-SIZE: 10px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11black {
+	FONT-SIZE: 11px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial12black {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial14black {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11darkgrey {
+	FONT-SIZE: 12px; COLOR: #474646; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11new {
+	FONT-SIZE: 11px; COLOR: #68b4c7; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial10grey {
+	FONT-SIZE: 10px; COLOR: #7f7f7f; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.hellotunes_txt {
+	FONT-SIZE: 10px; COLOR: #c54e4c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11black {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.txtbox_hm {
+	BORDER-RIGHT: #a9a9a9 1px solid; BORDER-TOP: #a9a9a9 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #a9a9a9 1px solid; COLOR: #000000; BORDER-BOTTOM: #a9a9a9 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial10green {
+	FONT-SIZE: 10px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.news_headlines {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #16a3c5; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.btn_hm {
+	BORDER-RIGHT: #a9a9a9 1px solid; BORDER-TOP: #a9a9a9 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #a9a9a9 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #a9a9a9 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 43px; BACKGROUND-COLOR: #b3b3b3; CURSOR: HAND
+}
+
+.btn_orange {
+	BORDER-RIGHT: #F88C17 1px solid; BORDER-TOP: #F88C17 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #F88C17 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #F88C17 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 43px; BACKGROUND-COLOR: #F88C17; CURSOR: HAND
+}
+
+.btn_blue {
+	BORDER-RIGHT: #99CCCC 1px solid; BORDER-TOP: #99CCCC 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #99CCCC 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #99CCCC 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 43px; BACKGROUND-COLOR: #99CCCC; CURSOR: HAND
+}
+
+.bottomtxt {
+	FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial14green {
+	FONT-SIZE: 14px; COLOR: #417062; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11_de {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11_de A:link {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11_de A:active {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11blacknews {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial11_de A:hover {
+	FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11_de A:visited {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11_ac {
+	FONT-SIZE: 11px; COLOR: #8b8989; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11green {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial15red {
+	FONT-SIZE: 13px; COLOR: #d90b0c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.verdana11black {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11red {
+	FONT-SIZE: 11px; COLOR: #d90b0c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.foryou_hm {
+	FONT-SIZE: 11px; COLOR: #600101; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial10black {
+	FONT-SIZE: 10px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11black {
+	FONT-SIZE: 11px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial10green {
+	FONT-SIZE: 10px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.news_headlines {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #16a3c5; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.btn_hm {
+	BORDER-RIGHT: #a9a9a9 1px solid; BORDER-TOP: #a9a9a9 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #a9a9a9 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #a9a9a9 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 13px; BACKGROUND-COLOR: #b3b3b3
+}
+.bottomtxt {
+	FONT-SIZE: 10px; COLOR: #f0b3b3; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.arial14green {
+	FONT-SIZE: 14px; COLOR: #417062; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.tabs_de {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.tabs_de A:link {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.tabs_de A:active {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.tabs_de A:hover {
+	FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.tabs_de A:visited {
+	FONT-SIZE: 11px; COLOR: #424141; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.tabs_ac {
+	FONT-SIZE: 11px; COLOR: #8b8989; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.bread_crumbs {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #127c8c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.red_heading {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #e12035; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.red_heading_n {
+	FONT-SIZE: 15px; COLOR: #e12035; FONT-FAMILY: Verdana,Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.verdana11black {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11red {
+	FONT-SIZE: 11px; COLOR: #d90b0c; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.mediacenter_date {
+	FONT-SIZE: 11px; COLOR: #9e9c9c; FONT-STYLE: italic; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.leftnav {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #636363; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.leftnav_n {
+	FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.bodytext {
+	FONT-SIZE: 11px; COLOR: #4c4c4c; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.bodytxt_b_btmborder {
+	FONT-SIZE: 12px; COLOR: #4c4c4c; LINE-HEIGHT: 15px; BORDER-BOTTOM: #636363 1px dotted; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.bodytext_border {
+	FONT-SIZE: 12px; COLOR: #4c4c4c; LINE-HEIGHT: 15px; BORDER-BOTTOM: #636363 1px dotted; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.leftnav_active {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.blue_heading {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #3aa8b6; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.bodytext_blue {
+	FONT-SIZE: 11px; COLOR: #09a3b4; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.blue_heading_n {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #47a0a7; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.blue_text {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #006093; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11grey2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11grey2 A:link {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11grey2 A:visited {
+	FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11grey2 A:active {
+	FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11grey2 A:hover {
+	FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.knowmore A {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: underline
+}
+.knowmore A:hover {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: underline
+}
+.roaming_know A {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #f45354; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.whttext {
+	FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.hellotunes_txt {
+	FONT-SIZE: 10px; COLOR: #c54e4c; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.datacard_ac {
+	FONT-SIZE: 11px; COLOR: #b4e0d7; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial12grey {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #7b7b7b; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial14grey {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #7b7b7b; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.white_text {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #ffffff; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial14green {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #62928c; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial11greenunderline {
+	FONT-SIZE: 11px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: underline
+}
+.verdana15green {
+	FONT-WEIGHT: bold; FONT-SIZE: 15px; COLOR: #62928c; LINE-HEIGHT: 15px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial14greenunderline {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.verdana16black {
+	FONT-WEIGHT: normal; FONT-SIZE: 18px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial12green {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #198578; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.chkmail {
+	FONT-SIZE: 11px; COLOR: #36739f; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial12darkgrey {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #585858; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial16black {
+	FONT-WEIGHT: normal; FONT-SIZE: 16px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.box_roaming {
+	BORDER-RIGHT: #d5d5d5 1px solid; BORDER-TOP: #d5d5d5 1px solid; FONT-SIZE: 11px; PADDING-BOTTOM: 10px; BORDER-LEFT: #d5d5d5 1px solid; COLOR: #4c4c4c; LINE-HEIGHT: 15px; PADDING-TOP: 10px; BORDER-BOTTOM: #d5d5d5 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.box_faq {
+	BORDER-RIGHT: #d5d5d5 0px solid; PADDING-RIGHT: 10px; BORDER-TOP: #d5d5d5 0px solid; PADDING-LEFT: 10px; FONT-SIZE: 11px; PADDING-BOTTOM: 5px; BORDER-LEFT: #d5d5d5 0px solid; COLOR: #4c4c4c; LINE-HEIGHT: 15px; PADDING-TOP: 5px; BORDER-BOTTOM: #d5d5d5 0px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.whttext_Error {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; FONT-WEIGHT: bold; FONT-SIZE: 25px; PADDING-BOTTOM: 20px; COLOR: #ffffff; PADDING-TOP: 20px; FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: black; TEXT-ALIGN: center
+}
+.box_roaming_Error {
+	BORDER-RIGHT: #d5d5d5 1px solid; BORDER-TOP: #d5d5d5 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 14px; PADDING-BOTTOM: 10px; BORDER-LEFT: #d5d5d5 1px solid; COLOR: black; LINE-HEIGHT: 15px; PADDING-TOP: 10px; BORDER-BOTTOM: #d5d5d5 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.arial14brown {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #8f0201; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.callingcardFootnotes {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 5px
+}
+.Arialcallingcard {
+	BORDER-RIGHT: #d5d5d5 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #d5d5d5 1px solid; PADDING-LEFT: 10px; FONT-SIZE: 11px; PADDING-BOTTOM: 10px; BORDER-LEFT: #d5d5d5 1px solid; COLOR: #000000; LINE-HEIGHT: 15px; PADDING-TOP: 10px; BORDER-BOTTOM: #d5d5d5 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-ALIGN: left; TEXT-DECORATION: none
+}
+.verdana11wht {
+	FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.textbox {
+	BORDER-RIGHT: #e4e0e0 1px solid; BORDER-TOP: #e4e0e0 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #e4e0e0 1px solid; WIDTH: 130px; COLOR: #000000; BORDER-BOTTOM: #e4e0e0 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 25px
+}
+.Arial10blackMOD {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.td_left {
+	BORDER-LEFT: #e9efef 1px solid
+}
+.td_right {
+	BORDER-LEFT: #f4f9f9 2px solid
+}
+.arial14greenbbb {
+	PADDING-LEFT: 8px; FONT-SIZE: 14px; COLOR: #5eb4c1; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.arial11graybbb {
+	PADDING-LEFT: 8px; FONT-SIZE: 11px; COLOR: #656565; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.input_boxbbb {
+	BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #dddddd 1px solid; WIDTH: 64px; COLOR: #656565; BORDER-BOTTOM: #dddddd 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 16px
+}
+
+.input_boxdate {
+	BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #dddddd 1px solid; WIDTH: 64px; COLOR: #656565; BORDER-BOTTOM: #dddddd 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 18px
+}
+
+.input_boxMin {
+        BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #dddddd 1px solid; WIDTH: 24px; COLOR: #656565; BORDER-BOTTOM: #dddddd 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 16px
+}
+
+.submitbbb {
+	PADDING-RIGHT: 13px; PADDING-LEFT: 68px; PADDING-BOTTOM: 0px; WIDTH: 74px; PADDING-TOP: 9px; HEIGHT: 18px
+}
+.style3 {
+	FONT-WEIGHT: normal; FONT-SIZE: 14px; COLOR: #dd2027; FONT-FAMILY: Airtel-med
+}
+.style5 {
+	COLOR: #363636
+}
+.style9 {
+	FONT-SIZE: 11px; COLOR: #ff0000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.airtel28greenheading {
+	FONT-WEIGHT: normal; FONT-SIZE: 14px; COLOR: #20ddbc; LINE-HEIGHT: 15px; FONT-FAMILY: Times New Roman PS MT; TEXT-DECORATION: none
+}
+.humnist14grey {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: Times New Roman PS MT; TEXT-DECORATION: none
+}
+.airtel28redBoldheading style7 {
+	FONT-WEIGHT: normal; FONT-SIZE: 14px; COLOR: #dd2027; FONT-FAMILY: Airtel-med
+}
+.style1 {
+	FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.style8 {
+	FONT-WEIGHT: normal; FONT-SIZE: 14px; COLOR: #dd2027; FONT-FAMILY: Airtel-med
+}
+.style11 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ff0000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.style25 {
+	FONT-WEIGHT: bold; COLOR: #ff0000
+}
+.style26 {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.style7 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #00a3ac; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.style27 {
+	COLOR: #ffffff
+}
+.style29 {
+	COLOR: #ff0000
+}
+.style4 {
+	FONT-WEIGHT: bold; COLOR: #ff0000
+}
+.airtel_bold18wht {
+	FONT-SIZE: 18px; COLOR: #ffffff; FONT-FAMILY: Airtel-Bold
+}
+.combolist {
+        BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #dddddd 1px solid; WIDTH: 78px; COLOR: #656565; BORDER-BOTTOM: #dddddd 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 16px
+}
+

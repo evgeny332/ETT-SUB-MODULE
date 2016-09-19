@@ -1,0 +1,82 @@
+function Validate()
+{
+
+	var allocatedtps = document.ModifyUser.allocatedtps.value; 
+	if(allocatedtps == "")
+	{
+		alert("Assign TPS can't be blank");
+		document.ModifyUser.allocatedtps.focus();
+		return false ; 
+	}
+	if(isNaN(allocatedtps))
+	{	
+		alert("Non numeric Assign TPS are not allowed");
+		document.ModifyUser.allocatedtps.focus();
+		return false ;
+	}
+	if(allocatedtps <= 0)
+	{
+		alert("Assign TPS should more than 0");
+		document.ModifyUser.allocatedtps.focus();
+		return false ;
+	}
+	if(allocatedtps > availTps)
+	{
+		alert("Assign TPS can not more than available TPS");
+		document.ModifyUser.allocatedtps.focus();
+		return false ;
+	}
+	if(allocatedtps < ChildUsedTps)
+	{
+		alert("Assign TPS can not less than already used TPS by user.");
+		document.ModifyUser.allocatedtps.focus();
+		return false ;
+	}
+	var checked = 0 ;
+	
+
+	var SenderId = document.getElementById("AllotedSenderName");
+	if(SenderId.options.length <= 0 )
+	{	
+		alert("Please select sender id");
+		document.ModifyUser.AllotedSenderName.focus();
+		return false ;
+	}
+	else
+	{
+		var SenderValue = "" ;
+		for(var index = 0 ; index < SenderId.options.length ; index ++ )
+		{
+			
+			SenderValue = SenderValue +  SenderId.options[index].value + "," ; 	
+		}
+		document.ModifyUser.SenderNames.value=SenderValue;
+		alert(SenderValue);
+	}
+
+	var permission = document.getElementById("setPermission");
+	if(permission.options.length <= 0 )
+	{	
+		alert("Assign permission first");
+		document.ModifyUser.SenderName.focus();
+		return false ;
+	}
+	else
+	{
+		var Value = "" ;
+		for(var index = 0 ; index < permission.options.length ; index ++ )
+		{
+			Value = Value +  permission.options[index].value+ "," ; 	
+		}
+		document.ModifyUser.permission.value=Value;
+	}
+	return true; 
+}
+function updateDate()
+{
+	document.FileStatus.fromDate.value=DateValue;
+}
+function showMessage(camp , msg)
+{
+	alert("Campaign Name : "+camp +"\nMessage :" +msg);
+}

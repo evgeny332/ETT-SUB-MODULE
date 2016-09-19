@@ -1,0 +1,38 @@
+function Validate()
+{
+	var selectbox =document.getElementById("sendername") ;
+	document.getElementById("sendername1") =document.getElementById("sendername");
+	
+	
+	var index=selectbox.selectedIndex;
+	if(index == -1)
+	{
+		alert("Please select SenderId");
+		document.DeleteSenderId.sendername.focus();
+		return false ; 
+	}
+	var userSelectbox =document.getElementById("userList1") = document.getElementById("userList");
+	var userIndex=userSelectbox.selectedIndex;
+	if(userIndex == -1)
+	{
+		alert("Please select SenderId");
+		document.DeleteSenderId.userList.focus();
+		return false ; 
+	}
+	var cfm  = confirm("Delete sender id "+senderid);
+	return cfm ;
+}
+function updateList()
+{
+	var IndexValue = document.DeleteSenderId.sendername.selectedIndex;
+	var SelectedVal = document.DeleteSenderId.sendername.options[IndexValue].value;
+	document.DeleteSenderId.sendername.value= IndexValue;
+//	var flagvalue = document.DeleteSenderId.flag.value;
+	var flagvalue = document.DeleteSenderId.flag.value="1";
+	alert("flagvalue"+flagvalue);
+	alert("IndexValue"+IndexValue);
+	alert("SelectedVal"+SelectedVal);
+	document.DeleteSenderId.action=GetListPath1;
+	document.DeleteSenderId.submit();
+	alert("GetListPath1"+GetListPath1);
+}

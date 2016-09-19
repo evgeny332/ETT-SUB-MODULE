@@ -1,0 +1,189 @@
+Popup Calendar Styles .head {
+	FONT-FAMILY: arial; FONT-SIZE: 12px; FONT-WEIGHT: normal
+}
+.text {
+	FONT-FAMILY: arial; FONT-SIZE: 12px; z-index:100; FONT-WEIGHT: normal; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; PADDING-TOP: 2px
+}
+#popupcalendar {
+	BACKGROUND-COLOR: white; HEIGHT: 130px; LEFT: 0px; POSITION: absolute; TOP: 0px; VISIBILITY: hidden; WIDTH: 185px
+}
+A.cal-DayLink {
+	BACKGROUND-COLOR: transparent; COLOR: black; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal; TEXT-DECORATION: none
+}
+A.cal-DayLink:hover {
+	BACKGROUND-COLOR: transparent; COLOR: blue; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.cal-DayLink:active {
+	BACKGROUND-COLOR: transparent; COLOR: #0066ff; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal; TEXT-DECORATION: none
+}
+.cal-TextBox {
+	BACKGROUND-COLOR: #ffffff; COLOR: black; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal
+}
+A.cal-TodayLink {
+	BACKGROUND-COLOR: transparent; COLOR: red; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.cal-TodayLink:hover {
+	BACKGROUND-COLOR: transparent; COLOR: blue; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.cal-TodayLink:active {
+	BACKGROUND-COLOR: transparent; COLOR: #0066ff; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.cal-GreyDate {
+	BACKGROUND-COLOR: #eff3f7; COLOR: #155A7A; FONT-FAMILY: Verdana,  Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal; TEXT-DECORATION: none
+}
+.cal-GreyInvalidDate {
+	BACKGROUND-COLOR: #ffffcc; COLOR: #999999; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal; TEXT-DECORATION: line-through
+}
+.cal-DayCell {
+	BACKGROUND-COLOR: white; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: normal
+}
+.cal-HeadCell {
+	BACKGROUND-COLOR: #e7e7e7; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: 8pt; FONT-WEIGHT: bold
+}
+.cal-Table {
+	BACKGROUND-COLOR: #bcbcbc; BORDER-BOTTOM-COLOR: #99cccc; BORDER-LEFT-COLOR: #99cccc; BORDER-RIGHT-COLOR: #99cccc; BORDER-TOP-COLOR: #99cccc
+}
+
+#calendarDiv{
+	position:absolute;
+	width:205px;
+	border:1px solid #bb1f29;
+	padding:1px;
+	background-color: #FFF;
+	font-family:arial;
+	font-size:10px;
+	padding-bottom:20px;
+	visibility:hidden;
+}
+#calendarDiv span,#calendarDiv img{
+	float:left;
+}
+#calendarDiv .selectBox,#calendarDiv .selectBoxOver{
+	
+	line-height:12px;
+	padding:1px;
+	cursor:pointer;
+	padding-left:2px;
+}
+
+#calendarDiv .selectBoxTime,#calendarDiv .selectBoxTimeOver{	
+	line-height:12px;
+	padding:1px;
+	cursor:pointer;
+	padding-left:2px;
+}
+
+#calendarDiv td{
+	padding:3px;
+	margin:0px;
+	font-size:10px;
+}
+
+#calendarDiv .selectBox{
+	border:1px solid #e9d7d4;		
+	color: #e9d7d4;
+	position:relative;
+}
+#calendarDiv .selectBoxOver{
+	border:1px solid #FFF;
+	background-color: #bc262f;
+	color: #FFF;
+	position:relative;
+}
+#calendarDiv .selectBoxTime{
+	border:1px solid #0086B7;		
+	color: #0086B7;
+	position:relative;
+}
+#calendarDiv .selectBoxTimeOver{
+	border:1px solid #216072;	
+	color: #216072;
+	position:relative;
+}
+
+#calendarDiv .topBar{
+	height:16px;
+	padding:2px;
+	background-color: #bc262f;
+
+
+}
+#calendarDiv .activeDay{	/* Active day in the calendar */
+	color:#FF0000;
+}
+
+#calendarDiv .inActiveDay{	/* Active day in the calendar */
+	color:#999999;
+}
+
+
+#calendarDiv .todaysDate{
+	height:17px;
+	line-height:17px;
+	padding:2px;
+	background-color: #e9d7d4;
+	text-align:center;
+	position:absolute;
+	bottom:0px;
+	width:201px;
+}
+#calendarDiv .todaysDate div{
+	float:left;
+}
+	
+#calendarDiv .timeBar{
+	height:17px;
+	line-height:17px;
+	background-color: #e9d7d4;
+	width:72px;
+	color:#FFF;
+	position:absolute;
+	right:0px;
+}
+
+#calendarDiv .timeBar div{
+	float:left;
+	margin-right:1px;
+}
+
+
+#calendarDiv .monthYearPicker{
+	background-color: #e9d7d4;
+	border:1px solid #AAAAAA;
+	position:absolute;
+	color: #000000;
+	left:0px;
+	top:15px;
+	z-index:1000;
+	display:none;
+
+}
+#calendarDiv #monthSelect{
+	width:70px;
+}
+#calendarDiv .monthYearPicker div{
+	float:none;
+	clear:both;	
+	padding:1px;
+	margin:1px;	
+	cursor:pointer;
+}
+#calendarDiv .monthYearActive{
+	background-color:#bc262f;
+	color: #e9d7d4;
+}
+
+#calendarDiv td{
+	text-align:right;
+	cursor:pointer;
+}
+
+#calendarDiv .topBar img{
+	cursor:pointer;
+}
+#calendarDiv .topBar div{
+	float:left;
+	margin-right:1px;
+}
+
+
